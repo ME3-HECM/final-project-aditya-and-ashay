@@ -2239,7 +2239,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 66:     char buf[40];
 [v _buf `uc ~T0 @X0 -> 40 `i a ]
 "67
-[; ;main.c: 67:     sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
+[; ;main.c: 67:     sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
 [e ( _sprintf (1 , , , , (. , &U _buf :s 1C _R _B _G _C ]
 "69
 [; ;main.c: 69:     sendStringSerial4(buf);
@@ -2249,4 +2249,4 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 37 100 47 47 37 100 47 47 37 100 47 47 37 100 0 ]
+[a 1C 82 32 61 32 37 100 32 43 32 66 32 61 32 37 100 32 43 32 71 32 61 32 37 100 32 43 32 67 32 61 32 37 100 0 ]
