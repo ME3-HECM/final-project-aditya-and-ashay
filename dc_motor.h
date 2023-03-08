@@ -21,12 +21,11 @@ typedef struct DC_motor { //definition of DC_motor structure
     unsigned char *negDutyHighByte; //PWM duty address for motor -ve side
 } DC_motor;
 
-
+struct DC_motor motorL, motorR; 		//declare two DC_motor structures 
 //function prototypes
 void initDCmotorsPWM(unsigned int PWMperiod); // function to setup PWM
 void setMotorPWM(DC_motor *m);
-void left_motor_init();
-void right_motor_init()
+void motor_init(DC_motor *mL,DC_motor *mR);
 void buggyLEDs_init(void);
 
 

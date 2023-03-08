@@ -91,21 +91,15 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
-void left_motor_init()
+void motor_init(DC_motor *mL, DC_motor *mR)
 {
-    DC_motor motorL;
     motorL.power=0; 						//zero power to start
     motorL.direction=1; 					//set default motor direction
     motorL.brakemode=1;						// brake mode (slow decay)
     motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);  //store address of CCP1 duty high byte
     motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);  //store address of CCP2 duty high byte
     motorL.PWMperiod=99; 			//store PWMperiod for motor (value of T2PR in this case)
-
-}
-
-void right_motor_init()
-{
-    DC_motor motorR;
+    
     motorR.power=0; 						//zero power to start
     motorR.direction=1; 					//set default motor direction
     motorR.brakemode=1;						// brake mode (slow decay)
@@ -113,6 +107,7 @@ void right_motor_init()
     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);  //store address of CCP4 duty high byte
     motorR.PWMperiod=99; 			//store PWMperiod for motor (value of T2PR in this case)
     //same for motorR but different CCP registers
+    
 }
 
 void buggyLEDs_init(void) {
