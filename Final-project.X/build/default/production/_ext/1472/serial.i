@@ -1,4 +1,4 @@
-# 1 "../color.c"
+# 1 "../serial.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "../color.c" 2
+# 1 "../serial.c" 2
 # 1 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 1 3
 # 18 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -24229,144 +24229,133 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
-# 1 "../color.c" 2
+# 1 "../serial.c" 2
 
-# 1 "../color.h" 1
-# 12 "../color.h"
-void color_click_init(void);
+# 1 "../serial.h" 1
+# 13 "../serial.h"
+volatile char EUSART4RXbuf[20];
+volatile char RxBufWriteCnt=0;
+volatile char RxBufReadCnt=0;
 
-
-
-
-
-
-void color_writetoaddr(char address, char value);
-
+volatile char EUSART4TXbuf[60];
+volatile char TxBufWriteCnt=0;
+volatile char TxBufReadCnt=0;
 
 
 
-
-unsigned int color_read_Red(void);
-unsigned int color_read_Blue(void);
-unsigned int color_read_Green(void);
-unsigned int color_read_Clear(void);
-# 2 "../color.c" 2
-
-# 1 "../i2c.h" 1
-# 13 "../i2c.h"
-void I2C_2_Master_Init(void);
+void initUSART4(void);
+char getCharSerial4(void);
+void sendCharSerial4(char charToSend);
+void sendStringSerial4(char *string);
 
 
+char getCharFromRxBuf(void);
+void putCharToRxBuf(char byte);
+char isDataInRxBuf (void);
 
 
-void I2C_2_Master_Idle(void);
-
-
-
-
-void I2C_2_Master_Start(void);
+char getCharFromTxBuf(void);
+void putCharToTxBuf(char byte);
+char isDataInTxBuf (void);
+void TxBufferedString(char *string);
+void sendTxBuf(void);
+# 2 "../serial.c" 2
 
 
 
+void initUSART4(void) {
 
-void I2C_2_Master_RepStart(void);
-
-
-
-
-void I2C_2_Master_Stop(void);
+    RC0PPS = 0x12;
+    RX4PPS = 0x11;
+    TRISCbits.TRISC1 = 1;
 
 
+    BAUD4CONbits.BRG16 = 0;
+    TX4STAbits.BRGH = 0;
+    SP4BRGL = 51;
+    SP4BRGH = 0;
+
+    RC4STAbits.CREN = 1;
+    TX4STAbits.TXEN = 1;
+    RC4STAbits.SPEN = 1;
 
 
-void I2C_2_Master_Write(unsigned char data_byte);
-
-
-
-
-unsigned char I2C_2_Master_Read(unsigned char ack);
-# 3 "../color.c" 2
-
-
-void color_click_init(void)
-{
-
-    I2C_2_Master_Init();
-
-
-  color_writetoaddr(0x00, 0x01);
-    _delay((unsigned long)((3)*(64000000/4000.0)));
-
-
- color_writetoaddr(0x00, 0x03);
-
-
- color_writetoaddr(0x01, 0xD5);
 }
 
-void color_writetoaddr(char address, char value){
-    I2C_2_Master_Start();
-    I2C_2_Master_Write(0x52 | 0x00);
-    I2C_2_Master_Write(0x80 | address);
-    I2C_2_Master_Write(value);
-    I2C_2_Master_Stop();
+
+char getCharSerial4(void) {
+    while (!PIR4bits.RC4IF);
+    return RC4REG;
 }
 
-unsigned int color_read_Red(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x16);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
+
+void sendCharSerial4(char charToSend) {
+    while (!PIR4bits.TX4IF);
+    TX4REG = charToSend;
 }
 
-unsigned int color_read_Blue(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
 
- I2C_2_Master_Write(0xA0 | 0x1A);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
+
+void sendStringSerial4(char *string){
+
+    while (*string != 0) {
+        sendCharSerial4(*string++);
+    }
+
 }
 
-unsigned int color_read_Green(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
 
- I2C_2_Master_Write(0xA0 | 0x18);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
+
+
+
+
+char getCharFromRxBuf(void){
+    if (RxBufReadCnt>=20) {RxBufReadCnt=0;}
+    return EUSART4RXbuf[RxBufReadCnt++];
 }
 
-unsigned int color_read_Clear(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
 
- I2C_2_Master_Write(0xA0 | 0x14);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
+void putCharToRxBuf(char byte){
+    if (RxBufWriteCnt>=20) {RxBufWriteCnt=0;}
+    EUSART4RXbuf[RxBufWriteCnt++]=byte;
+}
+
+
+
+
+char isDataInRxBuf (void){
+    return (RxBufWriteCnt!=RxBufReadCnt);
+}
+
+
+
+char getCharFromTxBuf(void){
+    if (TxBufReadCnt>=60) {TxBufReadCnt=0;}
+    return EUSART4TXbuf[TxBufReadCnt++];
+}
+
+
+void putCharToTxBuf(char byte){
+    if (TxBufWriteCnt>=60) {TxBufWriteCnt=0;}
+    EUSART4TXbuf[TxBufWriteCnt++]=byte;
+}
+
+
+
+
+char isDataInTxBuf (void){
+    return (TxBufWriteCnt!=TxBufReadCnt);
+}
+
+
+void TxBufferedString(char *string){
+    while(*string != 0){
+  putCharToTxBuf(*string++);}
+
+}
+
+
+
+void sendTxBuf(void){
+    if (isDataInTxBuf()) {PIE4bits.TX4IE=1;}
 }

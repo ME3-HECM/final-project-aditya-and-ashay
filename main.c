@@ -43,16 +43,31 @@ void main(void){
     Interrupts_init();
     I2C_2_Master_Init();
     
-    unsigned int R = color_read_Red();
-    unsigned int B = color_read_Blue();
-    unsigned int G = color_read_Green();
-    unsigned int C = color_read_Clear();
+    
+    
+    TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
+    TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
+    TRISFbits.TRISF7 = 0; // Set TRIS value for blue LED (output)
+    
+    LATGbits.LATG1 = 1; //red LED on
+    LATAbits.LATA4 = 1; //green LED on
+    LATFbits.LATF7 = 1; //blue LED on
+    
+    TRISFbits.TRISF2 = 1;
+    ANSELFbits.ANSELF2=0;
     
     while (1) {
-    char buf[40];
-    sprintf(buf,"%d",R);
-    sendStringSerial4(buf);
-    }
+        while (PORTFbits.RF2);
+        unsigned int R = color_read_Red();
+        unsigned int B = color_read_Blue();
+        unsigned int G = color_read_Green();
+        unsigned int C = color_read_Clear();
+
+        char buf[40];
+        sprintf(buf,"// Red = %d Blue = %d Green = %d Clear = %d //",R,B,G,C);
+        sendStringSerial4(buf);
+        __delay_ms(1000);
+        }
     
 //    for (int i = 0; i<=3; i += 1){
 //    __delay_ms(1000);
