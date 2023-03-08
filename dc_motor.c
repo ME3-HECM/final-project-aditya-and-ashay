@@ -126,19 +126,13 @@ void turnLeft(DC_motor *mL, DC_motor *mR)
         __delay_us(20);
     }
     __delay_ms(425);
-    
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
 }
 
 //function to make the robot turn right 
-void turnRight(DC_motor *mL, DC_motor *mR, int deg)
+void turnRight(DC_motor *mL, DC_motor *mR)
 {
-    char i;
-    i = deg/45;
-    
-    char j;
-    for (j=0;j<i;j++) {
     mL-> direction = 1;
     mR-> direction = 0; // moves right side 
     while ((mL->power <= 30) || (mR->power <= 30)){
@@ -146,10 +140,9 @@ void turnRight(DC_motor *mL, DC_motor *mR, int deg)
         if (mR->power <= 30){mR->power += 10;}
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(50);
+        __delay_us(50);   
     }
-    __delay_ms(230); // delay for 45 degree 
-    }
+    __delay_ms(430);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
 }

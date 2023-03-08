@@ -11,15 +11,15 @@
  Intel Hex-file ranges:
   0h - 3h		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
   8h - 79h		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
-  E00h - E10h		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
-  E12h - 1C11h		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
+  E00h - E04h		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
+  E06h - 1BCDh		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
   200000h - 20000Fh		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
   300000h - 30000Bh		(dist/default/production\final-project-aditya-and-ashay.X.production.hex)
  Unused ranges:
   4h - 7h
   7Ah - DFFh
-  E11h - E11h
-  1C12h - 1FFFFFh
+  E05h - E05h
+  1BCEh - 1FFFFFh
   200010h - 2FFFFFh
 
 ### Hex Memory Map ###
@@ -38,8 +38,8 @@
 00000060 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000070 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- -- -- -- -- --
 ----------------------------------------------------------
-00000E00 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000E10 | H1 -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000E00 | H1 H1 H1 H1 H1 -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000E10 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E20 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E30 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E40 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
@@ -258,12 +258,7 @@
 00001B90 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001BA0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001BB0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001BC0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001BD0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001BE0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001BF0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001C00 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001C10 | H1 H1 -- -- -- -- -- -- -- -- -- -- -- -- -- --
+00001BC0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- --
 ----------------------------------------------------------
 00200000 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 ----------------------------------------------------------

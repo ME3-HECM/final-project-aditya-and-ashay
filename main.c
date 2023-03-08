@@ -8,13 +8,11 @@
 
 #include <xc.h>
 #include <stdio.h>
-#include <stdint.h>
 #include "dc_motor.h"
-#include "serial.h"
 #include "color.h"
 #include "i2c.h"
+#include "serial.h"
 #include "interrupts.h"
-
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
@@ -38,33 +36,23 @@ void main(void){
     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);  //store address of CCP4 duty high byte
     motorR.PWMperiod=99; 			//store PWMperiod for motor (value of T2PR in this case)
     //same for motorR but different CCP registers
- 
-    //Trying to get realterm to work to analyse the colour the car reads.
     
+    // Sending colour data to realterm
+    initUSART4();
     color_click_init();
+    Interrupts_init();
     I2C_2_Master_Init();
     
-    initUSART4();
-    Interrupts_init();
-    
-    
-    TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
-    TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
-    TRISFbits.TRISF7 = 0; // Set TRIS value for blue LED (output)
-    
-    LATGbits.LATG1 = 0; //red LED on
-    LATAbits.LATA4 = 0; //green LED on
-    LATFbits.LATF7 = 0; //blue LED on
-   
     unsigned int R = color_read_Red();
     unsigned int B = color_read_Blue();
     unsigned int G = color_read_Green();
     unsigned int C = color_read_Clear();
-        
-    char buf[40];
-    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
     
+    while (1) {
+    char buf[40];
+    sprintf(buf,"%d",R);
     sendStringSerial4(buf);
+    }
     
 //    for (int i = 0; i<=3; i += 1){
 //    __delay_ms(1000);
@@ -75,7 +63,8 @@ void main(void){
 //    stop(&motorL,&motorR);
 //    __delay_ms(1000);
 //    }
-//
+//    
+//    
 //    turnLeft(&motorL,&motorR);
 //    __delay_ms(1000);
 //    
@@ -90,5 +79,5 @@ void main(void){
 //    }
 //    
 //    turnRight(&motorL,&motorR);
-//    __delay_ms(1000);
+//    __delay_ms(1000);}
 }

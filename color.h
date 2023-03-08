@@ -27,5 +27,4 @@ unsigned int color_read_Blue(void);
 unsigned int color_read_Green(void);
 unsigned int color_read_Clear(void);
 
-
 #endif

@@ -33,7 +33,6 @@ void Interrupts_init(void)
 //	//add your ISR code here i.e. check the flag, do something (i.e. toggle an LED), clear the flag...
 //}
 
-
 void __interrupt(high_priority) HighISR()
     {   //add your ISR code here i.e. check the flag, do something (i.e. toggle an LED), clear the flag...    
     if (PIR4bits.RC4IF == 1){ 

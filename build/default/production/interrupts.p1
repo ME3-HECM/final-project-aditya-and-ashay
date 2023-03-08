@@ -2086,48 +2086,48 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2015 ]
 }
 [v $root$_HighISR `(v ~T0 @X0 0 e ]
-"37
-[; ;interrupts.c: 37: void __attribute__((picinterrupt(("high_priority")))) HighISR()
+"36
+[; ;interrupts.c: 36: void __attribute__((picinterrupt(("high_priority")))) HighISR()
 [v _HighISR `(v ~T2 @X0 1 ef ]
-"38
-[; ;interrupts.c: 38:     {
+"37
+[; ;interrupts.c: 37:     {
 {
 [e :U _HighISR ]
 [f ]
-"39
-[; ;interrupts.c: 39:     if (PIR4bits.RC4IF == 1){
+"38
+[; ;interrupts.c: 38:     if (PIR4bits.RC4IF == 1){
 [e $ ! == -> . . _PIR4bits 0 3 `i -> 1 `i 2017  ]
 {
-"40
-[; ;interrupts.c: 40:         putCharToRxBuf(RC4REG);
+"39
+[; ;interrupts.c: 39:         putCharToRxBuf(RC4REG);
 [e ( _putCharToRxBuf (1 -> _RC4REG `uc ]
-"41
-[; ;interrupts.c: 41:     }
+"40
+[; ;interrupts.c: 40:     }
 }
 [e :U 2017 ]
-"42
-[; ;interrupts.c: 42:     if (PIR4bits.TX4IF == 1 && PIE4bits.TX4IE==1){
+"41
+[; ;interrupts.c: 41:     if (PIR4bits.TX4IF == 1 && PIE4bits.TX4IE==1){
 [e $ ! && == -> . . _PIR4bits 0 2 `i -> 1 `i == -> . . _PIE4bits 0 2 `i -> 1 `i 2018  ]
 {
-"43
-[; ;interrupts.c: 43:         if (isDataInTxBuf()==1 ) {TX4REG = getCharFromTxBuf();}
+"42
+[; ;interrupts.c: 42:         if (isDataInTxBuf()==1 ) {TX4REG = getCharFromTxBuf();}
 [e $ ! == -> ( _isDataInTxBuf ..  `i -> 1 `i 2019  ]
 {
 [e = _TX4REG -> ( _getCharFromTxBuf ..  `uc ]
 }
 [e $U 2020  ]
-"44
-[; ;interrupts.c: 44:         else {PIE4bits.TX4IE=0; }
+"43
+[; ;interrupts.c: 43:         else {PIE4bits.TX4IE=0; }
 [e :U 2019 ]
 {
 [e = . . _PIE4bits 0 2 -> -> 0 `i `uc ]
 }
 [e :U 2020 ]
-"45
-[; ;interrupts.c: 45: }
+"44
+[; ;interrupts.c: 44: }
 }
 [e :U 2018 ]
-"46
-[; ;interrupts.c: 46: }
+"45
+[; ;interrupts.c: 45: }
 [e :UE 2016 ]
 }
