@@ -694,21 +694,21 @@
 "21 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"66
+"64
 [v main@buf buf `[40]uc  1 a 40 31 ]
 [s S851 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
 "25
 [v main@motorR motorR `S851  1 a 9 88 ]
 [v main@motorL motorL `S851  1 a 9 79 ]
-"64
-[v main@C C `ui  1 a 2 77 ]
-"63
-[v main@G G `ui  1 a 2 75 ]
 "62
-[v main@B B `ui  1 a 2 73 ]
+[v main@C C `ui  1 a 2 77 ]
 "61
+[v main@G G `ui  1 a 2 75 ]
+"60
+[v main@B B `ui  1 a 2 73 ]
+"59
 [v main@R R `ui  1 a 2 71 ]
-"97
+"94
 } 0
 "9 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]

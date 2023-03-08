@@ -2219,34 +2219,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 "57
 [; ;main.c: 57:     LATFbits.LATF7 = 0;
 [e = . . _LATFbits 0 7 -> -> 0 `i `uc ]
-"61
-[; ;main.c: 61:     unsigned int R = color_read_Red();
+"59
+[; ;main.c: 59:     unsigned int R = color_read_Red();
 [v _R `ui ~T0 @X0 1 a ]
 [e = _R ( _color_read_Red ..  ]
-"62
-[; ;main.c: 62:     unsigned int B = color_read_Blue();
+"60
+[; ;main.c: 60:     unsigned int B = color_read_Blue();
 [v _B `ui ~T0 @X0 1 a ]
 [e = _B ( _color_read_Blue ..  ]
-"63
-[; ;main.c: 63:     unsigned int G = color_read_Green();
+"61
+[; ;main.c: 61:     unsigned int G = color_read_Green();
 [v _G `ui ~T0 @X0 1 a ]
 [e = _G ( _color_read_Green ..  ]
-"64
-[; ;main.c: 64:     unsigned int C = color_read_Clear();
+"62
+[; ;main.c: 62:     unsigned int C = color_read_Clear();
 [v _C `ui ~T0 @X0 1 a ]
 [e = _C ( _color_read_Clear ..  ]
-"66
-[; ;main.c: 66:     char buf[40];
+"64
+[; ;main.c: 64:     char buf[40];
 [v _buf `uc ~T0 @X0 -> 40 `i a ]
-"67
-[; ;main.c: 67:     sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
+"65
+[; ;main.c: 65:     sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
 [e ( _sprintf (1 , , , , (. , &U _buf :s 1C _R _B _G _C ]
-"69
-[; ;main.c: 69:     sendStringSerial4(buf);
+"67
+[; ;main.c: 67:     sendStringSerial4(buf);
 [e ( _sendStringSerial4 (1 &U _buf ]
-"97
-[; ;main.c: 97: }
+"94
+[; ;main.c: 94: }
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 82 32 61 32 37 100 32 43 32 66 32 61 32 37 100 32 43 32 71 32 61 32 37 100 32 43 32 67 32 61 32 37 100 0 ]
+[a 1C 37 100 47 47 37 100 47 47 37 100 47 47 37 100 0 ]

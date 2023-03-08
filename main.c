@@ -55,19 +55,16 @@ void main(void){
     LATGbits.LATG1 = 0; //red LED on
     LATAbits.LATA4 = 0; //green LED on
     LATFbits.LATF7 = 0; //blue LED on
-    
-     
-        
+   
     unsigned int R = color_read_Red();
     unsigned int B = color_read_Blue();
     unsigned int G = color_read_Green();
     unsigned int C = color_read_Clear();
         
     char buf[40];
-    sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
+    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
     
     sendStringSerial4(buf);
-    
     
 //    for (int i = 0; i<=3; i += 1){
 //    __delay_ms(1000);
