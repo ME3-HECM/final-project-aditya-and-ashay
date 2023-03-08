@@ -6,6 +6,7 @@
 #define _XTAL_FREQ 64000000
 
 
+
 typedef struct DC_motor { //definition of DC_motor structure
     char power;         //motor power, out of 100
     char direction;     //motor direction, forward(1), reverse(0)
@@ -15,14 +16,3 @@ typedef struct DC_motor { //definition of DC_motor structure
     unsigned char *negDutyHighByte; //PWM duty address for motor -ve side
 } DC_motor;
 
-
-//function prototypes
-void initDCmotorsPWM(unsigned int PWMperiod); // function to setup PWM
-void setMotorPWM(DC_motor *m);
-void stop(DC_motor *mL, DC_motor *mR);
-void turnLeft(DC_motor *mL, DC_motor *mR);
-void turnRight(DC_motor *mL, DC_motor *mR, int deg);
-void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
-
-
-#endif
