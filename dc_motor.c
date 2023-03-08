@@ -91,6 +91,83 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+void left_motor_init()
+{
+    DC_motor motorL;
+    motorL.power=0; 						//zero power to start
+    motorL.direction=1; 					//set default motor direction
+    motorL.brakemode=1;						// brake mode (slow decay)
+    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);  //store address of CCP1 duty high byte
+    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);  //store address of CCP2 duty high byte
+    motorL.PWMperiod=99; 			//store PWMperiod for motor (value of T2PR in this case)
+
+}
+
+void right_motor_init()
+{
+    DC_motor motorR;
+    motorR.power=0; 						//zero power to start
+    motorR.direction=1; 					//set default motor direction
+    motorR.brakemode=1;						// brake mode (slow decay)
+    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);  //store address of CCP3 duty high byte
+    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);  //store address of CCP4 duty high byte
+    motorR.PWMperiod=99; 			//store PWMperiod for motor (value of T2PR in this case)
+    //same for motorR but different CCP registers
+}
+
+void buggyLEDs_init(void) {
+    HEADLAMPS_LED = 0;    // Set initial LAT value for H.LAMPS
+    MAINBEAM_LED = 0;     // Set initial LAT value for M.BEAM
+    BRAKE_LED = 0;        // Set initial LAT value for BRAKE
+    TURNLEFT_LED = 0;     // Set initial LAT value for TURN-L
+    TURNRIGHT_LED = 0;    // Set initial LAT value for TURN-R
+    
+    TRISHbits.TRISH1 = 0; // Set TRIS value for H.LAMPS
+    TRISDbits.TRISD3 = 0; // Set TRIS value for M.BEAM
+    TRISDbits.TRISD4 = 0; // Set TRIS value for BRAKE
+    TRISFbits.TRISF0 = 0; // Set TRIS value for TURN-L
+    TRISHbits.TRISH0 = 0; // Set TRIS value for TURN-R
+}
+
+//function to make the robot go straight
+void forward(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    MAINBEAM_LED = 1;
+    mL-> direction = 1;
+    mR-> direction = 1; // Forward direction
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(20);   
+    }
+    __delay_ms(2000);
+    MAINBEAM_LED = 0;
+}
+
+void reverse(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    MAINBEAM_LED = 1;
+    mL-> direction = 0;
+    mR-> direction = 0; // Forward direction
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(20);   
+    }
+    __delay_ms(2000);
+    MAINBEAM_LED = 0;
+}
+
 //function to stop the robot gradually 
 void stop(DC_motor *mL, DC_motor *mR)
 {
@@ -114,7 +191,7 @@ void stop(DC_motor *mL, DC_motor *mR)
 }
 
 //function to make the robot turn left 
-void turnLeft(DC_motor *mL, DC_motor *mR)
+void left_45(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);       // Make sure motor is idle
     mL-> direction = 0;
@@ -128,14 +205,14 @@ void turnLeft(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);
     }
-    __delay_ms(420);
+    __delay_ms(210);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
     TURNLEFT_LED = 0;
 }
 
 //function to make the robot turn right 
-void turnRight(DC_motor *mL, DC_motor *mR)
+void right_45(DC_motor *mL, DC_motor *mR)
 {
     mL-> direction = 1;
     mR-> direction = 0; // moves right side 
@@ -146,41 +223,7 @@ void turnRight(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(50);   
     }
-    __delay_ms(430);
+    __delay_ms(215);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
-}
-
-//function to make the robot go straight
-void fullSpeedAhead(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    MAINBEAM_LED = 1;
-    mL-> direction = 1;
-    mR-> direction = 1; // Forward direction
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <40) && (mR->power <40)){
-        mL->power += 10;
-        mR->power += 10;
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        __delay_us(20);   
-    }
-    __delay_ms(2000);
-    MAINBEAM_LED = 0;
-}
-
-void buggyLEDs_init(void) {
-    HEADLAMPS_LED = 0;    // Set initial LAT value for H.LAMPS
-    MAINBEAM_LED = 0;     // Set initial LAT value for M.BEAM
-    BRAKE_LED = 0;        // Set initial LAT value for BRAKE
-    TURNLEFT_LED = 0;     // Set initial LAT value for TURN-L
-    TURNRIGHT_LED = 0;    // Set initial LAT value for TURN-R
-    
-    TRISHbits.TRISH1 = 0; // Set TRIS value for H.LAMPS
-    TRISDbits.TRISD3 = 0; // Set TRIS value for M.BEAM
-    TRISDbits.TRISD4 = 0; // Set TRIS value for BRAKE
-    TRISFbits.TRISF0 = 0; // Set TRIS value for TURN-L
-    TRISHbits.TRISH0 = 0; // Set TRIS value for TURN-R
 }
