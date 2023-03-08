@@ -11,6 +11,7 @@ void color_click_init(void)
     __delay_ms(3); //need to wait 3ms for everthing to start up
     //turn on device ADC
 	color_writetoaddr(0x00, 0x03);
+
     //set integration time
 	color_writetoaddr(0x01, 0xD5);
 }
@@ -33,7 +34,7 @@ unsigned int color_read_Red(void)
 	I2C_2_Master_RepStart();			// start a repeated transmission
 	I2C_2_Master_Write(0x52 | 0x01);     //7 bit address + Read (1) mode
 	tmp=I2C_2_Master_Read(1);			//read the Red LSB
-	tmp=tmp | (I2C_2_Master_Read(0)<<8); //read the Red MSB (don't acknowledge as this is the last read)
+	//tmp=tmp | (I2C_2_Master_Read(0)<<8); //read the Red MSB (don't acknowledge as this is the last read)
 	I2C_2_Master_Stop();          //Stop condition
 	return tmp;
 }
