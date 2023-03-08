@@ -64,7 +64,7 @@ void main(void){
     unsigned int C = color_read_Clear();
         
     char buf[40];
-    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
+    sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
     
     sendStringSerial4(buf);
     
