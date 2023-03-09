@@ -24255,8 +24255,8 @@ void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
 
 
-void left_45(DC_motor *mL, DC_motor *mR);
-void right_45(DC_motor *mL, DC_motor *mR);
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
 # 2 "../dc_motor.c" 2
 
 
@@ -24387,7 +24387,6 @@ void buggyLEDs_init(void) {
 void forward(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    LATDbits.LATD3 = 1;
     mL-> direction = 1;
     mR-> direction = 1;
     setMotorPWM(mR);
@@ -24399,8 +24398,6 @@ void forward(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((2000)*(64000000/4000.0)));
-    LATDbits.LATD3 = 0;
 }
 
 void reverse(DC_motor *mL, DC_motor *mR)
@@ -24418,8 +24415,6 @@ void reverse(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((2000)*(64000000/4000.0)));
-    LATDbits.LATD3 = 0;
 }
 
 
@@ -24445,13 +24440,14 @@ void stop(DC_motor *mL, DC_motor *mR)
 }
 
 
-void left_45(DC_motor *mL, DC_motor *mR)
+void left_45(DC_motor *mL, DC_motor *mR, int count)
 {
     stop(mL,mR);
     mL-> direction = 0;
     mR-> direction = 1;
     LATFbits.LATF0 = 1;
-
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -24463,13 +24459,16 @@ void left_45(DC_motor *mL, DC_motor *mR)
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
     LATFbits.LATF0 = 0;
+    }
 }
 
 
-void right_45(DC_motor *mL, DC_motor *mR)
+void right_45(DC_motor *mL, DC_motor *mR, int count )
 {
     mL-> direction = 1;
     mR-> direction = 0;
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -24480,4 +24479,5 @@ void right_45(DC_motor *mL, DC_motor *mR)
     _delay((unsigned long)((215)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
+}
 }

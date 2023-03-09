@@ -5,11 +5,11 @@
 
 #define _XTAL_FREQ 64000000
 
-#define HEADLAMPS_LED LATHbits.LATH1 // Toggles the front white LEDs and rear red LEDs (at a reduced brightness)
-#define MAINBEAM_LED LATDbits.LATD3  // Toggles the front white LEDs (at full brightness)
-#define BRAKE_LED LATDbits.LATD4     // Toggles the rear red LEDs (at full brightness)
-#define TURNLEFT_LED LATFbits.LATF0  // Toggles the left signal (but no hardware based brightness control)
-#define TURNRIGHT_LED LATHbits.LATH0 // Toggles the right signal (but no hardware based brightness control)
+#define HEADLAMPS LATHbits.LATH1 // Toggles the front white LEDs and rear red LEDs (at a reduced brightness)
+#define MAINLIGHT LATDbits.LATD3  // Toggles the front white LEDs (at full brightness)
+#define BRAKELIGHT LATDbits.LATD4     // Toggles the rear red LEDs (at full brightness)
+#define LEFTINDICATOR LATFbits.LATF0  // Toggles the left signal (but no hardware based brightness control)
+#define RIGHTINDICATOR LATHbits.LATH0 // Toggles the right signal (but no hardware based brightness control)
 
 
 typedef struct DC_motor { //definition of DC_motor structure
@@ -34,8 +34,8 @@ void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
 
 
-void left_45(DC_motor *mL, DC_motor *mR);
-void right_45(DC_motor *mL, DC_motor *mR);
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
 
 
 #endif

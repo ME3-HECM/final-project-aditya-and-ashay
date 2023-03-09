@@ -20,9 +20,11 @@ void main(void){
     
     for (int i = 0; i<=3; i += 1){
     __delay_ms(1000);
-    right_45(&motorL,&motorR);
+    right_45(&motorL,&motorR, 2);
     stop(&motorL,&motorR);
     __delay_ms(1000);
+    left_45(&motorL,&motorR,2);
+     __delay_ms(1000);
     }
  
 }

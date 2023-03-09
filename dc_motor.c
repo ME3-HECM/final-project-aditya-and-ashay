@@ -111,11 +111,11 @@ void motor_init(DC_motor *mL, DC_motor *mR)
 }
 
 void buggyLEDs_init(void) {
-    HEADLAMPS_LED = 0;    // Set initial LAT value for H.LAMPS
-    MAINBEAM_LED = 0;     // Set initial LAT value for M.BEAM
-    BRAKE_LED = 0;        // Set initial LAT value for BRAKE
-    TURNLEFT_LED = 0;     // Set initial LAT value for TURN-L
-    TURNRIGHT_LED = 0;    // Set initial LAT value for TURN-R
+    HEADLAMPS = 0;    // Set initial LAT value for H.LAMPS
+    MAINLIGHT = 0;     // Set initial LAT value for M.BEAM
+    BRAKELIGHT = 0;        // Set initial LAT value for BRAKE
+    LEFTINDICATOR = 0;     // Set initial LAT value for TURN-L
+    RIGHTINDICATOR = 0;    // Set initial LAT value for TURN-R
     
     TRISHbits.TRISH1 = 0; // Set TRIS value for H.LAMPS
     TRISDbits.TRISD3 = 0; // Set TRIS value for M.BEAM
@@ -128,7 +128,6 @@ void buggyLEDs_init(void) {
 void forward(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    MAINBEAM_LED = 1;
     mL-> direction = 1;
     mR-> direction = 1; // Forward direction
     setMotorPWM(mR);
@@ -140,14 +139,12 @@ void forward(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
-    __delay_ms(2000);
-    MAINBEAM_LED = 0;
 }
 
 void reverse(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    MAINBEAM_LED = 1;
+    MAINLIGHT = 1;
     mL-> direction = 0;
     mR-> direction = 0; // Forward direction
     setMotorPWM(mR);
@@ -159,8 +156,6 @@ void reverse(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
-    __delay_ms(2000);
-    MAINBEAM_LED = 0;
 }
 
 //function to stop the robot gradually 
@@ -168,7 +163,7 @@ void stop(DC_motor *mL, DC_motor *mR)
 {
     mL->brakemode = 1;
     mR->brakemode = 1;
-    BRAKE_LED = 1;
+    BRAKELIGHT = 1;
     
     for (int i = 70; i >= 0; i=i-10) {
         mL -> power = i;
@@ -182,17 +177,18 @@ void stop(DC_motor *mL, DC_motor *mR)
     mR->power = 0;
     setMotorPWM(mL);
     setMotorPWM(mR);
-    BRAKE_LED = 0;
+    BRAKELIGHT = 0;
 }
 
 //function to make the robot turn left 
-void left_45(DC_motor *mL, DC_motor *mR)
+void left_45(DC_motor *mL, DC_motor *mR, int count)
 {
     stop(mL,mR);       // Make sure motor is idle
     mL-> direction = 0;
     mR-> direction = 1; // moves right side 
-    TURNLEFT_LED = 1;
-    
+    LEFTINDICATOR = 1;
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -203,14 +199,17 @@ void left_45(DC_motor *mL, DC_motor *mR)
     __delay_ms(210);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
-    TURNLEFT_LED = 0;
+    LEFTINDICATOR = 0;
+    }
 }
 
 //function to make the robot turn right 
-void right_45(DC_motor *mL, DC_motor *mR)
+void right_45(DC_motor *mL, DC_motor *mR, int count )
 {
     mL-> direction = 1;
     mR-> direction = 0; // moves right side 
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -221,4 +220,5 @@ void right_45(DC_motor *mL, DC_motor *mR)
     __delay_ms(215);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
+}
 }

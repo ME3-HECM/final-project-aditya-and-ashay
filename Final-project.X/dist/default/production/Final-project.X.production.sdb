@@ -13,9 +13,11 @@
 [v _motor_init motor_init `(v  1 e 1 0 ]
 "113
 [v _buggyLEDs_init buggyLEDs_init `(v  1 e 1 0 ]
-"167
+"162
 [v _stop stop `(v  1 e 1 0 ]
-"210
+"184
+[v _left_45 left_45 `(v  1 e 1 0 ]
+"207
 [v _right_45 right_45 `(v  1 e 1 0 ]
 "4 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/i2c.c
 [v _I2C_2_Master_Init I2C_2_Master_Init `(v  1 e 1 0 ]
@@ -562,28 +564,52 @@
 "14 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"34
-[v main@i i `i  1 a 2 33 ]
-"41
+"21
+[v main@i i `i  1 a 2 37 ]
+"30
 } 0
-"210 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/dc_motor.c
+"207 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/dc_motor.c
 [v _right_45 right_45 `(v  1 e 1 0 ]
 {
+"211
+[v right_45@i i `i  1 a 2 33 ]
 [s S280 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
+"207
 [v right_45@mL mL `*.39S280  1 p 2 25 ]
 [v right_45@mR mR `*.39S280  1 p 2 27 ]
+[v right_45@count count `i  1 p 2 29 ]
 "224
 } 0
-"167
+"94
+[v _motor_init motor_init `(v  1 e 1 0 ]
+{
+[s S280 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
+[v motor_init@mL mL `*.39S280  1 p 2 0 ]
+[v motor_init@mR mR `*.39S280  1 p 2 2 ]
+"111
+} 0
+"184
+[v _left_45 left_45 `(v  1 e 1 0 ]
+{
+"190
+[v left_45@i i `i  1 a 2 33 ]
+[s S280 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
+"184
+[v left_45@mL mL `*.39S280  1 p 2 25 ]
+[v left_45@mR mR `*.39S280  1 p 2 27 ]
+[v left_45@count count `i  1 p 2 29 ]
+"204
+} 0
+"162
 [v _stop stop `(v  1 e 1 0 ]
 {
-"173
+"168
 [v stop@i i `i  1 a 2 23 ]
 [s S280 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-"167
+"162
 [v stop@mL mL `*.39S280  1 p 2 19 ]
 [v stop@mR mR `*.39S280  1 p 2 21 ]
-"186
+"181
 } 0
 "72
 [v _setMotorPWM setMotorPWM `(v  1 e 1 0 ]
@@ -618,15 +644,7 @@
 [v ___lwdiv@divisor divisor `ui  1 p 2 8 ]
 "30
 } 0
-"94 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/dc_motor.c
-[v _motor_init motor_init `(v  1 e 1 0 ]
-{
-[s S280 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v motor_init@mL mL `*.39S280  1 p 2 0 ]
-[v motor_init@mR mR `*.39S280  1 p 2 2 ]
-"111
-} 0
-"5
+"5 C:\Users\adity\OneDrive - Imperial College London\Year 3\ECM\FINAL PROJECT\final-project-aditya-and-ashay.X/dc_motor.c
 [v _initDCmotorsPWM initDCmotorsPWM `(v  1 e 1 0 ]
 {
 [v initDCmotorsPWM@PWMperiod PWMperiod `ui  1 p 2 0 ]

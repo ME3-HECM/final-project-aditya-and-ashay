@@ -18,11 +18,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v __delay `JF192 ~T0 @X0 0 e ]
 [p i __delay ]
 "38 ../dc_motor.h
-[; ;../dc_motor.h: 38: void right_45(DC_motor *mL, DC_motor *mR);
-[v _right_45 `(v ~T0 @X0 0 ef2`*S2015`*S2015 ]
+[; ;../dc_motor.h: 38: void right_45(DC_motor *mL, DC_motor *mR, int count);
+[v _right_45 `(v ~T0 @X0 0 ef3`*S2015`*S2015`i ]
 "34
 [; ;../dc_motor.h: 34: void stop(DC_motor *mL, DC_motor *mR);
 [v _stop `(v ~T0 @X0 0 ef2`*S2015`*S2015 ]
+"37
+[; ;../dc_motor.h: 37: void left_45(DC_motor *mL, DC_motor *mR, int count);
+[v _left_45 `(v ~T0 @X0 0 ef3`*S2015`*S2015`i ]
 "2 ../main.c
 [p x FEXTOSC  =  HS      ]
 "3
@@ -2025,8 +2028,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "18
 [; ;../main.c: 18:     motor_init(&motorL,&motorR);
 [e ( _motor_init (2 , &U _motorL &U _motorR ]
-"34
-[; ;../main.c: 34:     for (int i = 0; i<=3; i += 1){
+"21
+[; ;../main.c: 21:     for (int i = 0; i<=3; i += 1){
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -2034,26 +2037,32 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 2018  ]
 [e :U 2017 ]
 {
-"35
-[; ;../main.c: 35:     _delay((unsigned long)((1000)*(64000000/4000.0)));
+"22
+[; ;../main.c: 22:     _delay((unsigned long)((1000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"36
-[; ;../main.c: 36:     right_45(&motorL,&motorR);
-[e ( _right_45 (2 , &U _motorL &U _motorR ]
-"37
-[; ;../main.c: 37:     stop(&motorL,&motorR);
+"23
+[; ;../main.c: 23:     right_45(&motorL,&motorR, 2);
+[e ( _right_45 (3 , , &U _motorL &U _motorR -> 2 `i ]
+"24
+[; ;../main.c: 24:     stop(&motorL,&motorR);
 [e ( _stop (2 , &U _motorL &U _motorR ]
-"38
-[; ;../main.c: 38:     _delay((unsigned long)((1000)*(64000000/4000.0)));
+"25
+[; ;../main.c: 25:     _delay((unsigned long)((1000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"39
-[; ;../main.c: 39:     }
+"26
+[; ;../main.c: 26:     left_45(&motorL,&motorR,2);
+[e ( _left_45 (3 , , &U _motorL &U _motorR -> 2 `i ]
+"27
+[; ;../main.c: 27:      _delay((unsigned long)((1000)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"28
+[; ;../main.c: 28:     }
 }
 [e =+ _i -> 1 `i ]
 [e $ <= _i -> 3 `i 2017  ]
 [e :U 2018 ]
 }
-"41
-[; ;../main.c: 41: }
+"30
+[; ;../main.c: 30: }
 [e :UE 2016 ]
 }

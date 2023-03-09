@@ -24264,8 +24264,8 @@ void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
 
 
-void left_45(DC_motor *mL, DC_motor *mR);
-void right_45(DC_motor *mL, DC_motor *mR);
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
 # 10 "../main.c" 2
 
 
@@ -24276,12 +24276,15 @@ void main(void){
     initDCmotorsPWM(99);
     buggyLEDs_init();
     motor_init(&motorL,&motorR);
-# 34 "../main.c"
+
+
     for (int i = 0; i<=3; i += 1){
     _delay((unsigned long)((1000)*(64000000/4000.0)));
-    right_45(&motorL,&motorR);
+    right_45(&motorL,&motorR, 2);
     stop(&motorL,&motorR);
     _delay((unsigned long)((1000)*(64000000/4000.0)));
+    left_45(&motorL,&motorR,2);
+     _delay((unsigned long)((1000)*(64000000/4000.0)));
     }
 
 }
