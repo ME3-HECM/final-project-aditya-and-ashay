@@ -1,4 +1,4 @@
-# 1 "../color.c"
+# 1 "../interrupts.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "../color.c" 2
+# 1 "../interrupts.c" 2
 # 1 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 1 3
 # 18 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -24229,144 +24229,76 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
-# 1 "../color.c" 2
+# 1 "../interrupts.c" 2
 
-# 1 "../color.h" 1
-# 12 "../color.h"
-void color_click_init(void);
+# 1 "../interrupts.h" 1
 
 
 
 
 
 
-void color_writetoaddr(char address, char value);
+
+void Interrupts_init(void);
+void __attribute__((picinterrupt(("high_priority")))) HighISR();
+# 2 "../interrupts.c" 2
+
+# 1 "../serial.h" 1
+# 13 "../serial.h"
+volatile char EUSART4RXbuf[20];
+volatile char RxBufWriteCnt=0;
+volatile char RxBufReadCnt=0;
+
+volatile char EUSART4TXbuf[60];
+volatile char TxBufWriteCnt=0;
+volatile char TxBufReadCnt=0;
+
+
+
+void initUSART4(void);
+char getCharSerial4(void);
+void sendCharSerial4(char charToSend);
+void sendStringSerial4(char *string);
+
+
+char getCharFromRxBuf(void);
+void putCharToRxBuf(char byte);
+char isDataInRxBuf (void);
+
+
+char getCharFromTxBuf(void);
+void putCharToTxBuf(char byte);
+char isDataInTxBuf (void);
+void TxBufferedString(char *string);
+void sendTxBuf(void);
+# 3 "../interrupts.c" 2
 
 
 
 
 
-unsigned int color_read_Red(void);
-unsigned int color_read_Blue(void);
-unsigned int color_read_Green(void);
-unsigned int color_read_Clear(void);
-# 2 "../color.c" 2
 
-# 1 "../i2c.h" 1
-# 13 "../i2c.h"
-void I2C_2_Master_Init(void);
-
-
-
-
-void I2C_2_Master_Idle(void);
-
-
-
-
-void I2C_2_Master_Start(void);
-
-
-
-
-void I2C_2_Master_RepStart(void);
-
-
-
-
-void I2C_2_Master_Stop(void);
-
-
-
-
-void I2C_2_Master_Write(unsigned char data_byte);
-
-
-
-
-unsigned char I2C_2_Master_Read(unsigned char ack);
-# 3 "../color.c" 2
-
-
-void color_click_init(void)
+void Interrupts_init(void)
 {
 
-    I2C_2_Master_Init();
 
 
-  color_writetoaddr(0x00, 0x01);
-    _delay((unsigned long)((3)*(64000000/4000.0)));
+
+    INTCONbits.PEIE=1;
+    PIE4bits.RC4IE=1;
+    PIE4bits.TX4IE=0;
+    INTCONbits.GIE=1;
 
 
- color_writetoaddr(0x00, 0x03);
-
-
- color_writetoaddr(0x01, 0xD5);
 }
-
-void color_writetoaddr(char address, char value){
-    I2C_2_Master_Start();
-    I2C_2_Master_Write(0x52 | 0x00);
-    I2C_2_Master_Write(0x80 | address);
-    I2C_2_Master_Write(value);
-    I2C_2_Master_Stop();
+# 36 "../interrupts.c"
+void __attribute__((picinterrupt(("high_priority")))) HighISR()
+    {
+    if (PIR4bits.RC4IF == 1){
+        putCharToRxBuf(RC4REG);
+    }
+    if (PIR4bits.TX4IF == 1 && PIE4bits.TX4IE==1){
+        if (isDataInTxBuf()==1 ) {TX4REG = getCharFromTxBuf();}
+        else {PIE4bits.TX4IE=0; }
 }
-
-unsigned int color_read_Red(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x16);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Blue(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
-
- I2C_2_Master_Write(0xA0 | 0x1A);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Green(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
-
- I2C_2_Master_Write(0xA0 | 0x18);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Clear(void)
-{
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
-
- I2C_2_Master_Write(0xA0 | 0x14);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
 }

@@ -24232,7 +24232,14 @@ unsigned char __t3rd16on(void);
 # 1 "../dc_motor.c" 2
 
 # 1 "../dc_motor.h" 1
-# 15 "../dc_motor.h"
+
+
+
+
+
+
+
+
 typedef struct DC_motor {
     char power;
     char direction;
@@ -24242,21 +24249,14 @@ typedef struct DC_motor {
     unsigned char *negDutyHighByte;
 } DC_motor;
 
-struct DC_motor motorL, motorR;
+
 
 void initDCmotorsPWM(unsigned int PWMperiod);
 void setMotorPWM(DC_motor *m);
-void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
-
-
-void forward(DC_motor *mL, DC_motor *mR);
-void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
-
-
-void left_45(DC_motor *mL, DC_motor *mR);
-void right_45(DC_motor *mL, DC_motor *mR);
+void turnLeft(DC_motor *mL, DC_motor *mR);
+void turnRight(DC_motor *mL, DC_motor *mR);
+void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
 # 2 "../dc_motor.c" 2
 
 
@@ -24350,84 +24350,11 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
-void motor_init(DC_motor *mL, DC_motor *mR)
-{
-    motorL.power=0;
-    motorL.direction=1;
-    motorL.brakemode=1;
-    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
-    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
-    motorL.PWMperiod=99;
-
-    motorR.power=0;
-    motorR.direction=1;
-    motorR.brakemode=1;
-    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
-    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
-    motorR.PWMperiod=99;
-
-
-}
-
-void buggyLEDs_init(void) {
-    LATHbits.LATH1 = 0;
-    LATDbits.LATD3 = 0;
-    LATDbits.LATD4 = 0;
-    LATFbits.LATF0 = 0;
-    LATHbits.LATH0 = 0;
-
-    TRISHbits.TRISH1 = 0;
-    TRISDbits.TRISD3 = 0;
-    TRISDbits.TRISD4 = 0;
-    TRISFbits.TRISF0 = 0;
-    TRISHbits.TRISH0 = 0;
-}
-
-
-void forward(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    LATDbits.LATD3 = 1;
-    mL-> direction = 1;
-    mR-> direction = 1;
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <40) && (mR->power <40)){
-        mL->power += 10;
-        mR->power += 10;
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((20)*(64000000/4000000.0)));
-    }
-    _delay((unsigned long)((2000)*(64000000/4000.0)));
-    LATDbits.LATD3 = 0;
-}
-
-void reverse(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    LATDbits.LATD3 = 1;
-    mL-> direction = 0;
-    mR-> direction = 0;
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <40) && (mR->power <40)){
-        mL->power += 10;
-        mR->power += 10;
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((20)*(64000000/4000000.0)));
-    }
-    _delay((unsigned long)((2000)*(64000000/4000.0)));
-    LATDbits.LATD3 = 0;
-}
-
 
 void stop(DC_motor *mL, DC_motor *mR)
 {
     mL->brakemode = 1;
     mR->brakemode = 1;
-    LATDbits.LATD4 = 1;
 
     for (int i = 70; i >= 0; i=i-10) {
         mL -> power = i;
@@ -24441,16 +24368,14 @@ void stop(DC_motor *mL, DC_motor *mR)
     mR->power = 0;
     setMotorPWM(mL);
     setMotorPWM(mR);
-    LATDbits.LATD4 = 0;
 }
 
 
-void left_45(DC_motor *mL, DC_motor *mR)
+void turnLeft(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
     mL-> direction = 0;
     mR-> direction = 1;
-    LATFbits.LATF0 = 1;
 
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
@@ -24459,14 +24384,13 @@ void left_45(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((210)*(64000000/4000.0)));
+    _delay((unsigned long)((425)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
-    LATFbits.LATF0 = 0;
 }
 
 
-void right_45(DC_motor *mL, DC_motor *mR)
+void turnRight(DC_motor *mL, DC_motor *mR)
 {
     mL-> direction = 1;
     mR-> direction = 0;
@@ -24477,7 +24401,25 @@ void right_45(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((50)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((215)*(64000000/4000.0)));
+    _delay((unsigned long)((430)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
+}
+
+
+void fullSpeedAhead(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    mL-> direction = 1;
+    mR-> direction = 1;
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((20)*(64000000/4000000.0)));
+    }
+    _delay((unsigned long)((2000)*(64000000/4000.0)));
 }
