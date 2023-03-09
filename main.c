@@ -18,13 +18,19 @@ void main(void){
     motor_init(&motorL,&motorR);
 
     
-    for (int i = 0; i<=3; i += 1){
     __delay_ms(1000);
-    right_45(&motorL,&motorR, 2);
-    stop(&motorL,&motorR);
+    instructions(&motorL,&motorR,1);
     __delay_ms(1000);
-    left_45(&motorL,&motorR,2);
-     __delay_ms(1000);
-    }
- 
+    instructions(&motorL,&motorR,2);
+    __delay_ms(1000);
+    instructions(&motorL,&motorR,3);
+    __delay_ms(1000);
+    instructions(&motorL,&motorR,4);
+    __delay_ms(1000);
+    instructions(&motorL,&motorR,5);
+    __delay_ms(1000);
+    instructions(&motorL,&motorR,6);
+    __delay_ms(1000);
+    instructions(&motorL,&motorR,7);
+    __delay_ms(1000);
 }

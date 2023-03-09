@@ -130,6 +130,7 @@ void forward(DC_motor *mL, DC_motor *mR)
     stop(mL,mR);
     mL-> direction = 1;
     mR-> direction = 1; // Forward direction
+    MAINLIGHT = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <40) && (mR->power <40)){
@@ -139,14 +140,15 @@ void forward(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
+    MAINLIGHT = 0;
 }
 
 void reverse(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    MAINLIGHT = 1;
     mL-> direction = 0;
     mR-> direction = 0; // Forward direction
+    HEADLAMPS = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <40) && (mR->power <40)){
@@ -156,6 +158,7 @@ void reverse(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
+    HEADLAMPS = 0;
 }
 
 //function to stop the robot gradually 
@@ -196,7 +199,7 @@ void left_45(DC_motor *mL, DC_motor *mR, int count)
         setMotorPWM(mR);
         __delay_us(20);
     }
-    __delay_ms(210);
+    __delay_ms(230);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
     LEFTINDICATOR = 0;
@@ -204,10 +207,11 @@ void left_45(DC_motor *mL, DC_motor *mR, int count)
 }
 
 //function to make the robot turn right 
-void right_45(DC_motor *mL, DC_motor *mR, int count )
+void right_45(DC_motor *mL, DC_motor *mR, int count)
 {
     mL-> direction = 1;
-    mR-> direction = 0; // moves right side 
+    mR-> direction = 0; // moves right side
+    RIGHTINDICATOR = 1;
     int i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
@@ -217,8 +221,47 @@ void right_45(DC_motor *mL, DC_motor *mR, int count )
         setMotorPWM(mR);
         __delay_us(50);   
     }
-    __delay_ms(215);
+    __delay_ms(250);
     stop(mL,mR); 
     __delay_ms(150); // Wait for Car to stabilise
+    RIGHTINDICATOR = 0;
 }
+}
+
+void space(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    HEADLAMPS = 1;
+    mL-> direction = 0;
+    mR-> direction = 0; // Forward direction
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(20);   
+    }
+    __delay_ms(300);
+    stop(mL,mR);
+    __delay_ms(200); // Wait for Car to stabilise
+    HEADLAMPS = 0;
+    
+}
+
+
+void instructions(DC_motor *mL, DC_motor *mR, int count)
+{
+    space(mL,mR);
+    __delay_ms(500);
+    stop(mL,mR);
+    __delay_ms(500);
+    if (count == 1){right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 2){left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 3){right_45(mL,mR,4); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); __delay_ms(400);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); __delay_ms(400);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 6){right_45(mL,mR,3); stop(mL,mR);}
+    if (count == 7){left_45(mL,mR,3); stop(mL,mR);}
 }

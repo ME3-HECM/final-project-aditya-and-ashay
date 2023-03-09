@@ -24257,6 +24257,9 @@ void stop(DC_motor *mL, DC_motor *mR);
 
 void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 2 "../dc_motor.c" 2
 
 
@@ -24389,6 +24392,7 @@ void forward(DC_motor *mL, DC_motor *mR)
     stop(mL,mR);
     mL-> direction = 1;
     mR-> direction = 1;
+    LATDbits.LATD3 = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <40) && (mR->power <40)){
@@ -24398,14 +24402,15 @@ void forward(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
+    LATDbits.LATD3 = 0;
 }
 
 void reverse(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    LATDbits.LATD3 = 1;
     mL-> direction = 0;
     mR-> direction = 0;
+    LATHbits.LATH1 = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <40) && (mR->power <40)){
@@ -24415,6 +24420,7 @@ void reverse(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
+    LATHbits.LATH1 = 0;
 }
 
 
@@ -24455,7 +24461,7 @@ void left_45(DC_motor *mL, DC_motor *mR, int count)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((210)*(64000000/4000.0)));
+    _delay((unsigned long)((230)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
     LATFbits.LATF0 = 0;
@@ -24463,10 +24469,11 @@ void left_45(DC_motor *mL, DC_motor *mR, int count)
 }
 
 
-void right_45(DC_motor *mL, DC_motor *mR, int count )
+void right_45(DC_motor *mL, DC_motor *mR, int count)
 {
     mL-> direction = 1;
     mR-> direction = 0;
+    LATHbits.LATH0 = 1;
     int i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
@@ -24476,8 +24483,47 @@ void right_45(DC_motor *mL, DC_motor *mR, int count )
         setMotorPWM(mR);
         _delay((unsigned long)((50)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((215)*(64000000/4000.0)));
+    _delay((unsigned long)((250)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
+    LATHbits.LATH0 = 0;
 }
+}
+
+void space(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    LATHbits.LATH1 = 1;
+    mL-> direction = 0;
+    mR-> direction = 0;
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((20)*(64000000/4000000.0)));
+    }
+    _delay((unsigned long)((300)*(64000000/4000.0)));
+    stop(mL,mR);
+    _delay((unsigned long)((200)*(64000000/4000.0)));
+    LATHbits.LATH1 = 0;
+
+}
+
+
+void instructions(DC_motor *mL, DC_motor *mR, int count)
+{
+    space(mL,mR);
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    stop(mL,mR);
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    if (count == 1){right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 2){left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 3){right_45(mL,mR,4); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); _delay((unsigned long)((400)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); _delay((unsigned long)((400)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 6){right_45(mL,mR,3); stop(mL,mR);}
+    if (count == 7){left_45(mL,mR,3); stop(mL,mR);}
 }

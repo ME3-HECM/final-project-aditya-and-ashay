@@ -24266,6 +24266,9 @@ void stop(DC_motor *mL, DC_motor *mR);
 
 void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 10 "../main.c" 2
 
 
@@ -24278,13 +24281,19 @@ void main(void){
     motor_init(&motorL,&motorR);
 
 
-    for (int i = 0; i<=3; i += 1){
     _delay((unsigned long)((1000)*(64000000/4000.0)));
-    right_45(&motorL,&motorR, 2);
-    stop(&motorL,&motorR);
+    instructions(&motorL,&motorR,1);
     _delay((unsigned long)((1000)*(64000000/4000.0)));
-    left_45(&motorL,&motorR,2);
-     _delay((unsigned long)((1000)*(64000000/4000.0)));
-    }
-
+    instructions(&motorL,&motorR,2);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
+    instructions(&motorL,&motorR,3);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
+    instructions(&motorL,&motorR,4);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
+    instructions(&motorL,&motorR,5);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
+    instructions(&motorL,&motorR,6);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
+    instructions(&motorL,&motorR,7);
+    _delay((unsigned long)((1000)*(64000000/4000.0)));
 }
