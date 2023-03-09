@@ -24284,6 +24284,7 @@ void Interrupts_init(void)
 
 
 
+
     INTCONbits.PEIE=1;
     PIE4bits.RC4IE=1;
     PIE4bits.TX4IE=0;
@@ -24291,7 +24292,7 @@ void Interrupts_init(void)
 
 
 }
-# 36 "interrupts.c"
+# 37 "interrupts.c"
 void __attribute__((picinterrupt(("high_priority")))) HighISR()
     {
     if (PIR4bits.RC4IF == 1){

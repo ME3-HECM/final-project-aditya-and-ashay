@@ -24301,7 +24301,6 @@ void sendStringSerial4(char *string){
     while (*string != 0) {
         sendCharSerial4(*string++);
     }
-
 }
 
 

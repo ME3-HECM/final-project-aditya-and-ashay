@@ -38,19 +38,29 @@ void main(void){
     //same for motorR but different CCP registers
     
     // Sending colour data to realterm
-    initUSART4();
+   
     color_click_init();
-    Interrupts_init();
     I2C_2_Master_Init();
+    
+    initUSART4();
+    Interrupts_init();
+    
+    TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
+    TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
+    TRISFbits.TRISF7 = 0; // Set TRIS value for blue LED (output)
+    
+    LATGbits.LATG1 = 1; //red LED on
+    LATAbits.LATA4 = 1; //green LED on
+    LATFbits.LATF7 = 1; //blue LED on
     
     unsigned int R = color_read_Red();
     unsigned int B = color_read_Blue();
     unsigned int G = color_read_Green();
     unsigned int C = color_read_Clear();
-    
-    while (1) {
+        
     char buf[40];
-    sprintf(buf,"%d",R);
+    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
+    
     sendStringSerial4(buf);
     }
     
@@ -80,4 +90,3 @@ void main(void){
 //    
 //    turnRight(&motorL,&motorR);
 //    __delay_ms(1000);}
-}

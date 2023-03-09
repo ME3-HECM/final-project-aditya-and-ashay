@@ -40,7 +40,6 @@ void sendStringSerial4(char *string){
     while (*string != 0) {          // While the data pointed to isn't a 0x00 do below (strings in C must end with a NULL byte)
         sendCharSerial4(*string++); // Send out the current byte pointed to and increment the pointer
     } 
-    
 }
 
 

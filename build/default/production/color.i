@@ -24293,13 +24293,10 @@ void color_click_init(void)
 
     I2C_2_Master_Init();
 
-
   color_writetoaddr(0x00, 0x01);
     _delay((unsigned long)((3)*(64000000/4000.0)));
 
-
  color_writetoaddr(0x00, 0x03);
-
 
  color_writetoaddr(0x01, 0xD5);
 }
@@ -24317,6 +24314,7 @@ unsigned int color_read_Red(void)
  unsigned int tmp;
  I2C_2_Master_Start();
  I2C_2_Master_Write(0x52 | 0x00);
+
  I2C_2_Master_Write(0xA0 | 0x16);
  I2C_2_Master_RepStart();
  I2C_2_Master_Write(0x52 | 0x01);
