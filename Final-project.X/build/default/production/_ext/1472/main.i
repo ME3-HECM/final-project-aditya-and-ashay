@@ -24563,9 +24563,9 @@ void main(void){
         unsigned int C = color_read_Clear();
 
         char buf[40];
-        sprintf(buf,"// Red = %d Blue = %d Green = %d Clear = %d //",R,B,G,C);
+        sprintf(buf,"%d %d %d %d \r\n",R,B,G,C);
         sendStringSerial4(buf);
-        _delay((unsigned long)((1000)*(64000000/4000.0)));
+        _delay((unsigned long)((100)*(64000000/4000.0)));
         }
 # 98 "../main.c"
 }

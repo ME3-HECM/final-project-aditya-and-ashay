@@ -11,15 +11,15 @@
  Intel Hex-file ranges:
   0h - 3h		(dist/default/production\Final-project.X.production.hex)
   8h - 79h		(dist/default/production\Final-project.X.production.hex)
-  E00h - E30h		(dist/default/production\Final-project.X.production.hex)
-  E32h - 1C63h		(dist/default/production\Final-project.X.production.hex)
+  E00h - E10h		(dist/default/production\Final-project.X.production.hex)
+  E12h - 1C43h		(dist/default/production\Final-project.X.production.hex)
   200000h - 20000Fh		(dist/default/production\Final-project.X.production.hex)
   300000h - 30000Bh		(dist/default/production\Final-project.X.production.hex)
  Unused ranges:
   4h - 7h
   7Ah - DFFh
-  E31h - E31h
-  1C64h - 1FFFFFh
+  E11h - E11h
+  1C44h - 1FFFFFh
   200010h - 2FFFFFh
 
 ### Hex Memory Map ###
@@ -39,9 +39,9 @@
 00000070 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- -- -- -- -- --
 ----------------------------------------------------------
 00000E00 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000E10 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000E10 | H1 -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E20 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000E30 | H1 -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000E30 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E40 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E50 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000E60 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
@@ -266,9 +266,7 @@
 00001C10 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001C20 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001C30 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001C40 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001C50 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00001C60 | H1 H1 H1 H1 -- -- -- -- -- -- -- -- -- -- -- --
+00001C40 | H1 H1 H1 H1 -- -- -- -- -- -- -- -- -- -- -- --
 ----------------------------------------------------------
 00200000 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 ----------------------------------------------------------

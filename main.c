@@ -64,9 +64,9 @@ void main(void){
         unsigned int C = color_read_Clear();
 
         char buf[40];
-        sprintf(buf,"// Red = %d Blue = %d Green = %d Clear = %d //",R,B,G,C);
+        sprintf(buf,"%d %d %d %d \r\n",R,B,G,C);
         sendStringSerial4(buf);
-        __delay_ms(1000);
+        __delay_ms(100);
         }
     
 //    for (int i = 0; i<=3; i += 1){

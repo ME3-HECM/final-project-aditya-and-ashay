@@ -2286,14 +2286,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;../main.c: 66:         char buf[40];
 [v _buf `uc ~T0 @X0 -> 40 `i a ]
 "67
-[; ;../main.c: 67:         sprintf(buf,"// Red = %d Blue = %d Green = %d Clear = %d //",R,B,G,C);
+[; ;../main.c: 67:         sprintf(buf,"%d %d %d %d \r\n",R,B,G,C);
 [e ( _sprintf (1 , , , , (. , &U _buf :s 1C _R _B _G _C ]
 "68
 [; ;../main.c: 68:         sendStringSerial4(buf);
 [e ( _sendStringSerial4 (1 &U _buf ]
 "69
-[; ;../main.c: 69:         _delay((unsigned long)((1000)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;../main.c: 69:         _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "70
 [; ;../main.c: 70:         }
 }
@@ -2305,4 +2305,4 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 47 47 32 82 101 100 32 61 32 37 100 32 66 108 117 101 32 61 32 37 100 32 71 114 101 101 110 32 61 32 37 100 32 67 108 101 97 114 32 61 32 37 100 32 47 47 0 ]
+[a 1C 37 100 32 37 100 32 37 100 32 37 100 32 13 10 0 ]
