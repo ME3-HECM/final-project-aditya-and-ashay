@@ -1,6 +1,7 @@
 #include <xc.h>
 #include "color.h"
 #include "i2c.h"
+#include "dc_motor.h"
 
 void color_click_init(void)
 {   
@@ -81,4 +82,34 @@ unsigned int color_read_Clear(void)
 	tmp=tmp | (I2C_2_Master_Read(0)<<8); //read the Red MSB (don't acknowledge as this is the last read)
 	I2C_2_Master_Stop();          //Stop condition
 	return tmp;
+}
+
+void READcolor(void) {
+    
+    colors.R = color_read_Red();
+    colors.B = color_read_Blue();
+    colors.G = color_read_Green();
+    colors.C = color_read_Clear();
+    
+    colors.R_norm = colors.R / colors.C;
+    colors.B_norm = colors.B / colors.C;
+    colors.G_norm = colors.G / colors.C;
+}
+
+void buggy_color_response(DC_motor *mL, DC_motor *mR) {
+    READcolor();
+    if (colors.C > 2500) {
+        
+        if (colors.R_norm > 0.77 && colors.B_norm < 0.175 && colors.G_norm < 0.135){
+        instructions(mL, mR, 1);} //RED COLOUR CARD
+        
+        if ( colors.B_norm < 0.25 && colors.G_norm > 0.4) {
+           //GReen card
+        }
+        if (colors.R_norm < 0.38 && colors.B_norm > 0.32 && colors.G_norm > 0.34){
+            //Blue card
+        }
+        
+            
+    } 
 }
