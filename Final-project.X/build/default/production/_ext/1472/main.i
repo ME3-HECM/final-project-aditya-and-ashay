@@ -7,7 +7,6 @@
 # 1 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "../main.c" 2
-
 #pragma config FEXTOSC = HS
 #pragma config RSTOSC = EXTOSC_4PLL
 
@@ -24238,9 +24237,158 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "D:/ECM/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
-# 9 "../main.c" 2
+# 8 "../main.c" 2
 
 # 1 "../dc_motor.h" 1
+
+
+
+
+# 1 "D:\\ECM\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "D:\\ECM\\pic\\include\\c99\\stdio.h" 3
+# 1 "D:\\ECM\\pic\\include\\c99\\bits/alltypes.h" 1 3
+
+
+
+
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "D:\\ECM\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "D:\\ECM\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "D:\\ECM\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "D:\\ECM\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "D:\\ECM\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+__attribute__((__format__(__printf__, 1, 2)))
+int printf(const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int fprintf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int sprintf(char *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 3, 4)))
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+__attribute__((__format__(__printf__, 1, 0)))
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 2, 0)))
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 3, 0)))
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+__attribute__((__format__(__scanf__, 1, 2)))
+int scanf(const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int fscanf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int sscanf(const char *restrict, const char *restrict, ...);
+
+__attribute__((__format__(__scanf__, 1, 0)))
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__scanf__, 2, 0)))
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
+
+
+
+
+
+
+
+char *tempnam(const char *, const char *);
+# 5 "../dc_motor.h" 2
 # 15 "../dc_motor.h"
 typedef struct DC_motor {
     char power;
@@ -24264,9 +24412,150 @@ void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
 
 
-void left_45(DC_motor *mL, DC_motor *mR);
-void right_45(DC_motor *mL, DC_motor *mR);
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
+# 9 "../main.c" 2
+
+# 1 "../ADC.h" 1
+
+
+
+
+
+
+
+void ADC_init(void);
+unsigned int ADC_getval(void);
 # 10 "../main.c" 2
+
+# 1 "../color.h" 1
+
+
+
+
+
+
+
+
+typedef struct colors {
+    unsigned int R;
+    unsigned int B;
+    unsigned int G;
+    unsigned int C;
+    float R_norm;
+    float B_norm;
+    float G_norm;
+} colors;
+
+struct colors color;
+
+
+
+void color_click_init(void);
+
+
+
+
+
+
+void color_writetoaddr(char address, char value);
+
+
+
+
+
+unsigned int color_read_Red(void);
+unsigned int color_read_Blue(void);
+unsigned int color_read_Green(void);
+unsigned int color_read_Clear(void);
+
+
+
+void READcolor(colors *c);
+void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
+
+void colourcards_normaliseRGBC(colors *c);
+# 11 "../main.c" 2
+
+# 1 "../interrupts.h" 1
+
+
+
+
+
+
+
+void Interrupts_init(void);
+void __attribute__((picinterrupt(("high_priority")))) HighISR();
+# 12 "../main.c" 2
+
+# 1 "../serial.h" 1
+# 13 "../serial.h"
+volatile char EUSART4RXbuf[20];
+volatile char RxBufWriteCnt=0;
+volatile char RxBufReadCnt=0;
+
+volatile char EUSART4TXbuf[60];
+volatile char TxBufWriteCnt=0;
+volatile char TxBufReadCnt=0;
+
+
+
+void initUSART4(void);
+char getCharSerial4(void);
+void sendCharSerial4(char charToSend);
+void sendStringSerial4(char *string);
+
+
+char getCharFromRxBuf(void);
+void putCharToRxBuf(char byte);
+char isDataInRxBuf (void);
+
+
+char getCharFromTxBuf(void);
+void putCharToTxBuf(char byte);
+char isDataInTxBuf (void);
+void TxBufferedString(char *string);
+void sendTxBuf(void);
+# 13 "../main.c" 2
+
+# 1 "../i2c.h" 1
+# 13 "../i2c.h"
+void I2C_2_Master_Init(void);
+
+
+
+
+void I2C_2_Master_Idle(void);
+
+
+
+
+void I2C_2_Master_Start(void);
+
+
+
+
+void I2C_2_Master_RepStart(void);
+
+
+
+
+void I2C_2_Master_Stop(void);
+
+
+
+
+void I2C_2_Master_Write(unsigned char data_byte);
+
+
+
+
+unsigned char I2C_2_Master_Read(unsigned char ack);
+# 14 "../main.c" 2
 
 
 
@@ -24276,12 +24565,27 @@ void main(void){
     initDCmotorsPWM(99);
     buggyLEDs_init();
     motor_init(&motorL,&motorR);
-# 34 "../main.c"
-    for (int i = 0; i<=3; i += 1){
-    _delay((unsigned long)((1000)*(64000000/4000.0)));
-    right_45(&motorL,&motorR);
-    stop(&motorL,&motorR);
-    _delay((unsigned long)((1000)*(64000000/4000.0)));
-    }
+    color_click_init();
+    initUSART4();
+    Interrupts_init();
+    I2C_2_Master_Init();
 
+    TRISGbits.TRISG1 = 0;
+    TRISAbits.TRISA4 = 0;
+    TRISFbits.TRISF7 = 0;
+
+    LATGbits.LATG1 = 1;
+    LATAbits.LATA4 = 1;
+    LATFbits.LATF7 = 1;
+
+    TRISFbits.TRISF2 = 1;
+    ANSELFbits.ANSELF2=0;
+
+    while (1) {
+
+
+
+       buggy_color_response(&motorL,&motorR,&color);
+       }
+# 55 "../main.c"
 }
