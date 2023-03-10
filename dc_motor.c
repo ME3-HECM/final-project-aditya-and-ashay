@@ -91,3 +91,76 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+//function to stop the robot gradually 
+void stop(DC_motor *mL, DC_motor *mR)
+{
+    mL->brakemode = 1;
+    mR->brakemode = 1;
+    
+    for (int i = 70; i >= 0; i=i-10) {
+        mL -> power = i;
+        mR -> power = i;  
+        setMotorPWM(mL);
+        setMotorPWM(mR); 
+        __delay_us(20);
+    }
+    
+    mL->power = 0;
+    mR->power = 0;
+    setMotorPWM(mL);
+    setMotorPWM(mR);
+}
+
+//function to make the robot turn left 
+void turnLeft(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);       // Make sure motor is idle
+    mL-> direction = 0;
+    mR-> direction = 1; // moves right side 
+    
+    while ((mL->power <= 30) || (mR->power <= 30)){
+        if (mL->power <= 30){mL->power += 10;}
+        if (mR->power <= 30){mR->power += 10;}
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(20);
+    }
+    __delay_ms(425);
+    stop(mL,mR); 
+    __delay_ms(150); // Wait for Car to stabilise
+}
+
+//function to make the robot turn right 
+void turnRight(DC_motor *mL, DC_motor *mR)
+{
+    mL-> direction = 1;
+    mR-> direction = 0; // moves right side 
+    while ((mL->power <= 30) || (mR->power <= 30)){
+        if (mL->power <= 30){mL->power += 10;}
+        if (mR->power <= 30){mR->power += 10;}
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(50);   
+    }
+    __delay_ms(430);
+    stop(mL,mR); 
+    __delay_ms(150); // Wait for Car to stabilise
+}
+
+//function to make the robot go straight
+void fullSpeedAhead(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    mL-> direction = 1;
+    mR-> direction = 1; // Forward direction
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_us(20);   
+    }
+    __delay_ms(2000);
+}

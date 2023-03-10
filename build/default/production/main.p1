@@ -2140,113 +2140,113 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"21 main.c
-[; ;main.c: 21: void main(void){
+"19 main.c
+[; ;main.c: 19: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"23
-[; ;main.c: 23:     initDCmotorsPWM(99);
+"21
+[; ;main.c: 21:     initDCmotorsPWM(99);
 [e ( _initDCmotorsPWM (1 -> -> 99 `i `ui ]
-"25
-[; ;main.c: 25:     struct DC_motor motorL, motorR;
+"23
+[; ;main.c: 23:     struct DC_motor motorL, motorR;
 [v _motorL `S2017 ~T0 @X0 1 a ]
 [v _motorR `S2017 ~T0 @X0 1 a ]
-"27
-[; ;main.c: 27:     motorL.power=0;
+"25
+[; ;main.c: 25:     motorL.power=0;
 [e = . _motorL 0 -> -> 0 `i `uc ]
-"28
-[; ;main.c: 28:     motorL.direction=1;
+"26
+[; ;main.c: 26:     motorL.direction=1;
 [e = . _motorL 1 -> -> 1 `i `uc ]
-"29
-[; ;main.c: 29:     motorL.brakemode=1;
+"27
+[; ;main.c: 27:     motorL.brakemode=1;
 [e = . _motorL 2 -> -> 1 `i `uc ]
-"30
-[; ;main.c: 30:     motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
+"28
+[; ;main.c: 28:     motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
 [e = . _motorL 4 -> &U _CCPR1H `*uc ]
-"31
-[; ;main.c: 31:     motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
+"29
+[; ;main.c: 29:     motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
 [e = . _motorL 5 -> &U _CCPR2H `*uc ]
-"32
-[; ;main.c: 32:     motorL.PWMperiod=99;
+"30
+[; ;main.c: 30:     motorL.PWMperiod=99;
 [e = . _motorL 3 -> -> 99 `i `ui ]
-"34
-[; ;main.c: 34:     motorR.power=0;
+"32
+[; ;main.c: 32:     motorR.power=0;
 [e = . _motorR 0 -> -> 0 `i `uc ]
-"35
-[; ;main.c: 35:     motorR.direction=1;
+"33
+[; ;main.c: 33:     motorR.direction=1;
 [e = . _motorR 1 -> -> 1 `i `uc ]
-"36
-[; ;main.c: 36:     motorR.brakemode=1;
+"34
+[; ;main.c: 34:     motorR.brakemode=1;
 [e = . _motorR 2 -> -> 1 `i `uc ]
-"37
-[; ;main.c: 37:     motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
+"35
+[; ;main.c: 35:     motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
 [e = . _motorR 4 -> &U _CCPR3H `*uc ]
-"38
-[; ;main.c: 38:     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
+"36
+[; ;main.c: 36:     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
 [e = . _motorR 5 -> &U _CCPR4H `*uc ]
-"39
-[; ;main.c: 39:     motorR.PWMperiod=99;
+"37
+[; ;main.c: 37:     motorR.PWMperiod=99;
 [e = . _motorR 3 -> -> 99 `i `ui ]
-"44
-[; ;main.c: 44:     color_click_init();
+"42
+[; ;main.c: 42:     color_click_init();
 [e ( _color_click_init ..  ]
-"45
-[; ;main.c: 45:     I2C_2_Master_Init();
+"43
+[; ;main.c: 43:     I2C_2_Master_Init();
 [e ( _I2C_2_Master_Init ..  ]
-"47
-[; ;main.c: 47:     initUSART4();
+"45
+[; ;main.c: 45:     initUSART4();
 [e ( _initUSART4 ..  ]
-"48
-[; ;main.c: 48:     Interrupts_init();
+"46
+[; ;main.c: 46:     Interrupts_init();
 [e ( _Interrupts_init ..  ]
-"51
-[; ;main.c: 51:     TRISGbits.TRISG1 = 0;
+"48
+[; ;main.c: 48:     TRISGbits.TRISG1 = 0;
 [e = . . _TRISGbits 0 1 -> -> 0 `i `uc ]
-"52
-[; ;main.c: 52:     TRISAbits.TRISA4 = 0;
+"49
+[; ;main.c: 49:     TRISAbits.TRISA4 = 0;
 [e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
-"53
-[; ;main.c: 53:     TRISFbits.TRISF7 = 0;
+"50
+[; ;main.c: 50:     TRISFbits.TRISF7 = 0;
 [e = . . _TRISFbits 0 7 -> -> 0 `i `uc ]
-"55
-[; ;main.c: 55:     LATGbits.LATG1 = 0;
-[e = . . _LATGbits 0 1 -> -> 0 `i `uc ]
+"52
+[; ;main.c: 52:     LATGbits.LATG1 = 1;
+[e = . . _LATGbits 0 1 -> -> 1 `i `uc ]
+"53
+[; ;main.c: 53:     LATAbits.LATA4 = 1;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+"54
+[; ;main.c: 54:     LATFbits.LATF7 = 1;
+[e = . . _LATFbits 0 7 -> -> 1 `i `uc ]
 "56
-[; ;main.c: 56:     LATAbits.LATA4 = 0;
-[e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
-"57
-[; ;main.c: 57:     LATFbits.LATF7 = 0;
-[e = . . _LATFbits 0 7 -> -> 0 `i `uc ]
-"61
-[; ;main.c: 61:     unsigned int R = color_read_Red();
+[; ;main.c: 56:     unsigned int R = color_read_Red();
 [v _R `ui ~T0 @X0 1 a ]
 [e = _R ( _color_read_Red ..  ]
-"62
-[; ;main.c: 62:     unsigned int B = color_read_Blue();
+"57
+[; ;main.c: 57:     unsigned int B = color_read_Blue();
 [v _B `ui ~T0 @X0 1 a ]
 [e = _B ( _color_read_Blue ..  ]
-"63
-[; ;main.c: 63:     unsigned int G = color_read_Green();
+"58
+[; ;main.c: 58:     unsigned int G = color_read_Green();
 [v _G `ui ~T0 @X0 1 a ]
 [e = _G ( _color_read_Green ..  ]
-"64
-[; ;main.c: 64:     unsigned int C = color_read_Clear();
+"59
+[; ;main.c: 59:     unsigned int C = color_read_Clear();
 [v _C `ui ~T0 @X0 1 a ]
 [e = _C ( _color_read_Clear ..  ]
-"66
-[; ;main.c: 66:     char buf[40];
+"61
+[; ;main.c: 61:     char buf[40];
 [v _buf `uc ~T0 @X0 -> 40 `i a ]
-"67
-[; ;main.c: 67:     sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
+"62
+[; ;main.c: 62:     sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
 [e ( _sprintf (1 , , , , (. , &U _buf :s 1C _R _B _G _C ]
-"69
-[; ;main.c: 69:     sendStringSerial4(buf);
+"64
+[; ;main.c: 64:     sendStringSerial4(buf);
 [e ( _sendStringSerial4 (1 &U _buf ]
-"97
-[; ;main.c: 97: }
+"65
+[; ;main.c: 65:     }
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 82 32 61 32 37 100 32 43 32 66 32 61 32 37 100 32 43 32 71 32 61 32 37 100 32 43 32 67 32 61 32 37 100 0 ]
+[a 1C 37 100 47 47 37 100 47 47 37 100 47 47 37 100 0 ]

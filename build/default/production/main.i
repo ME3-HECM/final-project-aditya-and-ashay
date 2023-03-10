@@ -24386,7 +24386,6 @@ char *ctermid(char *);
 char *tempnam(const char *, const char *);
 # 10 "main.c" 2
 
-
 # 1 "./dc_motor.h" 1
 
 
@@ -24411,39 +24410,9 @@ void initDCmotorsPWM(unsigned int PWMperiod);
 void setMotorPWM(DC_motor *m);
 void stop(DC_motor *mL, DC_motor *mR);
 void turnLeft(DC_motor *mL, DC_motor *mR);
-void turnRight(DC_motor *mL, DC_motor *mR, int deg);
+void turnRight(DC_motor *mL, DC_motor *mR);
 void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
-# 12 "main.c" 2
-
-# 1 "./serial.h" 1
-# 13 "./serial.h"
-volatile char EUSART4RXbuf[20];
-volatile char RxBufWriteCnt=0;
-volatile char RxBufReadCnt=0;
-
-volatile char EUSART4TXbuf[60];
-volatile char TxBufWriteCnt=0;
-volatile char TxBufReadCnt=0;
-
-
-
-void initUSART4(void);
-char getCharSerial4(void);
-void sendCharSerial4(char charToSend);
-void sendStringSerial4(char *string);
-
-
-char getCharFromRxBuf(void);
-void putCharToRxBuf(char byte);
-char isDataInRxBuf (void);
-
-
-char getCharFromTxBuf(void);
-void putCharToTxBuf(char byte);
-char isDataInTxBuf (void);
-void TxBufferedString(char *string);
-void sendTxBuf(void);
-# 13 "main.c" 2
+# 11 "main.c" 2
 
 # 1 "./color.h" 1
 # 12 "./color.h"
@@ -24464,7 +24433,7 @@ unsigned int color_read_Red(void);
 unsigned int color_read_Blue(void);
 unsigned int color_read_Green(void);
 unsigned int color_read_Clear(void);
-# 14 "main.c" 2
+# 12 "main.c" 2
 
 # 1 "./i2c.h" 1
 # 13 "./i2c.h"
@@ -24499,7 +24468,37 @@ void I2C_2_Master_Write(unsigned char data_byte);
 
 
 unsigned char I2C_2_Master_Read(unsigned char ack);
-# 15 "main.c" 2
+# 13 "main.c" 2
+
+# 1 "./serial.h" 1
+# 13 "./serial.h"
+volatile char EUSART4RXbuf[20];
+volatile char RxBufWriteCnt=0;
+volatile char RxBufReadCnt=0;
+
+volatile char EUSART4TXbuf[60];
+volatile char TxBufWriteCnt=0;
+volatile char TxBufReadCnt=0;
+
+
+
+void initUSART4(void);
+char getCharSerial4(void);
+void sendCharSerial4(char charToSend);
+void sendStringSerial4(char *string);
+
+
+char getCharFromRxBuf(void);
+void putCharToRxBuf(char byte);
+char isDataInRxBuf (void);
+
+
+char getCharFromTxBuf(void);
+void putCharToTxBuf(char byte);
+char isDataInTxBuf (void);
+void TxBufferedString(char *string);
+void sendTxBuf(void);
+# 14 "main.c" 2
 
 # 1 "./interrupts.h" 1
 
@@ -24511,8 +24510,7 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 void Interrupts_init(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
-# 16 "main.c" 2
-
+# 15 "main.c" 2
 
 
 
@@ -24546,16 +24544,13 @@ void main(void){
     initUSART4();
     Interrupts_init();
 
-
     TRISGbits.TRISG1 = 0;
     TRISAbits.TRISA4 = 0;
     TRISFbits.TRISF7 = 0;
 
-    LATGbits.LATG1 = 0;
-    LATAbits.LATA4 = 0;
-    LATFbits.LATF7 = 0;
-
-
+    LATGbits.LATG1 = 1;
+    LATAbits.LATA4 = 1;
+    LATFbits.LATF7 = 1;
 
     unsigned int R = color_read_Red();
     unsigned int B = color_read_Blue();
@@ -24563,8 +24558,7 @@ void main(void){
     unsigned int C = color_read_Clear();
 
     char buf[40];
-    sprintf(buf,"R = %d + B = %d + G = %d + C = %d",R,B,G,C);
+    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
 
     sendStringSerial4(buf);
-# 97 "main.c"
-}
+    }

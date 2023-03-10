@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/i2c.c</file>
             <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/dc_motor.c</file>
+            <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/i2c.h</file>
             <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/color.c</file>
-            <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/interrupts.c</file>
+            <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/dc_motor.h</file>
             <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/main.c</file>
-            <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/interrupts.h</file>
+            <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/color.h</file>
             <file>file:/C:/Users/ashay/OneDrive%20-%20Imperial%20College%20London/Documents/GitHub/final-project-aditya-and-ashay.X/serial.c</file>
         </group>
     </open-files>

@@ -24255,7 +24255,7 @@ void initDCmotorsPWM(unsigned int PWMperiod);
 void setMotorPWM(DC_motor *m);
 void stop(DC_motor *mL, DC_motor *mR);
 void turnLeft(DC_motor *mL, DC_motor *mR);
-void turnRight(DC_motor *mL, DC_motor *mR, int deg);
+void turnRight(DC_motor *mL, DC_motor *mR);
 void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
 # 2 "dc_motor.c" 2
 
@@ -24385,19 +24385,13 @@ void turnLeft(DC_motor *mL, DC_motor *mR)
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
     _delay((unsigned long)((425)*(64000000/4000.0)));
-
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
 }
 
 
-void turnRight(DC_motor *mL, DC_motor *mR, int deg)
+void turnRight(DC_motor *mL, DC_motor *mR)
 {
-    char i;
-    i = deg/45;
-
-    char j;
-    for (j=0;j<i;j++) {
     mL-> direction = 1;
     mR-> direction = 0;
     while ((mL->power <= 30) || (mR->power <= 30)){
@@ -24407,8 +24401,7 @@ void turnRight(DC_motor *mL, DC_motor *mR, int deg)
         setMotorPWM(mR);
         _delay((unsigned long)((50)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((230)*(64000000/4000.0)));
-    }
+    _delay((unsigned long)((430)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
 }

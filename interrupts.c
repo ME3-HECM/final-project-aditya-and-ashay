@@ -10,8 +10,9 @@ void Interrupts_init(void)
 {
 //    PIE2bits.C1IE = 1; // comparator 1
 //    IPR2bits.C1IP = 1; // high priority
-  // turn on global interrupts, peripheral interrupts and the interrupt source 
-	// It's a good idea to turn on global interrupts last, once all other interrupt configuration is done.
+// turn on global interrupts, peripheral interrupts and the interrupt source 
+// It's a good idea to turn on global interrupts last, once all other interrupt configuration is done.
+    
     INTCONbits.PEIE=1; 	//enable peripheral interrupts
     PIE4bits.RC4IE=1;	//receive interrupt
     PIE4bits.TX4IE=0;	//transmit interrupt (only turn on when you have more than one byte to send)
@@ -32,7 +33,6 @@ void Interrupts_init(void)
 //    }
 //	//add your ISR code here i.e. check the flag, do something (i.e. toggle an LED), clear the flag...
 //}
-
 
 void __interrupt(high_priority) HighISR()
     {   //add your ISR code here i.e. check the flag, do something (i.e. toggle an LED), clear the flag...    

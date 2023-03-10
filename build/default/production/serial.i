@@ -24270,7 +24270,6 @@ void initUSART4(void) {
     TRISCbits.TRISC1 = 1;
 
 
-
     BAUD4CONbits.BRG16 = 0;
     TX4STAbits.BRGH = 0;
     SP4BRGL = 51;
@@ -24294,6 +24293,7 @@ void sendCharSerial4(char charToSend) {
     while (!PIR4bits.TX4IF);
     TX4REG = charToSend;
 }
+
 
 
 void sendStringSerial4(char *string){

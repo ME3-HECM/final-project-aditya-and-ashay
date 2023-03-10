@@ -2069,20 +2069,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _Interrupts_init ]
 [f ]
-"15
-[; ;interrupts.c: 15:     INTCONbits.PEIE=1;
-[e = . . _INTCONbits 1 1 -> -> 1 `i `uc ]
 "16
-[; ;interrupts.c: 16:     PIE4bits.RC4IE=1;
-[e = . . _PIE4bits 0 3 -> -> 1 `i `uc ]
+[; ;interrupts.c: 16:     INTCONbits.PEIE=1;
+[e = . . _INTCONbits 1 1 -> -> 1 `i `uc ]
 "17
-[; ;interrupts.c: 17:     PIE4bits.TX4IE=0;
-[e = . . _PIE4bits 0 2 -> -> 0 `i `uc ]
+[; ;interrupts.c: 17:     PIE4bits.RC4IE=1;
+[e = . . _PIE4bits 0 3 -> -> 1 `i `uc ]
 "18
-[; ;interrupts.c: 18:     INTCONbits.GIE=1;
+[; ;interrupts.c: 18:     PIE4bits.TX4IE=0;
+[e = . . _PIE4bits 0 2 -> -> 0 `i `uc ]
+"19
+[; ;interrupts.c: 19:     INTCONbits.GIE=1;
 [e = . . _INTCONbits 1 2 -> -> 1 `i `uc ]
-"21
-[; ;interrupts.c: 21: }
+"22
+[; ;interrupts.c: 22: }
 [e :UE 2015 ]
 }
 [v $root$_HighISR `(v ~T0 @X0 0 e ]
