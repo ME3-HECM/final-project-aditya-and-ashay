@@ -42,14 +42,5 @@ void main(void){
        
        buggy_color_response(&motorL,&motorR,&color);
        }
-//       while (PORTFbits.RF2);
-//       READcolor(&color);
-//       colourcards_normaliseRGBC(&color);
-//     
-// 
-//       char buf[40];
-//       sprintf(buf,"%d %d %d %d\r\n",color.R,color.B, color.G, color.C);
-//       sendStringSerial4(buf);
-//       __delay_ms(100);
-//    }
+
 }
