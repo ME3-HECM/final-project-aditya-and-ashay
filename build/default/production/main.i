@@ -7,7 +7,6 @@
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-
 #pragma config FEXTOSC = HS
 #pragma config RSTOSC = EXTOSC_4PLL
 
@@ -24238,7 +24237,12 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
-# 9 "main.c" 2
+# 8 "main.c" 2
+
+# 1 "./dc_motor.h" 1
+
+
+
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
@@ -24384,17 +24388,8 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 10 "main.c" 2
-
-# 1 "./dc_motor.h" 1
-
-
-
-
-
-
-
-
+# 5 "./dc_motor.h" 2
+# 15 "./dc_motor.h"
 typedef struct DC_motor {
     char power;
     char direction;
@@ -24404,18 +24399,49 @@ typedef struct DC_motor {
     unsigned char *negDutyHighByte;
 } DC_motor;
 
-
+struct DC_motor motorL, motorR;
 
 void initDCmotorsPWM(unsigned int PWMperiod);
 void setMotorPWM(DC_motor *m);
+void motor_init(DC_motor *mL,DC_motor *mR);
+void buggyLEDs_init(void);
+
+
+void forward(DC_motor *mL, DC_motor *mR);
+void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
-void turnLeft(DC_motor *mL, DC_motor *mR);
-void turnRight(DC_motor *mL, DC_motor *mR);
-void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
-# 11 "main.c" 2
+
+
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
+# 9 "main.c" 2
 
 # 1 "./color.h" 1
-# 12 "./color.h"
+
+
+
+
+
+
+
+
+typedef struct colors {
+    unsigned int R;
+    unsigned int B;
+    unsigned int G;
+    unsigned int C;
+    float R_norm;
+    float B_norm;
+    float G_norm;
+} colors;
+
+struct colors color;
+
+
+
 void color_click_init(void);
 
 
@@ -24433,6 +24459,55 @@ unsigned int color_read_Red(void);
 unsigned int color_read_Blue(void);
 unsigned int color_read_Green(void);
 unsigned int color_read_Clear(void);
+
+
+
+void READcolor(colors *c);
+void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
+
+void colourcards_normaliseRGBC(colors *c);
+# 10 "main.c" 2
+
+# 1 "./interrupts.h" 1
+# 11 "./interrupts.h"
+int color_lowerbound = 0;
+int color_upperbound = 2500;
+
+char read_color_flag;
+
+void interrupts_init(void);
+void colorclick_interrupts_init(void);
+void __attribute__((picinterrupt(("high_priority")))) HighISR();
+# 11 "main.c" 2
+
+# 1 "./serial.h" 1
+# 13 "./serial.h"
+volatile char EUSART4RXbuf[20];
+volatile char RxBufWriteCnt=0;
+volatile char RxBufReadCnt=0;
+
+volatile char EUSART4TXbuf[60];
+volatile char TxBufWriteCnt=0;
+volatile char TxBufReadCnt=0;
+
+
+
+void initUSART4(void);
+char getCharSerial4(void);
+void sendCharSerial4(char charToSend);
+void sendStringSerial4(char *string);
+
+
+char getCharFromRxBuf(void);
+void putCharToRxBuf(char byte);
+char isDataInRxBuf (void);
+
+
+char getCharFromTxBuf(void);
+void putCharToTxBuf(char byte);
+char isDataInTxBuf (void);
+void TxBufferedString(char *string);
+void sendTxBuf(void);
 # 12 "main.c" 2
 
 # 1 "./i2c.h" 1
@@ -24470,79 +24545,17 @@ void I2C_2_Master_Write(unsigned char data_byte);
 unsigned char I2C_2_Master_Read(unsigned char ack);
 # 13 "main.c" 2
 
-# 1 "./serial.h" 1
-# 13 "./serial.h"
-volatile char EUSART4RXbuf[20];
-volatile char RxBufWriteCnt=0;
-volatile char RxBufReadCnt=0;
-
-volatile char EUSART4TXbuf[60];
-volatile char TxBufWriteCnt=0;
-volatile char TxBufReadCnt=0;
-
-
-
-void initUSART4(void);
-char getCharSerial4(void);
-void sendCharSerial4(char charToSend);
-void sendStringSerial4(char *string);
-
-
-char getCharFromRxBuf(void);
-void putCharToRxBuf(char byte);
-char isDataInRxBuf (void);
-
-
-char getCharFromTxBuf(void);
-void putCharToTxBuf(char byte);
-char isDataInTxBuf (void);
-void TxBufferedString(char *string);
-void sendTxBuf(void);
-# 14 "main.c" 2
-
-# 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-void Interrupts_init(void);
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
-# 15 "main.c" 2
-
 
 
 
 void main(void){
 
     initDCmotorsPWM(99);
-
-    struct DC_motor motorL, motorR;
-
-    motorL.power=0;
-    motorL.direction=1;
-    motorL.brakemode=1;
-    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
-    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
-    motorL.PWMperiod=99;
-
-    motorR.power=0;
-    motorR.direction=1;
-    motorR.brakemode=1;
-    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
-    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
-    motorR.PWMperiod=99;
-
-
-
-
-    color_click_init();
-    I2C_2_Master_Init();
-
+    motor_init(&motorL,&motorR);
+    buggyLEDs_init();
     initUSART4();
-    Interrupts_init();
+    color_click_init();
+    interrupts_init();
 
     TRISGbits.TRISG1 = 0;
     TRISAbits.TRISA4 = 0;
@@ -24552,13 +24565,7 @@ void main(void){
     LATAbits.LATA4 = 1;
     LATFbits.LATF7 = 1;
 
-    unsigned int R = color_read_Red();
-    unsigned int B = color_read_Blue();
-    unsigned int G = color_read_Green();
-    unsigned int C = color_read_Clear();
-
-    char buf[40];
-    sprintf(buf,"%d//%d//%d//%d",R,B,G,C);
-
-    sendStringSerial4(buf);
-    }
+    TRISFbits.TRISF2 = 1;
+    ANSELFbits.ANSELF2=0;
+# 47 "main.c"
+}

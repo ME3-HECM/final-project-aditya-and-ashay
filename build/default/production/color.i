@@ -24231,8 +24231,205 @@ unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
 # 1 "color.c" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 1 3
+
+
+
+
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+__attribute__((__format__(__printf__, 1, 2)))
+int printf(const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int fprintf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int sprintf(char *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 3, 4)))
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+__attribute__((__format__(__printf__, 1, 0)))
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 2, 0)))
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 3, 0)))
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+__attribute__((__format__(__scanf__, 1, 2)))
+int scanf(const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int fscanf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int sscanf(const char *restrict, const char *restrict, ...);
+
+__attribute__((__format__(__scanf__, 1, 0)))
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__scanf__, 2, 0)))
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
+
+
+
+
+
+
+
+char *tempnam(const char *, const char *);
+# 2 "color.c" 2
+
 # 1 "./color.h" 1
-# 12 "./color.h"
+
+
+
+
+# 1 "./dc_motor.h" 1
+# 15 "./dc_motor.h"
+typedef struct DC_motor {
+    char power;
+    char direction;
+    char brakemode;
+    unsigned int PWMperiod;
+    unsigned char *posDutyHighByte;
+    unsigned char *negDutyHighByte;
+} DC_motor;
+
+struct DC_motor motorL, motorR;
+
+void initDCmotorsPWM(unsigned int PWMperiod);
+void setMotorPWM(DC_motor *m);
+void motor_init(DC_motor *mL,DC_motor *mR);
+void buggyLEDs_init(void);
+
+
+void forward(DC_motor *mL, DC_motor *mR);
+void reverse(DC_motor *mL, DC_motor *mR);
+void stop(DC_motor *mL, DC_motor *mR);
+
+
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
+# 5 "./color.h" 2
+
+
+
+
+typedef struct colors {
+    unsigned int R;
+    unsigned int B;
+    unsigned int G;
+    unsigned int C;
+    float R_norm;
+    float B_norm;
+    float G_norm;
+} colors;
+
+struct colors color;
+
+
+
 void color_click_init(void);
 
 
@@ -24250,7 +24447,14 @@ unsigned int color_read_Red(void);
 unsigned int color_read_Blue(void);
 unsigned int color_read_Green(void);
 unsigned int color_read_Clear(void);
-# 2 "color.c" 2
+
+
+
+void READcolor(colors *c);
+void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
+
+void colourcards_normaliseRGBC(colors *c);
+# 3 "color.c" 2
 
 # 1 "./i2c.h" 1
 # 13 "./i2c.h"
@@ -24285,7 +24489,20 @@ void I2C_2_Master_Write(unsigned char data_byte);
 
 
 unsigned char I2C_2_Master_Read(unsigned char ack);
-# 3 "color.c" 2
+# 4 "color.c" 2
+
+
+# 1 "./interrupts.h" 1
+# 11 "./interrupts.h"
+int color_lowerbound = 0;
+int color_upperbound = 2500;
+
+char read_color_flag;
+
+void interrupts_init(void);
+void colorclick_interrupts_init(void);
+void __attribute__((picinterrupt(("high_priority")))) HighISR();
+# 6 "color.c" 2
 
 
 void color_click_init(void)
@@ -24367,4 +24584,62 @@ unsigned int color_read_Clear(void)
  tmp=tmp | (I2C_2_Master_Read(0)<<8);
  I2C_2_Master_Stop();
  return tmp;
+}
+
+void READcolor(colors *c) {
+
+    color.R = color_read_Red();
+    color.B = color_read_Blue();
+    color.G = color_read_Green();
+    color.C = color_read_Clear();
+
+
+
+
+}
+
+void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
+    READcolor(&color);
+    colourcards_normaliseRGBC(&color);
+    if (color.C > 2500){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
+    if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
+    instructions(mL,mR,1);
+    }
+    if (color.B_norm < 0.25 && color.G_norm > 0.40) {
+    instructions(mL,mR,2);
+    }
+    if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
+    instructions(mL,mR,3);
+    }
+    if (color.R_norm > 0.52 && color.G_norm > 0.32){
+    instructions(mL,mR,4);
+    }
+    if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
+    instructions(mL,mR,5);
+    }
+    if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
+    instructions(mL,mR,6);
+    }
+    if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
+    instructions(mL,mR,7);
+    }
+    if (color.R_norm < 0.5 && color.C > 16000){
+
+    }
+    }
+    else {forward(mL,mR);}
+    read_color_flag = 0;
+}
+
+
+void colourcards_normaliseRGBC(colors *c)
+{
+    unsigned int R = color.R;
+    unsigned int G = color.G;
+    unsigned int B = color.B;
+    unsigned int C = color.C;
+
+    color.R_norm = (float)R/(float)C;
+    color.G_norm = (float)G/(float)C;
+    color.B_norm = (float)B/(float)C;
 }

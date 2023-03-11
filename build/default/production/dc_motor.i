@@ -24236,10 +24236,152 @@ unsigned char __t3rd16on(void);
 
 
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 1 3
 
 
 
 
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+__attribute__((__format__(__printf__, 1, 2)))
+int printf(const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int fprintf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 2, 3)))
+int sprintf(char *restrict, const char *restrict, ...);
+__attribute__((__format__(__printf__, 3, 4)))
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+__attribute__((__format__(__printf__, 1, 0)))
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 2, 0)))
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__printf__, 3, 0)))
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+__attribute__((__format__(__scanf__, 1, 2)))
+int scanf(const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int fscanf(FILE *restrict, const char *restrict, ...);
+__attribute__((__format__(__scanf__, 2, 3)))
+int sscanf(const char *restrict, const char *restrict, ...);
+
+__attribute__((__format__(__scanf__, 1, 0)))
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+__attribute__((__format__(__scanf__, 2, 0)))
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
+
+
+
+
+
+
+
+char *tempnam(const char *, const char *);
+# 5 "./dc_motor.h" 2
+# 15 "./dc_motor.h"
 typedef struct DC_motor {
     char power;
     char direction;
@@ -24249,14 +24391,24 @@ typedef struct DC_motor {
     unsigned char *negDutyHighByte;
 } DC_motor;
 
-
+struct DC_motor motorL, motorR;
 
 void initDCmotorsPWM(unsigned int PWMperiod);
 void setMotorPWM(DC_motor *m);
+void motor_init(DC_motor *mL,DC_motor *mR);
+void buggyLEDs_init(void);
+
+
+void forward(DC_motor *mL, DC_motor *mR);
+void reverse(DC_motor *mL, DC_motor *mR);
 void stop(DC_motor *mL, DC_motor *mR);
-void turnLeft(DC_motor *mL, DC_motor *mR);
-void turnRight(DC_motor *mL, DC_motor *mR);
-void fullSpeedAhead(DC_motor *mL, DC_motor *mR);
+
+
+void left_45(DC_motor *mL, DC_motor *mR, int count);
+void right_45(DC_motor *mL, DC_motor *mR, int count);
+void space(DC_motor *mL, DC_motor *mR);
+
+void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 2 "dc_motor.c" 2
 
 
@@ -24350,11 +24502,82 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+void motor_init(DC_motor *mL, DC_motor *mR)
+{
+    motorL.power=0;
+    motorL.direction=1;
+    motorL.brakemode=1;
+    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
+    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
+    motorL.PWMperiod=99;
+
+    motorR.power=0;
+    motorR.direction=1;
+    motorR.brakemode=1;
+    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
+    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
+    motorR.PWMperiod=99;
+
+
+}
+
+void buggyLEDs_init(void) {
+    LATHbits.LATH1 = 0;
+    LATDbits.LATD3 = 0;
+    LATDbits.LATD4 = 0;
+    LATFbits.LATF0 = 0;
+    LATHbits.LATH0 = 0;
+
+    TRISHbits.TRISH1 = 0;
+    TRISDbits.TRISD3 = 0;
+    TRISDbits.TRISD4 = 0;
+    TRISFbits.TRISF0 = 0;
+    TRISHbits.TRISH0 = 0;
+}
+
+
+void forward(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    mL-> direction = 1;
+    mR-> direction = 1;
+    LATDbits.LATD3 = 1;
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((20)*(64000000/4000000.0)));
+    }
+    LATDbits.LATD3 = 0;
+}
+
+void reverse(DC_motor *mL, DC_motor *mR)
+{
+    stop(mL,mR);
+    mL-> direction = 0;
+    mR-> direction = 0;
+    LATHbits.LATH1 = 1;
+    setMotorPWM(mR);
+    setMotorPWM(mL);
+    while ((mL->power <40) && (mR->power <40)){
+        mL->power += 10;
+        mR->power += 10;
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((20)*(64000000/4000000.0)));
+    }
+    LATHbits.LATH1 = 0;
+}
+
 
 void stop(DC_motor *mL, DC_motor *mR)
 {
     mL->brakemode = 1;
     mR->brakemode = 1;
+    LATDbits.LATD4 = 1;
 
     for (int i = 70; i >= 0; i=i-10) {
         mL -> power = i;
@@ -24368,15 +24591,18 @@ void stop(DC_motor *mL, DC_motor *mR)
     mR->power = 0;
     setMotorPWM(mL);
     setMotorPWM(mR);
+    LATDbits.LATD4 = 0;
 }
 
 
-void turnLeft(DC_motor *mL, DC_motor *mR)
+void left_45(DC_motor *mL, DC_motor *mR, int count)
 {
     stop(mL,mR);
     mL-> direction = 0;
     mR-> direction = 1;
-
+    LATFbits.LATF0 = 1;
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -24384,16 +24610,21 @@ void turnLeft(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((425)*(64000000/4000.0)));
+    _delay((unsigned long)((230)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
+    LATFbits.LATF0 = 0;
+    }
 }
 
 
-void turnRight(DC_motor *mL, DC_motor *mR)
+void right_45(DC_motor *mL, DC_motor *mR, int count)
 {
     mL-> direction = 1;
     mR-> direction = 0;
+    LATHbits.LATH0 = 1;
+    int i;
+    for (i = 0;i<count;i++){
     while ((mL->power <= 30) || (mR->power <= 30)){
         if (mL->power <= 30){mL->power += 10;}
         if (mR->power <= 30){mR->power += 10;}
@@ -24401,17 +24632,19 @@ void turnRight(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((50)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((430)*(64000000/4000.0)));
+    _delay((unsigned long)((250)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
+    LATHbits.LATH0 = 0;
+}
 }
 
-
-void fullSpeedAhead(DC_motor *mL, DC_motor *mR)
+void space(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
-    mL-> direction = 1;
-    mR-> direction = 1;
+    LATHbits.LATH1 = 1;
+    mL-> direction = 0;
+    mR-> direction = 0;
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <40) && (mR->power <40)){
@@ -24421,5 +24654,25 @@ void fullSpeedAhead(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         _delay((unsigned long)((20)*(64000000/4000000.0)));
     }
-    _delay((unsigned long)((2000)*(64000000/4000.0)));
+    _delay((unsigned long)((300)*(64000000/4000.0)));
+    stop(mL,mR);
+    _delay((unsigned long)((200)*(64000000/4000.0)));
+    LATHbits.LATH1 = 0;
+
+}
+
+
+void instructions(DC_motor *mL, DC_motor *mR, int count)
+{
+    space(mL,mR);
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    stop(mL,mR);
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    if (count == 1){right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 2){left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 3){right_45(mL,mR,4); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); _delay((unsigned long)((400)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); _delay((unsigned long)((400)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2); stop(mL,mR);}
+    if (count == 6){right_45(mL,mR,3); stop(mL,mR);}
+    if (count == 7){left_45(mL,mR,3); stop(mL,mR);}
 }
