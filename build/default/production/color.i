@@ -24494,13 +24494,14 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 0;
+int color_lowerbound = 100;
 int color_upperbound = 2500;
 
-char read_color_flag;
+char read_color_flag = 0;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
+void interrupts_clear(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
 # 6 "color.c" 2
 
@@ -24601,7 +24602,8 @@ void READcolor(colors *c) {
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     READcolor(&color);
     colourcards_normaliseRGBC(&color);
-    if (color.C > 2500){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
+
+    if (read_color_flag = 1 ){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
     if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
     instructions(mL,mR,1);
     }

@@ -24668,6 +24668,7 @@ void instructions(DC_motor *mL, DC_motor *mR, int count)
     _delay((unsigned long)((500)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((500)*(64000000/4000.0)));
+
     if (count == 1){right_45(mL,mR,2); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4); stop(mL,mR);}

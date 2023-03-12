@@ -257,6 +257,7 @@ void instructions(DC_motor *mL, DC_motor *mR, int count)
     __delay_ms(500);
     stop(mL,mR);
     __delay_ms(500);
+    
     if (count == 1){right_45(mL,mR,2); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4); stop(mL,mR);}

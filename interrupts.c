@@ -2,6 +2,7 @@
 #include "interrupts.h"
 #include "color.h"
 #include "serial.h"
+#include "i2c.h"
 
 /************************************
  * Function to turn on interrupts and set if priority is used
@@ -9,29 +10,37 @@
 ************************************/
 void interrupts_init(void)
 {
-    TRISBbits.TRISB1 = 1;   // Set B0 to input
-    ANSELBbits.ANSELB1 = 0; // Turn off analogue input for B0
-    
+    TRISBbits.TRISB0 = 1;   // Set TRIS value for pin RB0 (input)
+    ANSELBbits.ANSELB0 = 0; // Turn off analogue input for pin RB0
+    INT1PPS=0x09;           // Set peripheral pin select module
+//    
     PIE0bits.INT1IE = 1;    // Enable external interrupt source
+//   
+//    
+    IPR0bits.INT1IP = 1;    // Set clear channel interrupt to high priority 
     
-    IPR0bits.INT1IP = 1;    // Set interrupt to high priority 
+    interrupts_clear();     // Clear interrupts on the colour click module
     
-    INTCONbits.INT1EDG = 0; // interrupt on falling edge
-    INTCONbits.IPEN = 1;    // Enable priority levels 
-    
-    INTCONbits.PEIE=1; 	//enable peripheral interrupts
-    INTCONbits.GIE=1; 	//enable interrupts globally 
-	
-    colorclick_interrupts_init();
+    INTCONbits.INT1EDG = 0; // Set interrupt on falling edge
+    INTCONbits.IPEN = 1;    // Enable priority levels on interrupts
+    INTCONbits.PEIE = 1;    // Enable peripheral interrupts
+    INTCONbits.GIE = 1;     // Enable global interrupts last, once all other interrupt configuration is done (when this is off, all interrupts are deactivated)
 }
 
 void colorclick_interrupts_init(void) {
     color_writetoaddr(0x00,0x13);                          // write to enable register and turn on interrupts                         
-    color_writetoaddr(0x04, (color_lowerbound & 0x00FF)); // low bits for lower colour threshold
+    color_writetoaddr(0x04, (color_lowerbound & 0xFF)); // low bits for lower colour threshold
     color_writetoaddr(0x05, (color_lowerbound >> 8));     // high bits for lower colour threshold
-    color_writetoaddr(0x06, (color_upperbound & 0x00FF)); // set low bits for upper threshold
+    color_writetoaddr(0x06, (color_upperbound & 0xFF)); // set low bits for upper threshold
     color_writetoaddr(0x07, (color_upperbound >> 8));     // set high bits for upper threshold
-    color_writetoaddr(0x0C, 0b0011); //Persistence register set to 3
+    color_writetoaddr(0x0C, 0b0001); //Persistence register set to 1
+}
+
+void interrupts_clear(void){
+    I2C_2_Master_Start();            // Start condition
+    I2C_2_Master_Write(0x52 | 0x00); // 7 bit device address + Write mode
+    I2C_2_Master_Write(0b11100110);  // Command + Register address  
+    I2C_2_Master_Stop();             // Send stop bit
 }
 
 void __interrupt(high_priority) HighISR() {

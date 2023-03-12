@@ -24233,13 +24233,14 @@ unsigned char __t3rd16on(void);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 0;
+int color_lowerbound = 100;
 int color_upperbound = 2500;
 
-char read_color_flag;
+char read_color_flag = 0;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
+void interrupts_clear(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
 # 2 "interrupts.c" 2
 
@@ -24501,6 +24502,41 @@ void TxBufferedString(char *string);
 void sendTxBuf(void);
 # 4 "interrupts.c" 2
 
+# 1 "./i2c.h" 1
+# 13 "./i2c.h"
+void I2C_2_Master_Init(void);
+
+
+
+
+void I2C_2_Master_Idle(void);
+
+
+
+
+void I2C_2_Master_Start(void);
+
+
+
+
+void I2C_2_Master_RepStart(void);
+
+
+
+
+void I2C_2_Master_Stop(void);
+
+
+
+
+void I2C_2_Master_Write(unsigned char data_byte);
+
+
+
+
+unsigned char I2C_2_Master_Read(unsigned char ack);
+# 5 "interrupts.c" 2
+
 
 
 
@@ -24508,29 +24544,37 @@ void sendTxBuf(void);
 
 void interrupts_init(void)
 {
-    TRISBbits.TRISB1 = 1;
-    ANSELBbits.ANSELB1 = 0;
+    TRISBbits.TRISB0 = 1;
+    ANSELBbits.ANSELB0 = 0;
+    INT1PPS=0x09;
 
     PIE0bits.INT1IE = 1;
 
+
     IPR0bits.INT1IP = 1;
+
+    interrupts_clear();
 
     INTCONbits.INT1EDG = 0;
     INTCONbits.IPEN = 1;
-
-    INTCONbits.PEIE=1;
-    INTCONbits.GIE=1;
-
-    colorclick_interrupts_init();
+    INTCONbits.PEIE = 1;
+    INTCONbits.GIE = 1;
 }
 
 void colorclick_interrupts_init(void) {
     color_writetoaddr(0x00,0x13);
-    color_writetoaddr(0x04, (color_lowerbound & 0x00FF));
+    color_writetoaddr(0x04, (color_lowerbound & 0xFF));
     color_writetoaddr(0x05, (color_lowerbound >> 8));
-    color_writetoaddr(0x06, (color_upperbound & 0x00FF));
+    color_writetoaddr(0x06, (color_upperbound & 0xFF));
     color_writetoaddr(0x07, (color_upperbound >> 8));
-    color_writetoaddr(0x0C, 0b0011);
+    color_writetoaddr(0x0C, 0b0001);
+}
+
+void interrupts_clear(void){
+    I2C_2_Master_Start();
+    I2C_2_Master_Write(0x52 | 0x00);
+    I2C_2_Master_Write(0b11100110);
+    I2C_2_Master_Stop();
 }
 
 void __attribute__((picinterrupt(("high_priority")))) HighISR() {

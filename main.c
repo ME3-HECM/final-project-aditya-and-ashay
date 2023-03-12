@@ -21,6 +21,8 @@ void main(void){
     buggyLEDs_init();
     initUSART4();
     color_click_init();
+    
+    colorclick_interrupts_init();
     interrupts_init();
     
     TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
@@ -32,16 +34,12 @@ void main(void){
     LATFbits.LATF7 = 1; //blue LED on
     
     TRISFbits.TRISF2 = 1;
-    ANSELFbits.ANSELF2=0;
+    ANSELFbits.ANSELF2 = 0;
     
-//    while (1) {
-//       
-//       buggy_color_response(&motorL,&motorR,&color);
-//       
-//       char buf[40];
-//       sprintf(buf,"%d  \r\n",color.C);
-//       sendStringSerial4(buf);
-//       
-//       }
+    while (1) {
+       
+       buggy_color_response(&motorL,&motorR,&color);
+       
+       }
 
 }

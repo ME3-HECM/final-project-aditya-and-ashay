@@ -101,7 +101,8 @@ void READcolor(colors *c) {
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     READcolor(&color);
     colourcards_normaliseRGBC(&color);
-    if (color.C > 2500){stop(mL,mR);__delay_ms(500);READcolor(&color);colourcards_normaliseRGBC(&color);__delay_ms(500);
+    
+    if (read_color_flag = 1/*color.C > 2500*/){stop(mL,mR);__delay_ms(500);READcolor(&color);colourcards_normaliseRGBC(&color);__delay_ms(500);
     if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
     instructions(mL,mR,1); //RED COLOUR CARD
     }

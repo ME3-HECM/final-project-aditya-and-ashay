@@ -24470,13 +24470,14 @@ void colourcards_normaliseRGBC(colors *c);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 0;
+int color_lowerbound = 100;
 int color_upperbound = 2500;
 
-char read_color_flag;
+char read_color_flag = 0;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
+void interrupts_clear(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
 # 11 "main.c" 2
 
@@ -24555,6 +24556,8 @@ void main(void){
     buggyLEDs_init();
     initUSART4();
     color_click_init();
+
+    colorclick_interrupts_init();
     interrupts_init();
 
     TRISGbits.TRISG1 = 0;
@@ -24566,6 +24569,12 @@ void main(void){
     LATFbits.LATF7 = 1;
 
     TRISFbits.TRISF2 = 1;
-    ANSELFbits.ANSELF2=0;
-# 47 "main.c"
+    ANSELFbits.ANSELF2 = 0;
+
+    while (1) {
+
+       buggy_color_response(&motorL,&motorR,&color);
+
+       }
+
 }
