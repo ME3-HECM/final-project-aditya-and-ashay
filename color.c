@@ -46,7 +46,7 @@ unsigned int color_read_Blue(void)
 	unsigned int tmp;
 	I2C_2_Master_Start();         //Start condition
 	I2C_2_Master_Write(0x52 | 0x00);     //7 bit address + Write mode
-    // For line below Red = 0x16, Blue = 0x1A (0x01 according to Amanda), Green = 0x18, Clear = 0x14
+    // For line below Red = 0x16, Blue = 0x1A, Green = 0x18, Clear = 0x14
 	I2C_2_Master_Write(0xA0 | 0x1A);    //command (auto-increment protocol transaction) + start at RED low register
 	I2C_2_Master_RepStart();			// start a repeated transmission
 	I2C_2_Master_Write(0x52 | 0x01);     //7 bit address + Read (1) mode
@@ -102,7 +102,7 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     READcolor(&color);
     colourcards_normaliseRGBC(&color);
     
-    if (read_color_flag = 1/*color.C > 2500*/){stop(mL,mR);__delay_ms(500);READcolor(&color);colourcards_normaliseRGBC(&color);__delay_ms(500);
+    if (color.C > color_upperbound){stop(mL,mR);__delay_ms(500);READcolor(&color);colourcards_normaliseRGBC(&color);__delay_ms(500);
     if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
     instructions(mL,mR,1); //RED COLOUR CARD
     }
@@ -143,4 +143,36 @@ void colourcards_normaliseRGBC(colors *c)
     color.R_norm = (float)R/(float)C;
     color.G_norm = (float)G/(float)C;
     color.B_norm = (float)B/(float)C;
+}
+
+void clear_RBG(colors *c){
+    color.R = 0;
+    color.B = 0;
+    color.G = 0;
+    color.C = 0;
+    color.R_norm = 0;
+    color.B_norm = 0;
+    color.G_norm = 0;
+}
+
+//Calibration code
+// Reads value of Blue card to find the lowest clear value and sets the upper bound to less than this
+void calibrate_upperbound(colors *c){
+    READcolor(&color);
+    colourcards_normaliseRGBC(&color);
+    if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
+    MAINLIGHT = 1;
+    READcolor(&color);
+    colourcards_normaliseRGBC(&color);
+    color_upperbound = (color.C - 250);
+    MAINLIGHT = 0; 
+    }
+    
+    if (color_upperbound < 3000){
+        LATDbits.LATD7 = !LATDbits.LATD7;    
+}
+    if(PORTFbits.RF2 == 1) {
+        start_flag = 1;
+    } 
+    
 }

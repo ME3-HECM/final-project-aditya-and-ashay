@@ -24233,10 +24233,10 @@ unsigned char __t3rd16on(void);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 100;
-int color_upperbound = 2500;
+int color_lowerbound;
+int color_upperbound;
 
-char read_color_flag = 0;
+char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
@@ -24444,6 +24444,8 @@ typedef struct colors {
 
 struct colors color;
 
+char start_flag;
+
 
 
 void color_click_init(void);
@@ -24470,6 +24472,8 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
+void clear_RBG(colors *c);
+void calibrate_upperbound(colors *c);
 # 3 "interrupts.c" 2
 
 # 1 "./serial.h" 1
@@ -24546,14 +24550,10 @@ void interrupts_init(void)
 {
     TRISBbits.TRISB0 = 1;
     ANSELBbits.ANSELB0 = 0;
-    INT1PPS=0x09;
+    interrupts_clear();
 
     PIE0bits.INT1IE = 1;
-
-
     IPR0bits.INT1IP = 1;
-
-    interrupts_clear();
 
     INTCONbits.INT1EDG = 0;
     INTCONbits.IPEN = 1;

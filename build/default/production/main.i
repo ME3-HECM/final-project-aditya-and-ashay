@@ -24440,6 +24440,8 @@ typedef struct colors {
 
 struct colors color;
 
+char start_flag;
+
 
 
 void color_click_init(void);
@@ -24466,14 +24468,16 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
+void clear_RBG(colors *c);
+void calibrate_upperbound(colors *c);
 # 10 "main.c" 2
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 100;
-int color_upperbound = 2500;
+int color_lowerbound;
+int color_upperbound;
 
-char read_color_flag = 0;
+char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
@@ -24557,8 +24561,8 @@ void main(void){
     initUSART4();
     color_click_init();
 
-    colorclick_interrupts_init();
-    interrupts_init();
+
+
 
     TRISGbits.TRISG1 = 0;
     TRISAbits.TRISA4 = 0;
@@ -24571,10 +24575,24 @@ void main(void){
     TRISFbits.TRISF2 = 1;
     ANSELFbits.ANSELF2 = 0;
 
+    TRISFbits.TRISF3 = 1;
+    ANSELFbits.ANSELF3 = 0;
+
+    TRISDbits.TRISD7 = 0;
+    LATDbits.LATD7 = 0;
+    start_flag = 0;
+
+    if (start_flag = 0) {
+        if(PORTFbits.RF3 == 1) {
+        calibrate_upperbound(&color);
+    }
+    }
+
+    if (start_flag = 1){
     while (1) {
 
        buggy_color_response(&motorL,&motorR,&color);
 
        }
-
+    }
 }

@@ -10,16 +10,12 @@
 ************************************/
 void interrupts_init(void)
 {
-    TRISBbits.TRISB0 = 1;   // Set TRIS value for pin RB0 (input)
-    ANSELBbits.ANSELB0 = 0; // Turn off analogue input for pin RB0
-    INT1PPS=0x09;           // Set peripheral pin select module
-//    
-    PIE0bits.INT1IE = 1;    // Enable external interrupt source
-//   
-//    
-    IPR0bits.INT1IP = 1;    // Set clear channel interrupt to high priority 
-    
+    TRISBbits.TRISB0 = 1;   // Set TRIS value for B0
+    ANSELBbits.ANSELB0 = 0; // Turn off analogue input B0
     interrupts_clear();     // Clear interrupts on the colour click module
+//    
+    PIE0bits.INT1IE = 1;    // Enable external interrupt source 
+    IPR0bits.INT1IP = 1;    // Set clear channel interrupt to high priority 
     
     INTCONbits.INT1EDG = 0; // Set interrupt on falling edge
     INTCONbits.IPEN = 1;    // Enable priority levels on interrupts

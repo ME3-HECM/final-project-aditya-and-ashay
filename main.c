@@ -22,8 +22,8 @@ void main(void){
     initUSART4();
     color_click_init();
     
-    colorclick_interrupts_init();
-    interrupts_init();
+//    colorclick_interrupts_init();
+//    interrupts_init();
     
     TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
     TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
@@ -36,10 +36,25 @@ void main(void){
     TRISFbits.TRISF2 = 1;
     ANSELFbits.ANSELF2 = 0;
     
+    TRISFbits.TRISF3 = 1;
+    ANSELFbits.ANSELF3 = 0;
+    
+    TRISDbits.TRISD7 = 0;
+    LATDbits.LATD7 = 0;
+    start_flag = 0;
+    
+    if (start_flag = 0) {
+        if(PORTFbits.RF3 == 1) {
+        calibrate_upperbound(&color);
+    }
+    }
+    
+    if (start_flag = 1){ //we can use start as way to calibrate the code before it begins the maze
     while (1) {
        
        buggy_color_response(&motorL,&motorR,&color);
        
        }
-
+    }
 }
+        

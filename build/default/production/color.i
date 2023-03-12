@@ -24428,6 +24428,8 @@ typedef struct colors {
 
 struct colors color;
 
+char start_flag;
+
 
 
 void color_click_init(void);
@@ -24454,6 +24456,8 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
+void clear_RBG(colors *c);
+void calibrate_upperbound(colors *c);
 # 3 "color.c" 2
 
 # 1 "./i2c.h" 1
@@ -24494,10 +24498,10 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
-int color_lowerbound = 100;
-int color_upperbound = 2500;
+int color_lowerbound;
+int color_upperbound;
 
-char read_color_flag = 0;
+char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
@@ -24603,7 +24607,7 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     READcolor(&color);
     colourcards_normaliseRGBC(&color);
 
-    if (read_color_flag = 1 ){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
+    if (color.C > color_upperbound){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
     if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
     instructions(mL,mR,1);
     }
@@ -24644,4 +24648,36 @@ void colourcards_normaliseRGBC(colors *c)
     color.R_norm = (float)R/(float)C;
     color.G_norm = (float)G/(float)C;
     color.B_norm = (float)B/(float)C;
+}
+
+void clear_RBG(colors *c){
+    color.R = 0;
+    color.B = 0;
+    color.G = 0;
+    color.C = 0;
+    color.R_norm = 0;
+    color.B_norm = 0;
+    color.G_norm = 0;
+}
+
+
+
+void calibrate_upperbound(colors *c){
+    READcolor(&color);
+    colourcards_normaliseRGBC(&color);
+    if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
+    LATDbits.LATD3 = 1;
+    READcolor(&color);
+    colourcards_normaliseRGBC(&color);
+    color_upperbound = (color.C - 250);
+    LATDbits.LATD3 = 0;
+    }
+
+    if (color_upperbound < 3000){
+        LATDbits.LATD7 = !LATDbits.LATD7;
+}
+    if(PORTFbits.RF2 == 1) {
+        start_flag = 1;
+    }
+
 }

@@ -8,10 +8,10 @@
 
 //Value for the upper bound for the interrupt to be triggered
 //Will find these through calibration
-int color_lowerbound = 100;
-int color_upperbound = 2500;
+int color_lowerbound;
+int color_upperbound;
 
-char read_color_flag = 0;
+char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
