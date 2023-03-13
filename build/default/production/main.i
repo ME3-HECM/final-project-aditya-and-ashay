@@ -24416,6 +24416,9 @@ void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
 void space(DC_motor *mL, DC_motor *mR);
 
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
 void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 9 "main.c" 2
 
@@ -24440,7 +24443,7 @@ typedef struct colors {
 
 struct colors color;
 
-char start_flag;
+
 
 
 
@@ -24468,16 +24471,13 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
-void clear_RBG(colors *c);
-void calibrate_upperbound(colors *c);
 # 10 "main.c" 2
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
+int Int_flag = 0;
 int color_lowerbound;
 int color_upperbound;
-
-char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
@@ -24550,6 +24550,20 @@ void I2C_2_Master_Write(unsigned char data_byte);
 unsigned char I2C_2_Master_Read(unsigned char ack);
 # 13 "main.c" 2
 
+# 1 "./timers.h" 1
+
+
+
+
+
+
+
+
+void Timer0_init(void);
+void timer_reset(void);
+unsigned int get_timer_val(void);
+# 14 "main.c" 2
+
 
 
 
@@ -24560,6 +24574,7 @@ void main(void){
     buggyLEDs_init();
     initUSART4();
     color_click_init();
+    Timer0_init();
 
 
 
@@ -24572,27 +24587,19 @@ void main(void){
     LATAbits.LATA4 = 1;
     LATFbits.LATF7 = 1;
 
-    TRISFbits.TRISF2 = 1;
-    ANSELFbits.ANSELF2 = 0;
 
-    TRISFbits.TRISF3 = 1;
-    ANSELFbits.ANSELF3 = 0;
+
+
+
+
 
     TRISDbits.TRISD7 = 0;
     LATDbits.LATD7 = 0;
-    start_flag = 0;
-
-    if (start_flag = 0) {
-        if(PORTFbits.RF3 == 1) {
-        calibrate_upperbound(&color);
-    }
-    }
-
-    if (start_flag = 1){
+# 54 "main.c"
     while (1) {
-
        buggy_color_response(&motorL,&motorR,&color);
-
        }
-    }
+
+
+
 }

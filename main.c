@@ -11,6 +11,7 @@
 #include "interrupts.h"
 #include "serial.h"
 #include "i2c.h"
+#include "timers.h"
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
@@ -21,9 +22,10 @@ void main(void){
     buggyLEDs_init();
     initUSART4();
     color_click_init();
+    Timer0_init();
     
-//    colorclick_interrupts_init();
-//    interrupts_init();
+    //colorclick_interrupts_init();
+    //interrupts_init();
     
     TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
     TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
@@ -33,28 +35,26 @@ void main(void){
     LATAbits.LATA4 = 1; //green LED on
     LATFbits.LATF7 = 1; //blue LED on
     
-    TRISFbits.TRISF2 = 1;
-    ANSELFbits.ANSELF2 = 0;
-    
-    TRISFbits.TRISF3 = 1;
-    ANSELFbits.ANSELF3 = 0;
+//    TRISFbits.TRISF2 = 1;
+//    ANSELFbits.ANSELF2 = 0;
+//    
+//    TRISFbits.TRISF3 = 1;
+//    ANSELFbits.ANSELF3 = 0;
     
     TRISDbits.TRISD7 = 0;
     LATDbits.LATD7 = 0;
-    start_flag = 0;
     
-    if (start_flag = 0) {
-        if(PORTFbits.RF3 == 1) {
-        calibrate_upperbound(&color);
-    }
-    }
-    
-    if (start_flag = 1){ //we can use start as way to calibrate the code before it begins the maze
-    while (1) {
-       
-       buggy_color_response(&motorL,&motorR,&color);
-       
-       }
-    }
-}
+//    char start_flag = 0;
+//    if (PORTFbits.RF3){
+//        start_flag = 1;
+//    }
+//    if (start_flag = 1) {
+//        timer_reset();
         
+    while (1) {
+       buggy_color_response(&motorL,&motorR,&color);
+       }
+    //start_flag = 0;
+    //}
+
+}        

@@ -18,7 +18,7 @@ typedef struct colors {
 
 struct colors color;
 
-char start_flag;
+
 /********************************************//**
  *  Function to initialise the colour click module using I2C
  ***********************************************/
@@ -46,7 +46,7 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
-void clear_RBG(colors *c);
-void calibrate_upperbound(colors *c);
+//void clear_RBG(colors *c);
+//void calibrate_upperbound(colors *c);
 
 #endif

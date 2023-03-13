@@ -4,4 +4,5 @@ dc_motor.h  \
 color.h  \
 interrupts.h  \
 serial.h  \
-i2c.h 
+i2c.h  \
+timers.h 

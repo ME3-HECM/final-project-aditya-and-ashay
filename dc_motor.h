@@ -38,6 +38,9 @@ void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
 void space(DC_motor *mL, DC_motor *mR);
 
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
 void instructions(DC_motor *mL, DC_motor *mR, int count);
 
 

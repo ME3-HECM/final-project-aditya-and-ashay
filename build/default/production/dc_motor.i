@@ -24408,6 +24408,9 @@ void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
 void space(DC_motor *mL, DC_motor *mR);
 
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
 void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 2 "dc_motor.c" 2
 
@@ -24661,6 +24664,25 @@ void space(DC_motor *mL, DC_motor *mR)
 
 }
 
+void reverse_pink(DC_motor *mL, DC_motor *mR) {
+
+    right_45(mL,mR,2);
+    stop(mL,mR);
+
+     reverse(mL,mR);
+    _delay((unsigned long)((400)*(64000000/4000.0)));
+    stop(mL,mR);
+}
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR) {
+
+    left_45(mL,mR,2);
+    stop(mL,mR);
+
+     reverse(mL,mR);
+    _delay((unsigned long)((400)*(64000000/4000.0)));
+    stop(mL,mR);
+}
 
 void instructions(DC_motor *mL, DC_motor *mR, int count)
 {
@@ -24676,4 +24698,8 @@ void instructions(DC_motor *mL, DC_motor *mR, int count)
     if (count == 5){reverse(mL,mR); _delay((unsigned long)((400)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3); stop(mL,mR);}
+
+    if (count == 9){reverse_yellow(mL,mR);}
+    if (count == 10) {reverse_pink(mL,mR);}
+
 }

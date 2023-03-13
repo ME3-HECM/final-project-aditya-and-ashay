@@ -24410,6 +24410,9 @@ void left_45(DC_motor *mL, DC_motor *mR, int count);
 void right_45(DC_motor *mL, DC_motor *mR, int count);
 void space(DC_motor *mL, DC_motor *mR);
 
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
 void instructions(DC_motor *mL, DC_motor *mR, int count);
 # 5 "./color.h" 2
 
@@ -24428,7 +24431,7 @@ typedef struct colors {
 
 struct colors color;
 
-char start_flag;
+
 
 
 
@@ -24456,8 +24459,6 @@ void READcolor(colors *c);
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
 void colourcards_normaliseRGBC(colors *c);
-void clear_RBG(colors *c);
-void calibrate_upperbound(colors *c);
 # 3 "color.c" 2
 
 # 1 "./i2c.h" 1
@@ -24498,16 +24499,41 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 # 1 "./interrupts.h" 1
 # 11 "./interrupts.h"
+int Int_flag = 0;
 int color_lowerbound;
 int color_upperbound;
-
-char read_color_flag;
 
 void interrupts_init(void);
 void colorclick_interrupts_init(void);
 void interrupts_clear(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
 # 6 "color.c" 2
+
+# 1 "./memory.h" 1
+# 15 "./memory.h"
+unsigned char card_count_index = 0;
+char card_memory[40];
+
+unsigned char timer_index = 0;
+char timer_memory[40];
+
+void card_append(unsigned char temp, *card_count_index, *card_memory);
+void timer_append(unsigned char temp, *timer_index, *timer_memory);
+# 7 "color.c" 2
+
+# 1 "./timers.h" 1
+
+
+
+
+
+
+
+
+void Timer0_init(void);
+void timer_reset(void);
+unsigned int get_timer_val(void);
+# 8 "color.c" 2
 
 
 void color_click_init(void)
@@ -24604,37 +24630,77 @@ void READcolor(colors *c) {
 }
 
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
+
     READcolor(&color);
     colourcards_normaliseRGBC(&color);
 
-    if (color.C > color_upperbound){stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));READcolor(&color);colourcards_normaliseRGBC(&color);_delay((unsigned long)((500)*(64000000/4000.0)));
-    if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
-    instructions(mL,mR,1);
-    }
-    if (color.B_norm < 0.25 && color.G_norm > 0.40) {
-    instructions(mL,mR,2);
-    }
-    if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
-    instructions(mL,mR,3);
-    }
-    if (color.R_norm > 0.52 && color.G_norm > 0.32){
-    instructions(mL,mR,4);
-    }
-    if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
-    instructions(mL,mR,5);
-    }
-    if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
-    instructions(mL,mR,6);
-    }
-    if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
-    instructions(mL,mR,7);
-    }
-    if (color.R_norm < 0.5 && color.C > 16000){
+    if (color.C > color_upperbound){
+        timer_append(get_timer_val(), &timer_index, &timer_memory);
+        stop(mL,mR); _delay((unsigned long)((500)*(64000000/4000.0)));
+        READcolor(&color); colourcards_normaliseRGBC(&color); _delay((unsigned long)((500)*(64000000/4000.0)));
 
+        if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
+        card_append(2, &card_count_index, *card_memory);
+        instructions(mL,mR,1);
+
+        }
+
+        if (color.B_norm < 0.25 && color.G_norm > 0.40) {
+        card_append(1, &card_count_index, *card_memory);
+        instructions(mL,mR,2);
+
+        }
+
+        if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
+        card_append(3, &card_count_index, *card_memory);
+        instructions(mL,mR,3);
+
+        }
+
+        if (color.R_norm > 0.52 && color.G_norm > 0.32){
+            card_append(9, &card_count_index, *card_memory);
+            instructions(mL,mR,4);
+
+        }
+
+        if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
+            card_append(10, &card_count_index, *card_memory);
+            instructions(mL,mR,5);
+
+        }
+
+        if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
+            card_append(7, &card_count_index, *card_memory);
+            instructions(mL,mR,6);
+
+        }
+
+        if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
+            card_append(6, &card_count_index, *card_memory);
+            instructions(mL,mR,7);
+
+        }
+
+        if (color.R_norm < 0.5 && color.C > 16000){
+            instructions(mL,mR,3);
+
+            while(timer_index >= 0) {
+
+                forward(mL,mR);
+                unsigned int i;
+                for (i=0; i < timer_memory[timer_index-1]; i++) {_delay((unsigned long)((1)*(64000000/4000.0)));}
+
+                instructions(mL,mR,card_memory[card_count_index-1]);
+
+                timer_index = timer_index - 1;
+                card_count_index = card_count_index - 1;
+            }
+
+        }
+        timer_reset();
     }
-    }
+
     else {forward(mL,mR);}
-    read_color_flag = 0;
 }
 
 
@@ -24648,36 +24714,4 @@ void colourcards_normaliseRGBC(colors *c)
     color.R_norm = (float)R/(float)C;
     color.G_norm = (float)G/(float)C;
     color.B_norm = (float)B/(float)C;
-}
-
-void clear_RBG(colors *c){
-    color.R = 0;
-    color.B = 0;
-    color.G = 0;
-    color.C = 0;
-    color.R_norm = 0;
-    color.B_norm = 0;
-    color.G_norm = 0;
-}
-
-
-
-void calibrate_upperbound(colors *c){
-    READcolor(&color);
-    colourcards_normaliseRGBC(&color);
-    if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
-    LATDbits.LATD3 = 1;
-    READcolor(&color);
-    colourcards_normaliseRGBC(&color);
-    color_upperbound = (color.C - 250);
-    LATDbits.LATD3 = 0;
-    }
-
-    if (color_upperbound < 3000){
-        LATDbits.LATD7 = !LATDbits.LATD7;
-}
-    if(PORTFbits.RF2 == 1) {
-        start_flag = 1;
-    }
-
 }
