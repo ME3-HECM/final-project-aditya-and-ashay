@@ -39,6 +39,7 @@ void right_45(DC_motor *mL, DC_motor *mR, int count);
 void space(DC_motor *mL, DC_motor *mR);
 
 void instructions(DC_motor *mL, DC_motor *mR, int count);
+void instructions2(DC_motor *mL, DC_motor *mR, int count);
 
 
 #endif

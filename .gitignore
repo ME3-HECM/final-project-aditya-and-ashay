@@ -28,3 +28,23 @@
 # Misc
 .svn
 *.bak
+color.c
+color.c
+color.h
+dc_motor.c
+Final-project.X/build/default/production/_ext/1472/timers.i
+*.i
+Final-project.X/build/default/production/_ext/1472/timers.p1
+Final-project.X/build/default/production/_ext/1472/timers.p1.d
+Final-project.X/dist/default/production/Final-project.X.production.cmf
+Final-project.X/build/default/production/_ext/1472/timers.p1.d
+Final-project.X/dist/default/production/Final-project.X.production.cmf
+Final-project.X/build/default/production/_ext/1472/timers.p1.d
+Final-project.X/dist/default/production/Final-project.X.production.cmf
+Final-project.X/dist/default/production/Final-project.X.production.hex
+Final-project.X/dist/default/production/Final-project.X.production.cmf
+Final-project.X/dist/default/production/Final-project.X.production.hex
+Final-project.X/dist/default/production/Final-project.X.production.cmf
+Final-project.X/build/default/production/_ext/1472/timers.p1.d
+Final-project.X/dist/default/production/Final-project.X.production.hex
+*.d
