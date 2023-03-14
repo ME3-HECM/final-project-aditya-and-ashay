@@ -5,8 +5,8 @@
 #include <stdio.h>          // Include standard input output library to use serial communication for testing purposes
 #define _XTAL_FREQ 64000000
 
-int left_timer = 235;
-int right_timer = 230;
+int left_timer = 105;
+int right_timer = 100;
 
 
 typedef struct DC_motor { //definition of DC_motor structure

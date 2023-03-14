@@ -95,23 +95,22 @@ void READcolor(colors *c) {
     color.G = color_read_Green();
     color.C = color_read_Clear();
     
-//    color.R_norm = (float)color.R / (float)color.C;
-//    color.B_norm = (float)color.B / (float)color.C;
-//    color.G_norm = (float)color.G / (float)color.C;
+    color.R_norm = (float)color.R / (float)color.C;
+    color.B_norm = (float)color.B / (float)color.C;
+    color.G_norm = (float)color.G / (float)color.C;
 }
 
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     
     READcolor(&color);
-    colourcards_normaliseRGBC(&color);
     
     if (color.C > color_upperbound){ 
         timer_memory[timer_index] = timer_val;
         timer_index ++;
         forward(mL,mR);
-        __delay_ms(100);
+        __delay_ms(50);
         stop(mL,mR); __delay_ms(500);
-        READcolor(&color); colourcards_normaliseRGBC(&color); __delay_ms(500);
+        READcolor(&color); __delay_ms(500);
         
         if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
             card_memory[card_count] = 2;
@@ -163,25 +162,24 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         }
     
         if (color.R_norm < 0.48 && color.C > 16000 && color.G_norm < 0.36 ){ //White card - Return home
+            
             card_memory[card_count] = 3;
             card_count ++;
+            
             space(mL,mR);
             __delay_ms(500);
             stop(mL,mR);
             __delay_ms(500);
             
-            // need a white_reverse function
-        
             return_home(mL,mR);
+            
             stop(mL,mR);
             __delay_ms(500);
+            
             instructions2(mL,mR,3);
-            
-            Sleep();
-            
-        }
+            Sleep();   
+        }    
         timer_reset();
-        
     }
         
     else {forward(mL,mR);} //If clear channel is below 2500, car will continue to move forward
@@ -190,6 +188,7 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 
 void return_home(DC_motor *mL, DC_motor *mR){
     while(timer_index > 0 && card_count > 0 ) {
+        
         instructions2(mL,mR,card_memory[card_count-1]);
         card_count--;
         __delay_ms(250);
@@ -198,10 +197,11 @@ void return_home(DC_motor *mL, DC_motor *mR){
         timer_index--; 
         stop(mL,mR);
         __delay_ms(200);
-        reverse(mL,mR);
+         reverse(mL,mR);
         __delay_ms(100);
         stop(mL,mR);        
         __delay_ms(250);
+
     }
 }
 
@@ -210,14 +210,3 @@ void delay_ms_func(unsigned int time) {
     for (i=0; i < time; i++) {__delay_ms(131);} //131 ms for each timer overflow
 }
 
-void colourcards_normaliseRGBC(colors *c)
-{
-    unsigned int R = color.R;
-    unsigned int G = color.G;
-    unsigned int B = color.B;
-    unsigned int C = color.C;
-    
-    color.R_norm = (float)R/(float)C;
-    color.G_norm = (float)G/(float)C;
-    color.B_norm = (float)B/(float)C;
-}

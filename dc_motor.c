@@ -124,7 +124,7 @@ void forward(DC_motor *mL, DC_motor *mR)
     MAINLIGHT = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
-    while ((mL->power <40) && (mR->power <45)){
+    while ((mL->power <50) && (mR->power <55)){
         mL->power += 5;
         mR->power += 5;
         setMotorPWM(mL);
@@ -142,12 +142,12 @@ void reverse(DC_motor *mL, DC_motor *mR)
     HEADLAMPS = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
-    while ((mL->power <40) && (mR->power <40)){
-        mL->power += 10;
-        mR->power += 10;
+    while ((mL->power <50) && (mR->power <55)){
+        mL->power += 5;
+        mR->power += 5;
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(20);   
+        __delay_us(10);   
     }
     HEADLAMPS = 0;
 }
@@ -183,12 +183,12 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
     LEFTINDICATOR = 1;
     int i;
     for (i = 0;i<count;i++){
-    while ((mL->power <= 30) || (mR->power <= 30)){
-        if (mL->power <= 30){mL->power += 10;}
-        if (mR->power <= 30){mR->power += 10;}
+    while ((mL->power <= 50) || (mR->power <= 50)){
+        if (mL->power <= 50){mL->power += 10;}
+        if (mR->power <= 50){mR->power += 10;}
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(20);
+        __delay_ms(10);
     }
     custom_delay(left_timer);
     stop(mL,mR); 
@@ -205,12 +205,12 @@ void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
     RIGHTINDICATOR = 1;
     int i;
     for (i = 0;i<count;i++){
-    while ((mL->power <= 30) || (mR->power <= 30)){
-        if (mL->power <= 30){mL->power += 10;}
-        if (mR->power <= 30){mR->power += 10;}
+    while ((mL->power <= 50) || (mR->power <= 50)){
+        if (mL->power <= 50){mL->power += 10;}
+        if (mR->power <= 50){mR->power += 10;}
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(20);   
+        __delay_ms(10);   
     }
     custom_delay(right_timer);
     stop(mL,mR); 
@@ -234,7 +234,7 @@ void space(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
-    __delay_ms(300);
+    __delay_ms(250);
     stop(mL,mR);
     __delay_ms(200); // Wait for Car to stabilise
     HEADLAMPS = 0;
@@ -278,19 +278,18 @@ void instructions(DC_motor *mL, DC_motor *mR, int count)
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
        
-    if (count == 9){reverse_yellow(mL,mR);}
-    if (count == 10) {reverse_pink(mL,mR);}
     
 }
 
 void instructions2(DC_motor *mL, DC_motor *mR, int count)
 {
-
+       
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); __delay_ms(400);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); __delay_ms(400);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,right_timer); stop(mL,mR);}
+        
+    if (count == 9){reverse_yellow(mL,mR);}
+    if (count == 10) {reverse_pink(mL,mR);}
 }
