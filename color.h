@@ -2,18 +2,31 @@
 #define _color_H
 
 #include <xc.h>
+#include "dc_motor.h"
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
-typedef struct colors_normalised {
+typedef struct colors {
     unsigned int R;
     unsigned int B;
     unsigned int G;
     unsigned int C;
-    unsigned float R_norm;
-    unsigned float B_norm;
-    unsigned float G_norm;
+    float R_norm;
+    float B_norm;
+    float G_norm;
 } colors;
+
+struct colors color;
+
+int color_lowerbound = 0;
+int color_upperbound = 2500;
+
+unsigned char card_count = 0;
+char card_memory[40];
+
+unsigned char timer_index = 0;
+char timer_memory[40];
+
 
 /********************************************//**
  *  Function to initialise the colour click module using I2C
@@ -38,7 +51,19 @@ unsigned int color_read_Clear(void);
 /***********************************
 *Function to read the colour values and assign them to a struct
 ************************************/
-void READcolor(void);
+void READcolor(colors *c);
+void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
+void colourcards_normaliseRGBC(colors *c);
+
+void return_home(DC_motor *mL, DC_motor *mR);
+void delay_ms_func(unsigned int time);
+//void clear_RBG(colors *c);
+//void calibrate_upperbound(colors *c);
 
 #endif
+
+
+
+
+

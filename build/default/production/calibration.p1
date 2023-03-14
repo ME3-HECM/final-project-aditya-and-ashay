@@ -1,56 +1,60 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"7858 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
-[v _RC0PPS `Vuc ~T0 @X0 0 e@3682 ]
-"3182
-[v _RX4PPS `Vuc ~T0 @X0 0 e@3605 ]
-"29584
-[s S1376 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S1376 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
-"29583
-[u S1375 `S1376 1 ]
-[n S1375 . . ]
-"29595
-[v _TRISCbits `VS1375 ~T0 @X0 0 e@3971 ]
-"16200
-[s S759 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S759 . ABDEN WUE . BRG16 SCKP . RCIDL ABDOVF ]
-"16199
-[u S758 `S759 1 ]
-[n S758 . . ]
-"16211
-[v _BAUD4CONbits `VS758 ~T0 @X0 0 e@3817 ]
-"16074
-[s S755 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S755 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
-"16073
-[u S754 `S755 1 ]
-[n S754 . . ]
-"16085
-[v _TX4STAbits `VS754 ~T0 @X0 0 e@3816 ]
-"15865
-[v _SP4BRGL `Vuc ~T0 @X0 0 e@3813 ]
-"15903
-[v _SP4BRGH `Vuc ~T0 @X0 0 e@3814 ]
-"15952
-[s S751 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S751 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
-"15951
-[u S750 `S751 1 ]
-[n S750 . . ]
-"15963
-[v _RC4STAbits `VS750 ~T0 @X0 0 e@3815 ]
-"5323
-[s S297 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S297 . TX3IF RC3IF TX4IF RC4IF TX5IF RC5IF ]
-"5322
-[u S296 `S297 1 ]
-[n S296 . . ]
-"5332
-[v _PIR4bits `VS296 ~T0 @X0 0 e@3639 ]
-"15782
-[v _RC4REG `Vuc ~T0 @X0 0 e@3811 ]
-"15820
-[v _TX4REG `Vuc ~T0 @X0 0 e@3812 ]
+"12 ./dc_motor.h
+[s S2017 `uc 1 `uc 1 `uc 1 `ui 1 `*uc 1 `*uc 1 ]
+[n S2017 DC_motor power direction brakemode PWMperiod posDutyHighByte negDutyHighByte ]
+"32
+[v _left_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`i`i ]
+[v F192 `(v ~T0 @X0 1 tf1`ul ]
+"12 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\builtins.h
+[v __delay `JF192 ~T0 @X0 0 e ]
+[p i __delay ]
+"30585 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
+[s S1412 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1412 . RF0 RF1 RF2 RF3 RF4 RF5 RF6 RF7 ]
+"30595
+[s S1413 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1413 . . C2OUTF C1OUTF ]
+"30584
+[u S1411 `S1412 1 `S1413 1 ]
+[n S1411 . . . ]
+"30601
+[v _PORTFbits `VS1411 ~T0 @X0 0 e@3982 ]
+"28810
+[s S1349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1349 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
+"28820
+[s S1350 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1350 . LD0 LD1 LD2 LD3 LD4 LD5 LD6 LD7 ]
+"28809
+[u S1348 `S1349 1 `S1350 1 ]
+[n S1348 . . . ]
+"28831
+[v _LATDbits `VS1348 ~T0 @X0 0 e@3964 ]
+"29235
+[s S1361 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1361 . LATH0 LATH1 LATH2 LATH3 ]
+"29241
+[s S1362 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1362 . LH0 LH1 LH2 LH3 ]
+"29247
+[s S1363 :4 `uc 1 :1 `uc 1 ]
+[n S1363 . . LH4 ]
+"29251
+[s S1364 :5 `uc 1 :1 `uc 1 ]
+[n S1364 . . LH5 ]
+"29255
+[s S1365 :6 `uc 1 :1 `uc 1 ]
+[n S1365 . . LH6 ]
+"29259
+[s S1366 :7 `uc 1 :1 `uc 1 ]
+[n S1366 . . LH7 ]
+"29234
+[u S1360 `S1361 1 `S1362 1 `S1363 1 `S1364 1 `S1365 1 `S1366 1 ]
+[n S1360 . . . . . . . ]
+"29264
+[v _LATHbits `VS1360 ~T0 @X0 0 e@3968 ]
+"33 ./dc_motor.h
+[v _right_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`i`i ]
 "54 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; <" PPSLOCK equ 0DEFh ;# ">
 "74
@@ -1367,110 +1371,132 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSH equ 0FFEh ;# ">
 "40927
 [; <" TOSU equ 0FFFh ;# ">
-"13 ./serial.h
-[v _EUSART4RXbuf `Vuc ~T0 @X0 -> 20 `i e ]
-"14
-[v _RxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufWriteCnt
--> -> 0 `i `uc
+"8 ./dc_motor.h
+[v _left_timer `i ~T0 @X0 1 e ]
+[i _left_timer
+-> 235 `i
 ]
-"15
-[v _RxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufReadCnt
--> -> 0 `i `uc
-]
-"17
-[v _EUSART4TXbuf `Vuc ~T0 @X0 -> 60 `i e ]
-"18
-[v _TxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufWriteCnt
--> -> 0 `i `uc
-]
-"19
-[v _TxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufReadCnt
--> -> 0 `i `uc
-]
-"5 serial.c
-[v _initUSART4 `(v ~T0 @X0 1 ef ]
-{
-[e :U _initUSART4 ]
-[f ]
-"7
-[e = _RC0PPS -> -> 18 `i `uc ]
-"8
-[e = _RX4PPS -> -> 17 `i `uc ]
 "9
-[e = . . _TRISCbits 0 1 -> -> 1 `i `uc ]
+[v _right_timer `i ~T0 @X0 1 e ]
+[i _right_timer
+-> 230 `i
+]
+"21
+[v _motorL `S2017 ~T0 @X0 1 e ]
+[v _motorR `S2017 ~T0 @X0 1 e ]
+"7 calibration.c
+[v _left_turn_calibration `(v ~T0 @X0 1 ef2`*S2017`*S2017 ]
+{
+[e :U _left_turn_calibration ]
+[v _mL `*S2017 ~T0 @X0 1 r1 ]
+[v _mR `*S2017 ~T0 @X0 1 r2 ]
+[f ]
+"8
+[e $U 2019  ]
+[e :U 2020 ]
+{
+"9
+[e ( _left_45 (4 , , , _mL _mR -> 4 `i _left_timer ]
+"10
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "12
-[e = . . _BAUD4CONbits 0 3 -> -> 0 `i `uc ]
+[e $ ! ! != -> . . _PORTFbits 0 2 `i -> 0 `i 2022  ]
+{
+[e =+ _left_timer -> 5 `i ]
+[e = . . _LATDbits 0 7 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e = . . _LATDbits 0 7 -> -> 0 `i `uc ]
+}
+[e $U 2023  ]
 "13
-[e = . . _TX4STAbits 0 2 -> -> 0 `i `uc ]
-"14
-[e = _SP4BRGL -> -> 51 `i `uc ]
-"15
-[e = _SP4BRGH -> -> 0 `i `uc ]
-"17
-[e = . . _RC4STAbits 0 4 -> -> 1 `i `uc ]
-"18
-[e = . . _TX4STAbits 0 5 -> -> 1 `i `uc ]
-"19
-[e = . . _RC4STAbits 0 7 -> -> 1 `i `uc ]
-"22
-[e :UE 2015 ]
-}
-"25
-[v _getCharSerial4 `(uc ~T0 @X0 1 ef ]
-{
-[e :U _getCharSerial4 ]
-[f ]
-"26
-[e $U 2017  ]
-[e :U 2018 ]
-[e :U 2017 ]
-[e $ ! != -> . . _PIR4bits 0 3 `i -> 0 `i 2018  ]
-[e :U 2019 ]
-"27
-[e ) -> _RC4REG `uc ]
-[e $UE 2016  ]
-"28
-[e :UE 2016 ]
-}
-"31
-[v _sendCharSerial4 `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _sendCharSerial4 ]
-[v _charToSend `uc ~T0 @X0 1 r1 ]
-[f ]
-"32
-[e $U 2021  ]
 [e :U 2022 ]
-[e :U 2021 ]
-[e $ ! != -> . . _PIR4bits 0 2 `i -> 0 `i 2022  ]
+[e $ ! ! != -> . . _PORTFbits 0 3 `i -> 0 `i 2024  ]
+{
+[e =- _left_timer -> 5 `i ]
+[e = . . _LATHbits 0 3 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e = . . _LATHbits 0 3 -> -> 0 `i `uc ]
+}
+[e :U 2024 ]
 [e :U 2023 ]
-"33
-[e = _TX4REG -> _charToSend `uc ]
-"34
-[e :UE 2020 ]
+"14
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"15
 }
-"38
-[v _sendStringSerial4 `(v ~T0 @X0 1 ef1`*uc ]
+[e :U 2019 ]
+"8
+[e $ ! && ! != -> . . _PORTFbits 0 3 `i -> 0 `i ! != -> . . _PORTFbits 0 2 `i -> 0 `i 2020  ]
+[e :U 2021 ]
+"16
+[e :UE 2018 ]
+}
+"18
+[v _right_turn_calibration `(v ~T0 @X0 1 ef2`*S2017`*S2017 ]
 {
-[e :U _sendStringSerial4 ]
-[v _string `*uc ~T0 @X0 1 r1 ]
+[e :U _right_turn_calibration ]
+[v _mL `*S2017 ~T0 @X0 1 r1 ]
+[v _mR `*S2017 ~T0 @X0 1 r2 ]
 [f ]
-"40
-[e $U 2025  ]
-[e :U 2026 ]
-{
-"41
-[e ( _sendCharSerial4 (1 *U ++ _string * -> -> 1 `i `x -> -> # *U _string `i `x ]
-"42
-}
-[e :U 2025 ]
-"40
-[e $ != -> *U _string `i -> 0 `i 2026  ]
+"19
+[e $U 2026  ]
 [e :U 2027 ]
-"43
-[e :UE 2024 ]
+{
+"20
+[e ( _right_45 (4 , , , _mL _mR -> 4 `i _left_timer ]
+"21
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"23
+[e $ ! ! != -> . . _PORTFbits 0 2 `i -> 0 `i 2029  ]
+{
+[e =+ _right_timer -> 5 `i ]
+[e = . . _LATDbits 0 7 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e = . . _LATDbits 0 7 -> -> 0 `i `uc ]
+}
+[e $U 2030  ]
+"24
+[e :U 2029 ]
+[e $ ! ! != -> . . _PORTFbits 0 3 `i -> 0 `i 2031  ]
+{
+[e =- _right_timer -> 5 `i ]
+[e = . . _LATHbits 0 3 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e = . . _LATHbits 0 3 -> -> 0 `i `uc ]
+}
+[e :U 2031 ]
+[e :U 2030 ]
+"25
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"26
+}
+[e :U 2026 ]
+"19
+[e $ ! && ! != -> . . _PORTFbits 0 3 `i -> 0 `i ! != -> . . _PORTFbits 0 2 `i -> 0 `i 2027  ]
+[e :U 2028 ]
+"27
+[e :UE 2025 ]
+}
+"29
+[v _custom_delay `(v ~T0 @X0 1 ef1`i ]
+{
+[e :U _custom_delay ]
+[v _temp `i ~T0 @X0 1 r1 ]
+[f ]
+"30
+[v _i `i ~T0 @X0 1 a ]
+"31
+{
+[e = _i -> 0 `i ]
+[e $U 2036  ]
+[e :U 2033 ]
+{
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+}
+[e ++ _i -> 1 `i ]
+[e :U 2036 ]
+[e $ < _i _temp 2033  ]
+[e :U 2034 ]
+}
+"32
+[e :UE 2032 ]
 }

@@ -2,6 +2,9 @@ build/default/production/main.p1:  \
 main.c  \
 dc_motor.h  \
 color.h  \
-i2c.h  \
+interrupts.h  \
 serial.h  \
-interrupts.h 
+i2c.h  \
+timers.h  \
+lights_buttons.h  \
+calibration.h 

@@ -1,56 +1,36 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"7858 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
-[v _RC0PPS `Vuc ~T0 @X0 0 e@3682 ]
-"3182
-[v _RX4PPS `Vuc ~T0 @X0 0 e@3605 ]
-"29584
-[s S1376 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S1376 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
-"29583
-[u S1375 `S1376 1 ]
-[n S1375 . . ]
-"29595
-[v _TRISCbits `VS1375 ~T0 @X0 0 e@3971 ]
-"16200
-[s S759 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S759 . ABDEN WUE . BRG16 SCKP . RCIDL ABDOVF ]
-"16199
-[u S758 `S759 1 ]
-[n S758 . . ]
-"16211
-[v _BAUD4CONbits `VS758 ~T0 @X0 0 e@3817 ]
-"16074
-[s S755 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S755 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
-"16073
-[u S754 `S755 1 ]
-[n S754 . . ]
-"16085
-[v _TX4STAbits `VS754 ~T0 @X0 0 e@3816 ]
-"15865
-[v _SP4BRGL `Vuc ~T0 @X0 0 e@3813 ]
-"15903
-[v _SP4BRGH `Vuc ~T0 @X0 0 e@3814 ]
-"15952
-[s S751 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S751 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
-"15951
-[u S750 `S751 1 ]
-[n S750 . . ]
-"15963
-[v _RC4STAbits `VS750 ~T0 @X0 0 e@3815 ]
-"5323
-[s S297 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S297 . TX3IF RC3IF TX4IF RC4IF TX5IF RC5IF ]
-"5322
-[u S296 `S297 1 ]
-[n S296 . . ]
-"5332
-[v _PIR4bits `VS296 ~T0 @X0 0 e@3639 ]
-"15782
-[v _RC4REG `Vuc ~T0 @X0 0 e@3811 ]
-"15820
-[v _TX4REG `Vuc ~T0 @X0 0 e@3812 ]
+"39651 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
+[s S1925 :4 `uc 1 :1 `uc 1 :3 `uc 1 ]
+[n S1925 . T0CKPS T0ASYNC T0CS ]
+"39656
+[s S1926 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1926 . T0CKPS0 T0CKPS1 T0CKPS2 T0CKPS3 . T0CS0 T0CS1 T0CS2 ]
+"39666
+[s S1927 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1927 . T0PS0 T0PS1 T0PS2 T0PS3 ]
+"39672
+[s S1928 :4 `uc 1 ]
+[n S1928 . T0PS ]
+"39650
+[u S1924 `S1925 1 `S1926 1 `S1927 1 `S1928 1 ]
+[n S1924 . . . . . ]
+"39676
+[v _T0CON1bits `VS1924 ~T0 @X0 0 e@4054 ]
+"39586
+[s S1922 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1922 . T0OUTPS T016BIT T0OUT . T0EN ]
+"39593
+[s S1923 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1923 . T0OUTPS0 T0OUTPS1 T0OUTPS2 T0OUTPS3 ]
+"39585
+[u S1921 `S1922 1 `S1923 1 ]
+[n S1921 . . . ]
+"39600
+[v _T0CON0bits `VS1921 ~T0 @X0 0 e@4053 ]
+"39326
+[v _TMR0H `Vuc ~T0 @X0 0 e@4052 ]
+"39188
+[v _TMR0L `Vuc ~T0 @X0 0 e@4051 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; <" PPSLOCK equ 0DEFh ;# ">
 "74
@@ -1367,110 +1347,50 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSH equ 0FFEh ;# ">
 "40927
 [; <" TOSU equ 0FFFh ;# ">
-"13 ./serial.h
-[v _EUSART4RXbuf `Vuc ~T0 @X0 -> 20 `i e ]
-"14
-[v _RxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufWriteCnt
+"15 ./interrupts.h
+[v _T_flag `uc ~T0 @X0 1 e ]
+[i _T_flag
 -> -> 0 `i `uc
 ]
-"15
-[v _RxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufReadCnt
--> -> 0 `i `uc
+"16
+[v _timer_val `i ~T0 @X0 1 e ]
+[i _timer_val
+-> 0 `i
 ]
-"17
-[v _EUSART4TXbuf `Vuc ~T0 @X0 -> 60 `i e ]
-"18
-[v _TxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufWriteCnt
--> -> 0 `i `uc
-]
-"19
-[v _TxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufReadCnt
--> -> 0 `i `uc
-]
-"5 serial.c
-[v _initUSART4 `(v ~T0 @X0 1 ef ]
-{
-[e :U _initUSART4 ]
-[f ]
-"7
-[e = _RC0PPS -> -> 18 `i `uc ]
-"8
-[e = _RX4PPS -> -> 17 `i `uc ]
+"8 timers.c
+[v _Timer0_init `(v ~T0 @X0 1 ef ]
 "9
-[e = . . _TRISCbits 0 1 -> -> 1 `i `uc ]
+{
+[e :U _Timer0_init ]
+[f ]
+"10
+[e = . . _T0CON1bits 0 2 -> -> 2 `i `uc ]
+"11
+[e = . . _T0CON1bits 0 1 -> -> 1 `i `uc ]
 "12
-[e = . . _BAUD4CONbits 0 3 -> -> 0 `i `uc ]
+[e = . . _T0CON1bits 0 0 -> -> 5 `i `uc ]
 "13
-[e = . . _TX4STAbits 0 2 -> -> 0 `i `uc ]
-"14
-[e = _SP4BRGL -> -> 51 `i `uc ]
-"15
-[e = _SP4BRGH -> -> 0 `i `uc ]
+[e = . . _T0CON0bits 0 1 -> -> 1 `i `uc ]
+"16
+[e = _TMR0H -> -> 0 `i `uc ]
 "17
-[e = . . _RC4STAbits 0 4 -> -> 1 `i `uc ]
+[e = _TMR0L -> -> 35 `i `uc ]
 "18
-[e = . . _TX4STAbits 0 5 -> -> 1 `i `uc ]
+[e = . . _T0CON0bits 0 4 -> -> 1 `i `uc ]
 "19
-[e = . . _RC4STAbits 0 7 -> -> 1 `i `uc ]
-"22
 [e :UE 2015 ]
 }
+"21
+[v _timer_reset `(v ~T0 @X0 1 ef ]
+{
+[e :U _timer_reset ]
+[f ]
+"22
+[e = _timer_val -> 0 `i ]
+"23
+[e = _TMR0H -> -> 0 `i `uc ]
+"24
+[e = _TMR0L -> -> 35 `i `uc ]
 "25
-[v _getCharSerial4 `(uc ~T0 @X0 1 ef ]
-{
-[e :U _getCharSerial4 ]
-[f ]
-"26
-[e $U 2017  ]
-[e :U 2018 ]
-[e :U 2017 ]
-[e $ ! != -> . . _PIR4bits 0 3 `i -> 0 `i 2018  ]
-[e :U 2019 ]
-"27
-[e ) -> _RC4REG `uc ]
-[e $UE 2016  ]
-"28
 [e :UE 2016 ]
-}
-"31
-[v _sendCharSerial4 `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _sendCharSerial4 ]
-[v _charToSend `uc ~T0 @X0 1 r1 ]
-[f ]
-"32
-[e $U 2021  ]
-[e :U 2022 ]
-[e :U 2021 ]
-[e $ ! != -> . . _PIR4bits 0 2 `i -> 0 `i 2022  ]
-[e :U 2023 ]
-"33
-[e = _TX4REG -> _charToSend `uc ]
-"34
-[e :UE 2020 ]
-}
-"38
-[v _sendStringSerial4 `(v ~T0 @X0 1 ef1`*uc ]
-{
-[e :U _sendStringSerial4 ]
-[v _string `*uc ~T0 @X0 1 r1 ]
-[f ]
-"40
-[e $U 2025  ]
-[e :U 2026 ]
-{
-"41
-[e ( _sendCharSerial4 (1 *U ++ _string * -> -> 1 `i `x -> -> # *U _string `i `x ]
-"42
-}
-[e :U 2025 ]
-"40
-[e $ != -> *U _string `i -> 0 `i 2026  ]
-[e :U 2027 ]
-"43
-[e :UE 2024 ]
 }

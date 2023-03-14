@@ -1,56 +1,119 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"7858 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
-[v _RC0PPS `Vuc ~T0 @X0 0 e@3682 ]
-"3182
-[v _RX4PPS `Vuc ~T0 @X0 0 e@3605 ]
-"29584
-[s S1376 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S1376 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
-"29583
-[u S1375 `S1376 1 ]
-[n S1375 . . ]
-"29595
-[v _TRISCbits `VS1375 ~T0 @X0 0 e@3971 ]
-"16200
-[s S759 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S759 . ABDEN WUE . BRG16 SCKP . RCIDL ABDOVF ]
-"16199
-[u S758 `S759 1 ]
-[n S758 . . ]
-"16211
-[v _BAUD4CONbits `VS758 ~T0 @X0 0 e@3817 ]
-"16074
-[s S755 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S755 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
-"16073
-[u S754 `S755 1 ]
-[n S754 . . ]
-"16085
-[v _TX4STAbits `VS754 ~T0 @X0 0 e@3816 ]
-"15865
-[v _SP4BRGL `Vuc ~T0 @X0 0 e@3813 ]
-"15903
-[v _SP4BRGH `Vuc ~T0 @X0 0 e@3814 ]
-"15952
-[s S751 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S751 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
-"15951
-[u S750 `S751 1 ]
-[n S750 . . ]
-"15963
-[v _RC4STAbits `VS750 ~T0 @X0 0 e@3815 ]
-"5323
-[s S297 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S297 . TX3IF RC3IF TX4IF RC4IF TX5IF RC5IF ]
-"5322
-[u S296 `S297 1 ]
-[n S296 . . ]
-"5332
-[v _PIR4bits `VS296 ~T0 @X0 0 e@3639 ]
-"15782
-[v _RC4REG `Vuc ~T0 @X0 0 e@3811 ]
-"15820
-[v _TX4REG `Vuc ~T0 @X0 0 e@3812 ]
+"30007 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
+[s S1390 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1390 . TRISG0 TRISG1 TRISG2 TRISG3 TRISG4 . TRISG6 TRISG7 ]
+"30006
+[u S1389 `S1390 1 ]
+[n S1389 . . ]
+"30018
+[v _TRISGbits `VS1389 ~T0 @X0 0 e@3975 ]
+"29340
+[s S1368 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1368 . TRISA0 TRISA1 TRISA2 TRISA3 TRISA4 TRISA5 TRISA6 TRISA7 ]
+"29339
+[u S1367 `S1368 1 ]
+[n S1367 . . ]
+"29351
+[v _TRISAbits `VS1367 ~T0 @X0 0 e@3969 ]
+"29945
+[s S1388 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1388 . TRISF0 TRISF1 TRISF2 TRISF3 TRISF4 TRISF5 TRISF6 TRISF7 ]
+"29944
+[u S1387 `S1388 1 ]
+[n S1387 . . ]
+"29956
+[v _TRISFbits `VS1387 ~T0 @X0 0 e@3974 ]
+"29146
+[s S1358 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1358 . LATG0 LATG1 LATG2 LATG3 LATG4 . LATG6 LATG7 ]
+"29156
+[s S1359 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1359 . LG0 LG1 LG2 LG3 LG4 ]
+"29145
+[u S1357 `S1358 1 `S1359 1 ]
+[n S1357 . . . ]
+"29164
+[v _LATGbits `VS1357 ~T0 @X0 0 e@3967 ]
+"28474
+[s S1340 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1340 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
+"28484
+[s S1341 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1341 . LA0 LA1 LA2 LA3 LA4 LA5 LA6 LA7 ]
+"28473
+[u S1339 `S1340 1 `S1341 1 ]
+[n S1339 . . . ]
+"28495
+[v _LATAbits `VS1339 ~T0 @X0 0 e@3961 ]
+"29034
+[s S1355 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1355 . LATF0 LATF1 LATF2 LATF3 LATF4 LATF5 LATF6 LATF7 ]
+"29044
+[s S1356 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1356 . LF0 LF1 LF2 LF3 LF4 LF5 LF6 LF7 ]
+"29033
+[u S1354 `S1355 1 `S1356 1 ]
+[n S1354 . . . ]
+"29055
+[v _LATFbits `VS1354 ~T0 @X0 0 e@3966 ]
+"12308
+[s S568 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S568 . ANSELF0 ANSELF1 ANSELF2 ANSELF3 ANSELF4 ANSELF5 ANSELF6 ANSELF7 ]
+"12307
+[u S567 `S568 1 ]
+[n S567 . . ]
+"12319
+[v _ANSELFbits `VS567 ~T0 @X0 0 e@3764 ]
+"29706
+[s S1380 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1380 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
+"29705
+[u S1379 `S1380 1 ]
+[n S1379 . . ]
+"29717
+[v _TRISDbits `VS1379 ~T0 @X0 0 e@3972 ]
+"28810
+[s S1349 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1349 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
+"28820
+[s S1350 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1350 . LD0 LD1 LD2 LD3 LD4 LD5 LD6 LD7 ]
+"28809
+[u S1348 `S1349 1 `S1350 1 ]
+[n S1348 . . . ]
+"28831
+[v _LATDbits `VS1348 ~T0 @X0 0 e@3964 ]
+"30064
+[s S1392 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1392 . TRISH0 TRISH1 TRISH2 TRISH3 ]
+"30063
+[u S1391 `S1392 1 ]
+[n S1391 . . ]
+"30071
+[v _TRISHbits `VS1391 ~T0 @X0 0 e@3976 ]
+"29235
+[s S1361 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1361 . LATH0 LATH1 LATH2 LATH3 ]
+"29241
+[s S1362 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S1362 . LH0 LH1 LH2 LH3 ]
+"29247
+[s S1363 :4 `uc 1 :1 `uc 1 ]
+[n S1363 . . LH4 ]
+"29251
+[s S1364 :5 `uc 1 :1 `uc 1 ]
+[n S1364 . . LH5 ]
+"29255
+[s S1365 :6 `uc 1 :1 `uc 1 ]
+[n S1365 . . LH6 ]
+"29259
+[s S1366 :7 `uc 1 :1 `uc 1 ]
+[n S1366 . . LH7 ]
+"29234
+[u S1360 `S1361 1 `S1362 1 `S1363 1 `S1364 1 `S1365 1 `S1366 1 ]
+[n S1360 . . . . . . . ]
+"29264
+[v _LATHbits `VS1360 ~T0 @X0 0 e@3968 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; <" PPSLOCK equ 0DEFh ;# ">
 "74
@@ -1367,110 +1430,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; <" TOSH equ 0FFEh ;# ">
 "40927
 [; <" TOSU equ 0FFFh ;# ">
-"13 ./serial.h
-[v _EUSART4RXbuf `Vuc ~T0 @X0 -> 20 `i e ]
-"14
-[v _RxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufWriteCnt
--> -> 0 `i `uc
-]
-"15
-[v _RxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufReadCnt
--> -> 0 `i `uc
-]
-"17
-[v _EUSART4TXbuf `Vuc ~T0 @X0 -> 60 `i e ]
-"18
-[v _TxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufWriteCnt
--> -> 0 `i `uc
-]
-"19
-[v _TxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufReadCnt
--> -> 0 `i `uc
-]
-"5 serial.c
-[v _initUSART4 `(v ~T0 @X0 1 ef ]
+"5 lights_buttons.c
+[v _ports_init `(v ~T0 @X0 1 ef ]
 {
-[e :U _initUSART4 ]
+[e :U _ports_init ]
 [f ]
 "7
-[e = _RC0PPS -> -> 18 `i `uc ]
+[e = . . _TRISGbits 0 1 -> -> 0 `i `uc ]
 "8
-[e = _RX4PPS -> -> 17 `i `uc ]
+[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
 "9
-[e = . . _TRISCbits 0 1 -> -> 1 `i `uc ]
+[e = . . _TRISFbits 0 7 -> -> 0 `i `uc ]
+"11
+[e = . . _LATGbits 0 1 -> -> 1 `i `uc ]
 "12
-[e = . . _BAUD4CONbits 0 3 -> -> 0 `i `uc ]
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 "13
-[e = . . _TX4STAbits 0 2 -> -> 0 `i `uc ]
-"14
-[e = _SP4BRGL -> -> 51 `i `uc ]
+[e = . . _LATFbits 0 7 -> -> 1 `i `uc ]
 "15
-[e = _SP4BRGH -> -> 0 `i `uc ]
-"17
-[e = . . _RC4STAbits 0 4 -> -> 1 `i `uc ]
+[e = . . _TRISFbits 0 2 -> -> 1 `i `uc ]
+"16
+[e = . . _ANSELFbits 0 2 -> -> 0 `i `uc ]
 "18
-[e = . . _TX4STAbits 0 5 -> -> 1 `i `uc ]
+[e = . . _TRISFbits 0 3 -> -> 1 `i `uc ]
 "19
-[e = . . _RC4STAbits 0 7 -> -> 1 `i `uc ]
+[e = . . _ANSELFbits 0 3 -> -> 0 `i `uc ]
+"21
+[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
 "22
+[e = . . _LATDbits 0 7 -> -> 0 `i `uc ]
+"24
+[e = . . _TRISHbits 0 3 -> -> 0 `i `uc ]
+"25
+[e = . . _LATHbits 0 3 -> -> 0 `i `uc ]
+"26
 [e :UE 2015 ]
 }
-"25
-[v _getCharSerial4 `(uc ~T0 @X0 1 ef ]
-{
-[e :U _getCharSerial4 ]
-[f ]
-"26
-[e $U 2017  ]
-[e :U 2018 ]
-[e :U 2017 ]
-[e $ ! != -> . . _PIR4bits 0 3 `i -> 0 `i 2018  ]
-[e :U 2019 ]
-"27
-[e ) -> _RC4REG `uc ]
-[e $UE 2016  ]
 "28
-[e :UE 2016 ]
-}
+[v _buggyLEDs_init `(v ~T0 @X0 1 ef ]
+{
+[e :U _buggyLEDs_init ]
+[f ]
+"29
+[e = . . _LATHbits 0 1 -> -> 0 `i `uc ]
+"30
+[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
 "31
-[v _sendCharSerial4 `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _sendCharSerial4 ]
-[v _charToSend `uc ~T0 @X0 1 r1 ]
-[f ]
+[e = . . _LATDbits 0 4 -> -> 0 `i `uc ]
 "32
-[e $U 2021  ]
-[e :U 2022 ]
-[e :U 2021 ]
-[e $ ! != -> . . _PIR4bits 0 2 `i -> 0 `i 2022  ]
-[e :U 2023 ]
+[e = . . _LATFbits 0 0 -> -> 0 `i `uc ]
 "33
-[e = _TX4REG -> _charToSend `uc ]
-"34
-[e :UE 2020 ]
-}
+[e = . . _LATHbits 0 0 -> -> 0 `i `uc ]
+"35
+[e = . . _TRISHbits 0 1 -> -> 0 `i `uc ]
+"36
+[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
+"37
+[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
 "38
-[v _sendStringSerial4 `(v ~T0 @X0 1 ef1`*uc ]
-{
-[e :U _sendStringSerial4 ]
-[v _string `*uc ~T0 @X0 1 r1 ]
-[f ]
+[e = . . _TRISFbits 0 0 -> -> 0 `i `uc ]
+"39
+[e = . . _TRISHbits 0 0 -> -> 0 `i `uc ]
 "40
-[e $U 2025  ]
-[e :U 2026 ]
-{
-"41
-[e ( _sendCharSerial4 (1 *U ++ _string * -> -> 1 `i `x -> -> # *U _string `i `x ]
-"42
-}
-[e :U 2025 ]
-"40
-[e $ != -> *U _string `i -> 0 `i 2026  ]
-[e :U 2027 ]
-"43
-[e :UE 2024 ]
+[e :UE 2016 ]
 }
