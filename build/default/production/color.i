@@ -24390,8 +24390,8 @@ char *tempnam(const char *, const char *);
 
 
 
-int left_timer = 105;
-int right_timer = 100;
+int left_timer = 98;
+int right_timer = 96;
 
 
 typedef struct DC_motor {
@@ -24418,8 +24418,8 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
 void space(DC_motor *mL, DC_motor *mR);
 
-void instructions(DC_motor *mL, DC_motor *mR, int count);
-void instructions2(DC_motor *mL, DC_motor *mR, int count);
+void movement(DC_motor *mL, DC_motor *mR, int count);
+void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 5 "./color.h" 2
 
 
@@ -24553,7 +24553,7 @@ void __attribute__((picinterrupt(("high_priority")))) HighISR();
 # 7 "color.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 19 "./lights_buttons.h"
+# 18 "./lights_buttons.h"
 void ports_init(void);
 void buggyLEDs_init(void);
 # 8 "color.c" 2
@@ -24667,56 +24667,61 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
             card_memory[card_count] = 2;
             card_count ++;
-            instructions(mL,mR,1);
+            movement(mL,mR,1);
 
         }
 
         if (color.B_norm < 0.25 && color.G_norm > 0.40) {
             card_memory[card_count] = 1;
             card_count ++;
-            instructions(mL,mR,2);
+            movement(mL,mR,2);
 
         }
 
         if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
             card_memory[card_count] = 3;
             card_count ++;
-            instructions(mL,mR,3);
+            movement(mL,mR,3);
 
         }
 
         if (color.R_norm > 0.52 && color.G_norm > 0.32){
             card_memory[card_count] = 9;
             card_count ++;
-            instructions(mL,mR,4);
+            movement(mL,mR,4);
 
         }
 
         if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
             card_memory[card_count] = 10;
             card_count ++;
-            instructions(mL,mR,5);
+            movement(mL,mR,5);
 
         }
 
         if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
             card_memory[card_count] = 7;
             card_count ++;
-            instructions(mL,mR,6);
+            movement(mL,mR,6);
 
         }
 
         if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
             card_memory[card_count] = 6;
             card_count ++;
-            instructions(mL,mR,7);
+            movement(mL,mR,7);
 
         }
 
-        if (color.R_norm < 0.48 && color.C > 16000 && color.G_norm < 0.36 ){
+        if (color.R_norm < 0.5 && color.C > 16000 ){
+
 
             card_memory[card_count] = 3;
             card_count ++;
+
+            LATGbits.LATG1 = 0;
+            LATAbits.LATA4 = 0;
+            LATFbits.LATF7 = 0;
 
             space(mL,mR);
             _delay((unsigned long)((500)*(64000000/4000.0)));
@@ -24728,12 +24733,13 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
             stop(mL,mR);
             _delay((unsigned long)((500)*(64000000/4000.0)));
 
-            instructions2(mL,mR,3);
+            movement_return(mL,mR,3);
             __asm(" sleep");
+
         }
         timer_reset();
     }
-
+# 216 "color.c"
     else {forward(mL,mR);}
 }
 
@@ -24741,11 +24747,15 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 void return_home(DC_motor *mL, DC_motor *mR){
     while(timer_index > 0 && card_count > 0 ) {
 
-        instructions2(mL,mR,card_memory[card_count-1]);
+        movement_return(mL,mR,card_memory[card_count-1]);
         card_count--;
         _delay((unsigned long)((250)*(64000000/4000.0)));
+        reverse(mL,mR);
+        _delay((unsigned long)((500)*(64000000/4000.0)));
+        stop(mL,mR);
+        _delay((unsigned long)((500)*(64000000/4000.0)));
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1] - 2);
+        delay_ms_func(timer_memory[timer_index-1]);
         timer_index--;
         stop(mL,mR);
         _delay((unsigned long)((200)*(64000000/4000.0)));

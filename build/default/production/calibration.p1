@@ -2049,16 +2049,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 40927: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "8 ./dc_motor.h
-[; ;./dc_motor.h: 8: int left_timer = 105;
+[; ;./dc_motor.h: 8: int left_timer = 98;
 [v _left_timer `i ~T0 @X0 1 e ]
 [i _left_timer
--> 105 `i
+-> 98 `i
 ]
 "9
-[; ;./dc_motor.h: 9: int right_timer = 100;
+[; ;./dc_motor.h: 9: int right_timer = 96;
 [v _right_timer `i ~T0 @X0 1 e ]
 [i _right_timer
--> 100 `i
+-> 96 `i
 ]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
@@ -2203,4 +2203,41 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32
 [; ;calibration.c: 32: }
 [e :UE 2032 ]
+}
+"34
+[; ;calibration.c: 34: void battery_health(void) {
+[v _battery_health `(v ~T0 @X0 1 ef ]
+{
+[e :U _battery_health ]
+[f ]
+"35
+[; ;calibration.c: 35:     unsigned char battery_level;
+[v _battery_level `uc ~T0 @X0 1 a ]
+"36
+[; ;calibration.c: 36:     if (battery_level < 160) {
+[e $ ! < -> _battery_level `i -> 160 `i 2038  ]
+{
+"37
+[; ;calibration.c: 37:         while (1){
+[e :U 2040 ]
+{
+"38
+[; ;calibration.c: 38:             LATDbits.LATD7 = !LATDbits.LATD7;
+[e = . . _LATDbits 0 7 -> -> ! != -> . . _LATDbits 0 7 `i -> 0 `i `i `uc ]
+"39
+[; ;calibration.c: 39:             LATHbits.LATH3 = !LATHbits.LATH3;
+[e = . . _LATHbits 0 3 -> -> ! != -> . . _LATHbits 0 3 `i -> 0 `i `i `uc ]
+"40
+[; ;calibration.c: 40:         }
+}
+[e :U 2039 ]
+[e $U 2040  ]
+[e :U 2041 ]
+"41
+[; ;calibration.c: 41:     }
+}
+[e :U 2038 ]
+"42
+[; ;calibration.c: 42: }
+[e :UE 2037 ]
 }

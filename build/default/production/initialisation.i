@@ -24384,8 +24384,8 @@ char *tempnam(const char *, const char *);
 
 
 
-int left_timer = 105;
-int right_timer = 100;
+int left_timer = 98;
+int right_timer = 96;
 
 
 typedef struct DC_motor {
@@ -24412,8 +24412,8 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
 void space(DC_motor *mL, DC_motor *mR);
 
-void instructions(DC_motor *mL, DC_motor *mR, int count);
-void instructions2(DC_motor *mL, DC_motor *mR, int count);
+void movement(DC_motor *mL, DC_motor *mR, int count);
+void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 2 "initialisation.c" 2
 
 # 1 "./color.h" 1
@@ -24582,7 +24582,7 @@ void timer_reset(void);
 # 7 "initialisation.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 19 "./lights_buttons.h"
+# 18 "./lights_buttons.h"
 void ports_init(void);
 void buggyLEDs_init(void);
 # 8 "initialisation.c" 2
@@ -24598,16 +24598,30 @@ void buggyLEDs_init(void);
 void left_turn_calibration(DC_motor *mL, DC_motor *mR);
 void right_turn_calibration(DC_motor *mL, DC_motor *mR);
 void custom_delay(int temp);
+void battery_health(void);
 # 9 "initialisation.c" 2
 
 # 1 "./initialisation.h" 1
 # 10 "./initialisation.h"
-void need4speed(void);
+void complete_initialisation(void);
 # 10 "initialisation.c" 2
 
+# 1 "./ADC.h" 1
 
 
-void need4speed(void){
+
+
+
+
+
+void ADC_init(void);
+unsigned int ADC_getval(void);
+# 11 "initialisation.c" 2
+
+
+
+void complete_initialisation(void){
+
     initDCmotorsPWM(99);
     buggyLEDs_init();
     ports_init();
@@ -24617,6 +24631,7 @@ void need4speed(void){
     Timer0_init();
     interrupts_init();
     initUSART4();
+    ADC_init();
 
 
 }

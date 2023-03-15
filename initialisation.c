@@ -8,9 +8,11 @@
 #include "lights_buttons.h"
 #include "calibration.h"
 #include "initialisation.h"
+#include "ADC.h"
 
 
-void need4speed(void){
+void complete_initialisation(void){
+    
     initDCmotorsPWM(99);
     buggyLEDs_init();
     ports_init();
@@ -20,6 +22,7 @@ void need4speed(void){
     Timer0_init();
     interrupts_init();
     initUSART4();
+    ADC_init();
     
     //colorclick_interrupts_init();
 }

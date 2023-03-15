@@ -1,4 +1,4 @@
-# 1 "dc_motor.c"
+# 1 "ADC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "dc_motor.c" 2
+# 1 "ADC.c" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -24229,501 +24229,49 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\\pic\\include\\xc.h" 2 3
-# 1 "dc_motor.c" 2
+# 1 "ADC.c" 2
 
-# 1 "./dc_motor.h" 1
+# 1 "./ADC.h" 1
 
 
 
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 1 3
-# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 1 3
 
 
 
+void ADC_init(void);
+unsigned int ADC_getval(void);
+# 2 "ADC.c" 2
 
 
-typedef void * va_list[1];
 
 
 
 
-typedef void * __isoc_va_list[1];
-# 137 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long ssize_t;
-# 246 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long off_t;
-# 399 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct _IO_FILE FILE;
-# 24 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 2 3
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 3
-typedef union _G_fpos64_t {
- char __opaque[16];
- double __align;
-} fpos_t;
 
-extern FILE *const stdin;
-extern FILE *const stdout;
-extern FILE *const stderr;
-
-
-
-
-
-FILE *fopen(const char *restrict, const char *restrict);
-FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
-int fclose(FILE *);
-
-int remove(const char *);
-int rename(const char *, const char *);
-
-int feof(FILE *);
-int ferror(FILE *);
-int fflush(FILE *);
-void clearerr(FILE *);
-
-int fseek(FILE *, long, int);
-long ftell(FILE *);
-void rewind(FILE *);
-
-int fgetpos(FILE *restrict, fpos_t *restrict);
-int fsetpos(FILE *, const fpos_t *);
-
-size_t fread(void *restrict, size_t, size_t, FILE *restrict);
-size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
-
-int fgetc(FILE *);
-int getc(FILE *);
-int getchar(void);
-int ungetc(int, FILE *);
-
-int fputc(int, FILE *);
-int putc(int, FILE *);
-int putchar(int);
-
-char *fgets(char *restrict, int, FILE *restrict);
-
-char *gets(char *);
-
-
-int fputs(const char *restrict, FILE *restrict);
-int puts(const char *);
-
-__attribute__((__format__(__printf__, 1, 2)))
-int printf(const char *restrict, ...);
-__attribute__((__format__(__printf__, 2, 3)))
-int fprintf(FILE *restrict, const char *restrict, ...);
-__attribute__((__format__(__printf__, 2, 3)))
-int sprintf(char *restrict, const char *restrict, ...);
-__attribute__((__format__(__printf__, 3, 4)))
-int snprintf(char *restrict, size_t, const char *restrict, ...);
-
-__attribute__((__format__(__printf__, 1, 0)))
-int vprintf(const char *restrict, __isoc_va_list);
-int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__printf__, 2, 0)))
-int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__printf__, 3, 0)))
-int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
-
-__attribute__((__format__(__scanf__, 1, 2)))
-int scanf(const char *restrict, ...);
-__attribute__((__format__(__scanf__, 2, 3)))
-int fscanf(FILE *restrict, const char *restrict, ...);
-__attribute__((__format__(__scanf__, 2, 3)))
-int sscanf(const char *restrict, const char *restrict, ...);
-
-__attribute__((__format__(__scanf__, 1, 0)))
-int vscanf(const char *restrict, __isoc_va_list);
-int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
-__attribute__((__format__(__scanf__, 2, 0)))
-int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
-
-void perror(const char *);
-
-int setvbuf(FILE *restrict, char *restrict, int, size_t);
-void setbuf(FILE *restrict, char *restrict);
-
-char *tmpnam(char *);
-FILE *tmpfile(void);
-
-
-
-
-FILE *fmemopen(void *restrict, size_t, const char *restrict);
-FILE *open_memstream(char **, size_t *);
-FILE *fdopen(int, const char *);
-FILE *popen(const char *, const char *);
-int pclose(FILE *);
-int fileno(FILE *);
-int fseeko(FILE *, off_t, int);
-off_t ftello(FILE *);
-int dprintf(int, const char *restrict, ...);
-int vdprintf(int, const char *restrict, __isoc_va_list);
-void flockfile(FILE *);
-int ftrylockfile(FILE *);
-void funlockfile(FILE *);
-int getc_unlocked(FILE *);
-int getchar_unlocked(void);
-int putc_unlocked(int, FILE *);
-int putchar_unlocked(int);
-ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
-ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
-int renameat(int, const char *, int, const char *);
-char *ctermid(char *);
-
-
-
-
-
-
-
-char *tempnam(const char *, const char *);
-# 5 "./dc_motor.h" 2
-
-
-
-int left_timer = 98;
-int right_timer = 96;
-
-
-typedef struct DC_motor {
-    char power;
-    char direction;
-    char brakemode;
-    unsigned int PWMperiod;
-    unsigned char *posDutyHighByte;
-    unsigned char *negDutyHighByte;
-} DC_motor;
-
-struct DC_motor motorL, motorR;
-
-void initDCmotorsPWM(unsigned int PWMperiod);
-void setMotorPWM(DC_motor *m);
-void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
-
-void forward(DC_motor *mL, DC_motor *mR);
-void reverse(DC_motor *mL, DC_motor *mR);
-void stop(DC_motor *mL, DC_motor *mR);
-
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
-void space(DC_motor *mL, DC_motor *mR);
-
-void movement(DC_motor *mL, DC_motor *mR, int count);
-void movement_return(DC_motor *mL, DC_motor *mR, int count);
-# 2 "dc_motor.c" 2
-
-# 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
-void ports_init(void);
-void buggyLEDs_init(void);
-# 3 "dc_motor.c" 2
-
-# 1 "./calibration.h" 1
-
-
-
-
-
-
-
-void left_turn_calibration(DC_motor *mL, DC_motor *mR);
-void right_turn_calibration(DC_motor *mL, DC_motor *mR);
-void custom_delay(int temp);
-void battery_health(void);
-# 4 "dc_motor.c" 2
-
-
-
-
-
-void initDCmotorsPWM(unsigned int PWMperiod){
-
-    TRISEbits.TRISE2 = 0;
-    TRISEbits.TRISE4 = 0;
-    TRISCbits.TRISC7 = 0;
-    TRISGbits.TRISG6 = 0;
-
-    LATEbits.LATE2 = 0;
-    LATEbits.LATE4 = 0;
-    LATCbits.LATC7 = 0;
-    LATGbits.LATG6 = 0;
-
-
-    RE2PPS=0x05;
-    RE4PPS=0x06;
-    RC7PPS=0x07;
-    RG6PPS=0x08;
-
-
-    T2CONbits.CKPS=0b100;
-    T2HLTbits.MODE=0b00000;
-    T2CLKCONbits.CS=0b0001;
-
-
-
-    T2PR=PWMperiod;
-    T2CONbits.ON=1;
-
-
-
-    CCPR1H=0;
-    CCPR2H=0;
-    CCPR3H=0;
-    CCPR4H=0;
-
-
-    CCPTMRS0bits.C1TSEL=0;
-    CCPTMRS0bits.C2TSEL=0;
-    CCPTMRS0bits.C3TSEL=0;
-    CCPTMRS0bits.C4TSEL=0;
-
-
-    CCP1CONbits.FMT=1;
-    CCP1CONbits.CCP1MODE=0b1100;
-    CCP1CONbits.EN=1;
-
-
-    CCP2CONbits.FMT=1;
-    CCP2CONbits.CCP2MODE=0b1100;
-    CCP2CONbits.EN=1;
-
-
-
-    CCP3CONbits.FMT=1;
-    CCP3CONbits.CCP3MODE=0b1100;
-    CCP3CONbits.EN=1;
-
-
-    CCP4CONbits.FMT=1;
-    CCP4CONbits.CCP4MODE=0b1100;
-    CCP4CONbits.EN=1;
-
-}
-
-
-
-
-void setMotorPWM(DC_motor *m)
+void ADC_init(void)
 {
-    unsigned char posDuty, negDuty;
+    TRISFbits.TRISF6=1;
+    ANSELFbits.ANSELF6=1;
 
-    if(m->brakemode) {
-        posDuty = m->PWMperiod - ((unsigned int)(m->power)*(m->PWMperiod))/100;
-        negDuty = m->PWMperiod;
-    }
-    else {
-        posDuty=0;
-  negDuty=((unsigned int)(m->power)*(m->PWMperiod))/100;
-    }
 
-    if (m->direction) {
-        *(m->posDutyHighByte)= posDuty;
-        *(m->negDutyHighByte)= negDuty;
-    } else {
-        *(m->posDutyHighByte)= negDuty;
-        *(m->negDutyHighByte)= posDuty;
-    }
+    ADREFbits.ADNREF = 0;
+    ADREFbits.ADPREF = 0b00;
+    ADPCH=0b101110;
+    ADCON0bits.ADFM = 0;
+    ADCON0bits.ADCS = 1;
+    ADCON0bits.ADON = 1;
 }
 
-void motor_init(DC_motor *mL, DC_motor *mR)
+unsigned int ADC_getval(void)
 {
-    motorL.power=0;
-    motorL.direction=1;
-    motorL.brakemode=1;
-    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
-    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
-    motorL.PWMperiod=99;
+    unsigned int tmpval;
 
-    motorR.power=0;
-    motorR.direction=1;
-    motorR.brakemode=1;
-    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
-    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
-    motorR.PWMperiod=99;
+    ADCON0bits.GO = 1;
 
+    while (ADCON0bits.GO);
 
-}
+    tmpval = ADRESH;
 
-
-
-void forward(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    mL-> direction = 1;
-    mR-> direction = 1;
-    LATDbits.LATD3 = 1;
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <= 50) || (mR->power <= 55)){
-        if (mL->power <= 50){mL->power += 1;}
-        if (mR->power <= 55){mR->power += 1;}
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((5)*(64000000/4000000.0)));
-    }
-    LATDbits.LATD3 = 0;
-}
-
-void reverse(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    mL-> direction = 0;
-    mR-> direction = 0;
-    LATHbits.LATH1 = 1;
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <= 50) || (mR->power <= 55)){
-        if (mL->power <= 50){mL->power += 1;}
-        if (mR->power <= 55){mR->power += 1;}
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((5)*(64000000/4000000.0)));
-    }
-    LATHbits.LATH1 = 0;
-}
-
-
-void stop(DC_motor *mL, DC_motor *mR)
-{
-    mL->brakemode = 1;
-    mR->brakemode = 1;
-    LATDbits.LATD4 = 1;
-
-    for (int i = 70; i >= 0; i=i-10) {
-        mL -> power = i;
-        mR -> power = i;
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((20)*(64000000/4000000.0)));
-    }
-
-    mL->power = 0;
-    mR->power = 0;
-    setMotorPWM(mL);
-    setMotorPWM(mR);
-    LATDbits.LATD4 = 0;
-}
-
-
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
-{
-    stop(mL,mR);
-    mL-> direction = 0;
-    mR-> direction = 1;
-    LATFbits.LATF0 = 1;
-    int i;
-    for (i = 0;i<count;i++){
-    while ((mL->power <= 50) || (mR->power <= 50)){
-        if (mL->power <= 50){mL->power += 10;}
-        if (mR->power <= 50){mR->power += 10;}
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((10)*(64000000/4000.0)));
-    }
-    custom_delay(left_timer);
-    stop(mL,mR);
-    _delay((unsigned long)((150)*(64000000/4000.0)));
-    LATFbits.LATF0 = 0;
-    }
-}
-
-
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
-{
-    mL-> direction = 1;
-    mR-> direction = 0;
-    LATHbits.LATH0 = 1;
-    int i;
-    for (i = 0;i<count;i++){
-    while ((mL->power <= 50) || (mR->power <= 50)){
-        if (mL->power <= 50){mL->power += 10;}
-        if (mR->power <= 50){mR->power += 10;}
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((10)*(64000000/4000.0)));
-    }
-    custom_delay(right_timer);
-    stop(mL,mR);
-    _delay((unsigned long)((150)*(64000000/4000.0)));
-    LATHbits.LATH0 = 0;
-}
-}
-
-void space(DC_motor *mL, DC_motor *mR)
-{
-    stop(mL,mR);
-    LATHbits.LATH1 = 1;
-    mL-> direction = 0;
-    mR-> direction = 0;
-    setMotorPWM(mR);
-    setMotorPWM(mL);
-    while ((mL->power <30) && (mR->power <30)){
-        mL->power += 10;
-        mR->power += 10;
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((20)*(64000000/4000000.0)));
-    }
-    _delay((unsigned long)((350)*(64000000/4000.0)));
-    stop(mL,mR);
-    _delay((unsigned long)((200)*(64000000/4000.0)));
-    LATHbits.LATH1 = 0;
-
-}
-
-void reverse_pink(DC_motor *mL, DC_motor *mR) {
-
-    right_45(mL,mR,2,right_timer);
-    stop(mL,mR);
-    _delay((unsigned long)((200)*(64000000/4000.0)));
-
-     reverse(mL,mR);
-    _delay((unsigned long)((900)*(64000000/4000.0)));
-    stop(mL,mR);
-}
-
-void reverse_yellow(DC_motor *mL, DC_motor *mR) {
-
-    left_45(mL,mR,2,left_timer);
-    stop(mL,mR);
-    _delay((unsigned long)((200)*(64000000/4000.0)));
-
-     reverse(mL,mR);
-    _delay((unsigned long)((900)*(64000000/4000.0)));
-    stop(mL,mR);
-}
-
-
-void movement(DC_motor *mL, DC_motor *mR, int count)
-{
-    space(mL,mR);
-    _delay((unsigned long)((500)*(64000000/4000.0)));
-    stop(mL,mR);
-    _delay((unsigned long)((500)*(64000000/4000.0)));
-    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-    if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
-
-
-}
-
-void movement_return(DC_motor *mL, DC_motor *mR, int count)
-{
-
-    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-    if (count == 7){left_45(mL,mR,3,right_timer); stop(mL,mR);}
-
-    if (count == 9){reverse_yellow(mL,mR);}
-    if (count == 10) {reverse_pink(mL,mR);}
+    return tmpval;
 }

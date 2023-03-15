@@ -31,6 +31,8 @@
       <itemPath>calibration.h</itemPath>
       <itemPath>initialisation.c</itemPath>
       <itemPath>initialisation.h</itemPath>
+      <itemPath>ADC.c</itemPath>
+      <itemPath>ADC.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

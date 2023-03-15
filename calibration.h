@@ -8,6 +8,7 @@
 void left_turn_calibration(DC_motor *mL, DC_motor *mR);
 void right_turn_calibration(DC_motor *mL, DC_motor *mR);
 void custom_delay(int temp);
+void battery_health(void);
 
 
 #endif	

@@ -7,7 +7,7 @@ void ports_init(void){
     TRISGbits.TRISG1 = 0; // Set TRIS value for red LED (output)
     TRISAbits.TRISA4 = 0; // Set TRIS value for green LED (output)
     TRISFbits.TRISF7 = 0; // Set TRIS value for blue LED (output)
-    
+            
     LATGbits.LATG1 = 1; //red LED on
     LATAbits.LATA4 = 1; //green LED on
     LATFbits.LATF7 = 1; //blue LED on

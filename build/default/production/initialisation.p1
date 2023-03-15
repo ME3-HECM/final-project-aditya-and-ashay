@@ -10,11 +10,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./dc_motor.h
 [; ;./dc_motor.h: 23: void initDCmotorsPWM(unsigned int PWMperiod);
 [v _initDCmotorsPWM `(v ~T0 @X0 0 ef1`ui ]
-"20 ./lights_buttons.h
-[; ;./lights_buttons.h: 20: void buggyLEDs_init(void);
+"19 ./lights_buttons.h
+[; ;./lights_buttons.h: 19: void buggyLEDs_init(void);
 [v _buggyLEDs_init `(v ~T0 @X0 0 ef ]
-"19
-[; ;./lights_buttons.h: 19: void ports_init(void);
+"18
+[; ;./lights_buttons.h: 18: void ports_init(void);
 [v _ports_init `(v ~T0 @X0 0 ef ]
 "25 ./dc_motor.h
 [; ;./dc_motor.h: 25: void motor_init(DC_motor *mL,DC_motor *mR);
@@ -34,6 +34,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./serial.h
 [; ;./serial.h: 23: void initUSART4(void);
 [v _initUSART4 `(v ~T0 @X0 0 ef ]
+"8 ./ADC.h
+[; ;./ADC.h: 8: void ADC_init(void);
+[v _ADC_init `(v ~T0 @X0 0 ef ]
 "54 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 54: __asm("PPSLOCK equ 0DEFh");
 [; <" PPSLOCK equ 0DEFh ;# ">
@@ -2009,16 +2012,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 40927: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "8 ./dc_motor.h
-[; ;./dc_motor.h: 8: int left_timer = 105;
+[; ;./dc_motor.h: 8: int left_timer = 98;
 [v _left_timer `i ~T0 @X0 1 e ]
 [i _left_timer
--> 105 `i
+-> 98 `i
 ]
 "9
-[; ;./dc_motor.h: 9: int right_timer = 100;
+[; ;./dc_motor.h: 9: int right_timer = 96;
 [v _right_timer `i ~T0 @X0 1 e ]
 [i _right_timer
--> 100 `i
+-> 96 `i
 ]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
@@ -2099,40 +2102,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _TxBufReadCnt
 -> -> 0 `i `uc
 ]
-"13 initialisation.c
-[; ;initialisation.c: 13: void need4speed(void){
-[v _need4speed `(v ~T0 @X0 1 ef ]
+"14 initialisation.c
+[; ;initialisation.c: 14: void complete_initialisation(void){
+[v _complete_initialisation `(v ~T0 @X0 1 ef ]
 {
-[e :U _need4speed ]
+[e :U _complete_initialisation ]
 [f ]
-"14
-[; ;initialisation.c: 14:     initDCmotorsPWM(99);
-[e ( _initDCmotorsPWM (1 -> -> 99 `i `ui ]
-"15
-[; ;initialisation.c: 15:     buggyLEDs_init();
-[e ( _buggyLEDs_init ..  ]
 "16
-[; ;initialisation.c: 16:     ports_init();
-[e ( _ports_init ..  ]
+[; ;initialisation.c: 16:     initDCmotorsPWM(99);
+[e ( _initDCmotorsPWM (1 -> -> 99 `i `ui ]
 "17
-[; ;initialisation.c: 17:     motor_init(&motorL,&motorR);
-[e ( _motor_init (2 , &U _motorL &U _motorR ]
+[; ;initialisation.c: 17:     buggyLEDs_init();
+[e ( _buggyLEDs_init ..  ]
 "18
-[; ;initialisation.c: 18:     I2C_2_Master_Init();
-[e ( _I2C_2_Master_Init ..  ]
+[; ;initialisation.c: 18:     ports_init();
+[e ( _ports_init ..  ]
 "19
-[; ;initialisation.c: 19:     color_click_init();
-[e ( _color_click_init ..  ]
+[; ;initialisation.c: 19:     motor_init(&motorL,&motorR);
+[e ( _motor_init (2 , &U _motorL &U _motorR ]
 "20
-[; ;initialisation.c: 20:     Timer0_init();
-[e ( _Timer0_init ..  ]
+[; ;initialisation.c: 20:     I2C_2_Master_Init();
+[e ( _I2C_2_Master_Init ..  ]
 "21
-[; ;initialisation.c: 21:     interrupts_init();
-[e ( _interrupts_init ..  ]
+[; ;initialisation.c: 21:     color_click_init();
+[e ( _color_click_init ..  ]
 "22
-[; ;initialisation.c: 22:     initUSART4();
+[; ;initialisation.c: 22:     Timer0_init();
+[e ( _Timer0_init ..  ]
+"23
+[; ;initialisation.c: 23:     interrupts_init();
+[e ( _interrupts_init ..  ]
+"24
+[; ;initialisation.c: 24:     initUSART4();
 [e ( _initUSART4 ..  ]
 "25
-[; ;initialisation.c: 25: }
+[; ;initialisation.c: 25:     ADC_init();
+[e ( _ADC_init ..  ]
+"28
+[; ;initialisation.c: 28: }
 [e :UE 2019 ]
 }

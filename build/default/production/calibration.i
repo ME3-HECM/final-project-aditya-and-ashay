@@ -24384,8 +24384,8 @@ char *tempnam(const char *, const char *);
 
 
 
-int left_timer = 105;
-int right_timer = 100;
+int left_timer = 98;
+int right_timer = 96;
 
 
 typedef struct DC_motor {
@@ -24412,12 +24412,12 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
 void space(DC_motor *mL, DC_motor *mR);
 
-void instructions(DC_motor *mL, DC_motor *mR, int count);
-void instructions2(DC_motor *mL, DC_motor *mR, int count);
+void movement(DC_motor *mL, DC_motor *mR, int count);
+void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 2 "calibration.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 19 "./lights_buttons.h"
+# 18 "./lights_buttons.h"
 void ports_init(void);
 void buggyLEDs_init(void);
 # 3 "calibration.c" 2
@@ -24450,4 +24450,14 @@ void right_turn_calibration(DC_motor *mL, DC_motor *mR){
 void custom_delay(int temp){
 int i;
 for (i = 0; i < temp; i++){_delay((unsigned long)((1)*(64000000/4000.0)));}
+}
+
+void battery_health(void) {
+    unsigned char battery_level;
+    if (battery_level < 160) {
+        while (1){
+            LATDbits.LATD7 = !LATDbits.LATD7;
+            LATHbits.LATH3 = !LATHbits.LATH3;
+        }
+    }
 }

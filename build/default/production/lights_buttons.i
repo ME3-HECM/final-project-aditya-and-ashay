@@ -24233,7 +24233,7 @@ unsigned char __t3rd16on(void);
 # 2 "lights_buttons.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 19 "./lights_buttons.h"
+# 18 "./lights_buttons.h"
 void ports_init(void);
 void buggyLEDs_init(void);
 # 3 "lights_buttons.c" 2

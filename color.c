@@ -115,57 +115,62 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
             card_memory[card_count] = 2;
             card_count ++;
-            instructions(mL,mR,1); //RED COLOUR CARD - Turn Right
+            movement(mL,mR,1); //RED COLOUR CARD - Turn Right
          
         }
     
         if (color.B_norm < 0.25 && color.G_norm > 0.40) { 
             card_memory[card_count] = 1;
             card_count ++;
-            instructions(mL,mR,2);   //Green card - Turn Left
+            movement(mL,mR,2);   //Green card - Turn Left
         
         }
     
         if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
             card_memory[card_count] = 3;
             card_count ++;
-            instructions(mL,mR,3);    //Blue card - Reverse 180
+            movement(mL,mR,3);    //Blue card - Reverse 180
         
         }
     
         if (color.R_norm > 0.52 && color.G_norm > 0.32){
             card_memory[card_count] = 9;
             card_count ++;
-            instructions(mL,mR,4);    //Yellow Card - Reverse 1 Square, Right turn
+            movement(mL,mR,4);    //Yellow Card - Reverse 1 Square, Right turn
             
         }
     
         if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
             card_memory[card_count] = 10;
             card_count ++;
-            instructions(mL,mR,5);    //Pink card
+            movement(mL,mR,5);    //Pink card
             
         }  
     
         if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
             card_memory[card_count] = 7;
             card_count ++;
-            instructions(mL,mR,6);    //Orange
+            movement(mL,mR,6);    //Orange
             
         }
     
         if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
             card_memory[card_count] = 6;
             card_count ++;
-            instructions(mL,mR,7);    //Light Blue
+            movement(mL,mR,7);    //Light Blue
             
         }
     
-        if (color.R_norm < 0.48 && color.C > 16000 && color.G_norm < 0.36 ){ //White card - Return home
-            
+        if (color.R_norm < 0.5 && color.C > 16000  ){ //White card - Return home
+           
+                
             card_memory[card_count] = 3;
             card_count ++;
             
+            LATGbits.LATG1 = 0; //red LED OFF
+            LATAbits.LATA4 = 0; //green LED OFF
+            LATFbits.LATF7 = 0; //blue LED OFF
+                
             space(mL,mR);
             __delay_ms(500);
             stop(mL,mR);
@@ -176,12 +181,38 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
             stop(mL,mR);
             __delay_ms(500);
             
-            instructions2(mL,mR,3);
+            movement_return(mL,mR,3);
             Sleep();   
-        }    
+        
+        }
         timer_reset();
     }
+    
+//    else if() { // wall (LOST)
+//                    
+//                 
+//                card_memory[card_count] = 3;
+//                card_count ++;
+//
+//                LATGbits.LATG1 = 0; //red LED OFF
+//                LATAbits.LATA4 = 0; //green LED OFF
+//                LATFbits.LATF7 = 0; //blue LED OFF
+//    
+//                space(mL,mR);
+//                __delay_ms(500);
+//                stop(mL,mR);
+//                __delay_ms(500);
+//
+//                return_home(mL,mR);
+//
+//                stop(mL,mR);
+//                __delay_ms(500);
+//
+//                movement_return(mL,mR,3);
+//                Sleep(); 
+//            }           
         
+
     else {forward(mL,mR);} //If clear channel is below 2500, car will continue to move forward
 }
     
@@ -189,11 +220,15 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 void return_home(DC_motor *mL, DC_motor *mR){
     while(timer_index > 0 && card_count > 0 ) {
         
-        instructions2(mL,mR,card_memory[card_count-1]);
+        movement_return(mL,mR,card_memory[card_count-1]);
         card_count--;
         __delay_ms(250);
+        reverse(mL,mR);
+        __delay_ms(500);
+        stop(mL,mR);
+        __delay_ms(500);
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1] - 2); //-2 corresponds to 262ms and accounts for the space created between white card and wall
+        delay_ms_func(timer_memory[timer_index-1]); //-2 corresponds to 262ms and accounts for the space created between white card and wall
         timer_index--; 
         stop(mL,mR);
         __delay_ms(200);

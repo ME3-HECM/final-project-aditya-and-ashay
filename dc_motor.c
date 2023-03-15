@@ -124,12 +124,12 @@ void forward(DC_motor *mL, DC_motor *mR)
     MAINLIGHT = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
-    while ((mL->power <50) && (mR->power <55)){
-        mL->power += 5;
-        mR->power += 5;
+    while ((mL->power <= 50) || (mR->power <= 55)){
+        if (mL->power <= 50){mL->power += 1;}
+        if (mR->power <= 55){mR->power += 1;}
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(10);   
+        __delay_us(5);   
     }
     MAINLIGHT = 0;
 }
@@ -142,12 +142,12 @@ void reverse(DC_motor *mL, DC_motor *mR)
     HEADLAMPS = 1;
     setMotorPWM(mR);
     setMotorPWM(mL);
-    while ((mL->power <50) && (mR->power <55)){
-        mL->power += 5;
-        mR->power += 5;
+    while ((mL->power <= 50) || (mR->power <= 55)){
+        if (mL->power <= 50){mL->power += 1;}
+        if (mR->power <= 55){mR->power += 1;}
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_us(10);   
+        __delay_us(5);   
     }
     HEADLAMPS = 0;
 }
@@ -234,7 +234,7 @@ void space(DC_motor *mL, DC_motor *mR)
         setMotorPWM(mR);
         __delay_us(20);   
     }
-    __delay_ms(250);
+    __delay_ms(350);
     stop(mL,mR);
     __delay_ms(200); // Wait for Car to stabilise
     HEADLAMPS = 0;
@@ -248,7 +248,7 @@ void reverse_pink(DC_motor *mL, DC_motor *mR) {
     __delay_ms(200);
     
      reverse(mL,mR);
-    __delay_ms(700);
+    __delay_ms(900);
     stop(mL,mR);
 }
 
@@ -259,12 +259,12 @@ void reverse_yellow(DC_motor *mL, DC_motor *mR) {
     __delay_ms(200);
     
      reverse(mL,mR);
-    __delay_ms(700);
+    __delay_ms(900);
     stop(mL,mR);
 }
 
 
-void instructions(DC_motor *mL, DC_motor *mR, int count)
+void movement(DC_motor *mL, DC_motor *mR, int count)
 {
     space(mL,mR);
     __delay_ms(500);
@@ -273,15 +273,15 @@ void instructions(DC_motor *mL, DC_motor *mR, int count)
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); __delay_ms(700);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); __delay_ms(700);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); __delay_ms(900);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); __delay_ms(900);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
        
     
 }
 
-void instructions2(DC_motor *mL, DC_motor *mR, int count)
+void movement_return(DC_motor *mL, DC_motor *mR, int count)
 {
        
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}

@@ -31,4 +31,13 @@ int i;
 for (i = 0; i < temp; i++){__delay_ms(1);}
 }
 
+void battery_health(void) {
+    unsigned char battery_level;
+    if (battery_level < 160) {
+        while (1){
+            LEDD7 = !LEDD7;
+            LEDH3 = !LEDH3;
+        }
+    } 
+}
 //void reverse_square_time();

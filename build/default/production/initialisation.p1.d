@@ -8,4 +8,5 @@ i2c.h  \
 timers.h  \
 lights_buttons.h  \
 calibration.h  \
-initialisation.h 
+initialisation.h  \
+ADC.h 

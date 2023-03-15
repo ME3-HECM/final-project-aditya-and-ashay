@@ -15,7 +15,6 @@
 #define LEDH3 LATHbits.LATH3
 
 
-
 void ports_init(void);
 void buggyLEDs_init(void);
 

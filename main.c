@@ -18,24 +18,17 @@
 
 void main(void){
     
-    need4speed();
+    complete_initialisation(); //Full initialisation of buggy function
    
-    
-    //char start_flag = 0;
     while (PORTFbits.RF2 && PORTFbits.RF3);
-    if (!PORTFbits.RF3){timer_reset();
+    if (!PORTFbits.RF3){__delay_ms(500);timer_reset();   
         while (1) {
         buggy_color_response(&motorL,&motorR,&color);
-        }}        
-    
-//    if (start_flag = 1) {
-//        timer_reset();
-//        while (1) {
-//        buggy_color_response(&motorL,&motorR,&color);
-//        }
-    } 
+        }
+    }            
+} 
 
-
+//        battery_health();
 //        while (1) { //infinite while loop - repeat forever
 //        
 //        while (PORTFbits.RF2 && PORTFbits.RF3); //empty while loop (wait for button press)
