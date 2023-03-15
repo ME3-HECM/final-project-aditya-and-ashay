@@ -1,12 +1,11 @@
-# ECM final project - Mine navigation search and rescue 
-### By - Aditya and Ashay ME3
+# ECM final project - Mine navigation search and rescue - Aditya and Ashay 
 
 ## Table of contents
 - [Challenge brief](#challenge-brief)
-- [Instructions and "Mine" environment specification](#instructions)
-- [Hardware setup](#hardware-setup)
+- [Instructions and environment specification](#instructions-and-environment-specification)
 - [Demonstration video](#demonstration-video)
-- [Calibrations](#user-instructions)
+- [Hardware setup](#hardware-setup)
+- [Calibrations](#calibrations)
 - [Code structure](#code-structure)
 
 
@@ -20,7 +19,7 @@ Our task was to develop an autonomous robot that can navigate a "mine" using a s
 4. When the final card is reached, navigate back to the starting position
 5. Handle exceptions and ### return back to the starting position if final card cannot be found
 
-## Instructions and "Mine" environment specification
+## Instructions and environment specification
 
 A "mine" is contstructed from black plywood walls 100mm high with some walls having coloured cards located on the sides of the maze to assist with navigation. The following colour code was used for navigation:
 
@@ -36,13 +35,7 @@ Light blue | Turn Left 135
 White | Finish (return home)
 Black | Maze wall colour
 
-Mine courses varied in difficulty, with the simplest requiring 4 basic moves to navigate. More advanced courses required 10 or moves to navigate. The mines had features such as dead ends but colour cards always directed to the end of the maze. Once the end of the maze was reached, the buggy had to return to the starting position. An example course to navigate is shown below. 
-
-![Navi Diagram](gifs/maze.gif)
-
-## Hardware setup
-
-
+Mine courses varied in difficulty, with the simplest requiring 4 basic moves to navigate. More advanced courses required 10 or moves to navigate. The mines had features such as dead ends but colour cards always directed to the end of the maze. Once the end of the maze was reached, the buggy had to return to the starting position. 
 
 
 ## Demonstration video
@@ -53,12 +46,13 @@ The link(s) provided below show how the buggy performed in an 'easy' maze and a 
 - Link for the hard maze:
 - Link for dead end reaction:
 
+## Hardware setup
 
 ## Calibrations
 
 One of the most important elements of this project was calibrating the buggy to dynamically varying surfaces and ambient light. This was necessary in order to perform the exact turns and read the colours perfectly. To assist in improving the buggy's performance, the rubber on the tyres were removed as it allowed more consistent turns when compared with the rubber on. There was also a special black sleeve which was 3-D printed to allow better colour reading. The calibration on test day was a 2 step process which went as follows:
 
-#### 1) Colour calibration
+### 1) Colour calibration
 
 Colour calibration was performed once before the testing day and one during the test day to confirm if any changes were necessary in the code. To calibrate the colour, the Red, Green, Blue, and Clear values are read from the array of sensors built into the buggy's chip. The sensor contains a grid of 4x4 photodiodes, 4 are sensitive to red light, 4 green light, 4 blue light and 4 "clear" light (that is, a range of wavelengths, see datasheet for exact spectral response). When light falls on the photodiode the photons are absorbed and current is generated. This signal is then integrated over time using integrators and sampled by 16 bit on board ADCs. Communication with the device is achieved using an I2C interface. This enables configuration of the device to customise sampling of the data (i.e. integration time, gain, etc.) and to read the 16 bit digital values for each of the RGBC channels. The relative magnitude of these values gives you information about the colour of light that is falling on the sensor. 
 
@@ -69,12 +63,13 @@ We then imported these values in an excel sheet and for each colour we found nor
 ![Excel individual colour values](https://user-images.githubusercontent.com/89412018/225194822-102c9d81-736a-4792-b63d-f6904ccc3c89.JPG)
 
 
-#### 2) Turning calibration
+### 2) Turning calibration
 
 Turning calibration was performed before every maze as the floor varied in roughness and surface level. Since the buggy did not have rotational encoders, it was imperative for the time to turn for each colour to be accurate. Our code for turning, which will be discussed in a later section, involves 45 degree turnes which are repeated to achieve 90, 135 and 180 degree turns. 
 
 In order to implement a calibration function, we created a separate file called calibrations.c and added the functions in the main.c file which is commented out while performing in the actual maze. An example of the left turning functions is shown below:
 
+```c
 void left_turn_calibration(DC_motor *mL, DC_motor *mR){
     while (!(!PORTFbits.RF3 && !PORTFbits.RF2)) {    
     left_45(mL,mR,4,left_timer);
@@ -85,44 +80,14 @@ void left_turn_calibration(DC_motor *mL, DC_motor *mR){
     __delay_ms(2000); // Leave time to exit Calibration   
     } 
 }
+```
 
 Here, the user lets the buggy turn 180 degrees in an anti-clockwise direction by clicking any of the butttons RF2 or RF3 on the buggy. It then performes the turn and the time it takes to rotate 45 x 4 can be adjusted by holding either the RF2 or RF3 button. The RF2 button increased the timer by 5ms and the RF3 button decreased the timer by 5ms incase the buggy overshoot the 180 degrees. A tally of increasing or decreasing button clicks are noted and the values are adjusted accordingly before the final test.
 
+- Link for turning calibration: 
+
 ## Code structure
 
-
-
-
-
-
-
-
-
-
-
-## Supplementary technical information
-
-### Additional buggy features
-
-In addition to the motor drives we explored in lab 6, the buggy contains some additional features that may be of use during the project. The first feature is additional LEDs, controlled through the pins labelled **H.LAMPS**, **M.BEAM**, **BRAKE**, **TURN-L** and **TURN-R**. H.LAMPS turns on the front white LEDs and rear red LEDs, at a reduced brightness. M.BEAM and BRAKE enable you to turn these LEDs on at full brightness. The turn signals have not hardware based brightness control. These LEDs give you a method to provide feedback for debugging, in addition of the LEDs on the clicker board.
-
-![Buggy pinout](gifs/buggy_pins.png)
-
-A further feature of the buggy is **BAT-VSENSE** pin which allows you to monitor the batter voltage via an analogue input pin. The battery is connected across a voltage divider, as shown in the diagram below:
-
-![Bat sense](gifs/bat_vsense.png)
-
-The voltage at BAT-VSENSE will always be one third of that at the battery. Measuring this value can be useful for determining if your battery needs charging. You could also use it to calibrate your robot to perform well at different charge levels. 
-
-### Colour click
-
-The Colour click board contains 2 devices to help with navigation, a tri-colour LED for illumination and a 4 channel RGBC photodiode sensor. This combination of two devices (an illumination source and a sensor) allow you a make measurements of the reflected colour of objects near the sensor. The circuit diagram for the Colour click is shown below:
-
-![Color Cick](gifs/color_click.png)
-
-The tri-colour LED is the simpler of the two devices to control. Three separate pins control the red, green and blue LEDs individually, despite them being in a single package. Control via these pins is simple digital on/off control and if any brightness control was required, the user would need program the microcontroller to generate a PWM signal to achieve this.  
-
-The second device on the Colour click is the TCS3471 colour light-to-digital converter. The sensor contains a grid of 4x4 photodiodes, 4 are sensitive to red light, 4 green light, 4 blue light and 4 "clear" light (that is, a range of wavelengths, see datasheet for exact spectral response). When light falls on the photodiode the photons are absorbed and current is generated. This signal is then integrated over time using integrators and sampled by 16 bit on board ADCs. Communication with the device is achieved using an I2C interface. This enables configuration of the device to customise sampling of the data (i.e. integration time, gain, etc.) and to read the 16 bit digital values for each of the RGBC channels. The relative magnitude of these values gives you information about the colour of light that is falling on the sensor. The device can also be configured to send an interrupt signal to the PIC when signal reaches a preset value.
 
 ### I2C
 
