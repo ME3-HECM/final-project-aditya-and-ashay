@@ -1,28 +1,28 @@
 # ECM final project - Mine navigation search and rescue 
-## By - Aditya and Ashay ME3
+### By - Aditya and Ashay ME3
 
 ## Table of contents
 - [Challenge brief](#challenge-brief)
-- [Overview](#overview)
+- [Instructions and "Mine" environment specification](#instructions)
 - [Hardware setup](#hardware-setup)
 - [Demonstration video](#demonstration-video)
-- [User instructions](#user-instructions)
+- [Calibrations](#user-instructions)
 - [Code structure](#code-structure)
 
 
 ## Challenge brief
 
-Your task is to develop an autonomous robot that can navigate a "mine" using a series of instructions coded in coloured cards and return to its starting position.  Your robot must be able to perform the following: 
+Our task was to develop an autonomous robot that can navigate a "mine" using a series of instructions coded in coloured cards and return to its starting position.  Our robot buggy (named Alisha) was able to perform the following: 
 
-1. Navigate towards a coloured card and stop before impacting the card
-1. Read the card colour
-1. Interpret the card colour using a predefined code and perform the navigation instruction
-1. When the final card is reached, navigate back to the starting position
-1. Handle exceptions and return back to the starting position if final card cannot be found
+1. Navigate towards a coloured card and ### stop before impacting the card
+2. Read the card colour
+3. Interpret the card colour using a predefined code and perform the navigation instruction
+4. When the final card is reached, navigate back to the starting position
+5. Handle exceptions and ### return back to the starting position if final card cannot be found
 
-## "Mine" environment specification
+## Instructions and "Mine" environment specification
 
-A "mine" is contstructed from black plywood walls 100mm high with some walls having coloured cards located on the sides of the maze to assist with navigation. The following colour code is to be used for navigation:
+A "mine" is contstructed from black plywood walls 100mm high with some walls having coloured cards located on the sides of the maze to assist with navigation. The following colour code was used for navigation:
 
 Colour | Instruction
 ---------|---------
@@ -36,17 +36,46 @@ Light blue | Turn Left 135
 White | Finish (return home)
 Black | Maze wall colour
 
-Mine courses will vary in difficulty, with the simplest requiring 4 basic moves to navigate. More advanced courses may require 10 or moves to navigate. The mines may have features such as dead ends but colour cards will always direct you to the end of the maze. Once the end of the maze has been reached, you must return to the starting position. An example course to navigate is shown below. You do not know in advance which colours will be in the course or how many.
+Mine courses varied in difficulty, with the simplest requiring 4 basic moves to navigate. More advanced courses required 10 or moves to navigate. The mines had features such as dead ends but colour cards always directed to the end of the maze. Once the end of the maze was reached, the buggy had to return to the starting position. An example course to navigate is shown below. 
 
 ![Navi Diagram](gifs/maze.gif)
 
-## Resources and project submission
+## Hardware setup
 
-To develop your solution you have your Clicker 2 board, buggy and colour click add on board. You must not use any hardware that is not provided as part of this course and you must use the XC8 compiler to compile your C code. 
 
-Please use this GitHub repo to manage your software development and submit your project code. 
 
-Final testing will take place in the CAGB foyer and testing areas will be provided around the mechatronics lab. You will not know the exact layout of the maze(s) in advance. You will also be asked to give a short presentation on the testing day.
+
+## Demonstration video
+
+The link(s) provided below show how the buggy performed in an 'easy' maze and a 'hard' maze. In addition, it also shows how the buggy responded to a dead end.
+
+Link for the easy maze:
+Link for the hard maze:
+Link for dead end reaction:
+
+
+## Calibrations
+
+One of the most important elements of this project was calibrating the buggy to dynamically varying surfaces and ambient light. This was necessary in order to perform the exact turns and read the colours perfectly. To assist in improving the buggy's performance, the rubber on the tyres were removed as it allowed more consistent turns when compared with the rubber on. There was also a special black sleeve which was 3-D printed to allow better colour reading. The calibration on test day was a 2 step process which went as follows:
+
+#### 1) Colour calibration
+
+
+#### 2) Turning calibration
+
+
+
+## Code structure
+
+
+
+
+
+
+
+
+
+
 
 ## Supplementary technical information
 
