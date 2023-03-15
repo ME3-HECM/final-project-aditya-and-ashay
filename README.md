@@ -1,4 +1,14 @@
-# Course project - Mine navigation search and rescue
+# ECM final project - Mine navigation search and rescue 
+## By - Aditya and Ashay ME3
+
+## Table of contents
+- [Challenge brief](#challenge-brief)
+- [Overview](#overview)
+- [Hardware setup](#hardware-setup)
+- [Demonstration video](#demonstration-video)
+- [User instructions](#user-instructions)
+- [Code structure](#code-structure)
+
 
 ## Challenge brief
 
