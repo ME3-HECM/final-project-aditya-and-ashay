@@ -49,9 +49,9 @@ Mine courses varied in difficulty, with the simplest requiring 4 basic moves to 
 
 The link(s) provided below show how the buggy performed in an 'easy' maze and a 'hard' maze. In addition, it also shows how the buggy responded to a dead end.
 
-Link for the easy maze:
-Link for the hard maze:
-Link for dead end reaction:
+- Link for the easy maze:
+- Link for the hard maze:
+- Link for dead end reaction:
 
 
 ## Calibrations
@@ -60,10 +60,33 @@ One of the most important elements of this project was calibrating the buggy to 
 
 #### 1) Colour calibration
 
+Colour calibration was performed once before the testing day and one during the test day to confirm if any changes were necessary in the code. To calibrate the colour, the Red, Green, Blue, and Clear values are read from the array of sensors built into the buggy's chip. The sensor contains a grid of 4x4 photodiodes, 4 are sensitive to red light, 4 green light, 4 blue light and 4 "clear" light (that is, a range of wavelengths, see datasheet for exact spectral response). When light falls on the photodiode the photons are absorbed and current is generated. This signal is then integrated over time using integrators and sampled by 16 bit on board ADCs. Communication with the device is achieved using an I2C interface. This enables configuration of the device to customise sampling of the data (i.e. integration time, gain, etc.) and to read the 16 bit digital values for each of the RGBC channels. The relative magnitude of these values gives you information about the colour of light that is falling on the sensor. 
+
+We decided to have no gap between the buggy's sensors and the colour card so that the readings can be precise. We then measured over a 100 Red, Green, Blue and Clear values produced in multiple locations and time (day, night, evening, on the 7th floor, at home etc.) and stored these values in a text file with the help of the REALTERM software. 
+
+We then imported these values in an excel sheet and for each colour we found normalised Red, Green and Blue values. This was done by dividing each individual colour by the Clear value and gave consistent results for multiple operating conditions. This process was repeated during test day with fewer data to confirm if the values fell into the right categories.
+
+![Excel individual colour values](https://user-images.githubusercontent.com/89412018/225194822-102c9d81-736a-4792-b63d-f6904ccc3c89.JPG)
+
 
 #### 2) Turning calibration
 
+Turning calibration was performed before every maze as the floor varied in roughness and surface level. Since the buggy did not have rotational encoders, it was imperative for the time to turn for each colour to be accurate. Our code for turning, which will be discussed in a later section, involves 45 degree turnes which are repeated to achieve 90, 135 and 180 degree turns. 
 
+In order to implement a calibration function, we created a separate file called calibrations.c and added the functions in the main.c file which is commented out while performing in the actual maze. An example of the left turning functions is shown below:
+
+void left_turn_calibration(DC_motor *mL, DC_motor *mR){
+    while (!(!PORTFbits.RF3 && !PORTFbits.RF2)) {    
+    left_45(mL,mR,4,left_timer);
+    __delay_ms(2000);
+        // Note: Hold on pressing your desired buttons until LED flashes on
+    if(!PORTFbits.RF2){left_timer  += 5;LEDD7 = 1;__delay_ms(200);LEDD7 = 0;} 
+    else if(!PORTFbits.RF3){left_timer  -= 5;LEDH3 = 1;__delay_ms(200);LEDH3 = 0;}
+    __delay_ms(2000); // Leave time to exit Calibration   
+    } 
+}
+
+Here, the user lets the buggy turn 180 degrees in an anti-clockwise direction by clicking any of the butttons RF2 or RF3 on the buggy. It then performes the turn and the time it takes to rotate 45 x 4 can be adjusted by holding either the RF2 or RF3 button. The RF2 button increased the timer by 5ms and the RF3 button decreased the timer by 5ms incase the buggy overshoot the 180 degrees. A tally of increasing or decreasing button clicks are noted and the values are adjusted accordingly before the final test.
 
 ## Code structure
 
