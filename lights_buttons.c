@@ -32,6 +32,7 @@ void ports_init(void){
 * Function used to initialise all the pins for the lights on the buggy
 ************************************************************/
 void buggyLEDs_init(void) {
+    
     HEADLAMPS = 0;   
     MAINLIGHT = 0;     
     BRAKELIGHT = 0;        

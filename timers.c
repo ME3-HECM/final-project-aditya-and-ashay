@@ -11,10 +11,9 @@ void Timer0_init(void)
     T0CON1bits.T0ASYNC=1; 
     T0CON1bits.T0CKPS=0b0101; // 1:32 prescalar rate bit
     T0CON0bits.T016BIT=1;	//16 bit mode	
-	
-    
+	  
     TMR0H=0;          //write High reg first
-    TMR0L=0b00100011; // Initliasied as 35 to ensure timer overflows at exactly 131 ms
+    TMR0L=0b00100011; // Initialised as 35 to ensure timer overflows at exactly 131 ms
     T0CON0bits.T0EN=1;	//start the timer
 }
 

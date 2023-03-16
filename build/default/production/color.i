@@ -24838,7 +24838,46 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         }
         timer_reset();
     }
-# 241 "color.c"
+
+    else if(color.C < 2200 && color.B < 500 && color.B_norm < 0.24) {
+
+            card_memory[card_count] = 3;
+            card_count ++;
+            char count2 = 0;
+
+            for (char j = 0; j <= 5; j++){
+                reverse(mL,mR);
+                _delay((unsigned long)((200)*(64000000/4000.0)));
+                stop(mL,mR);
+                _delay((unsigned long)((200)*(64000000/4000.0)));
+                forward(mL,mR);
+                _delay((unsigned long)((200)*(64000000/4000.0)));
+                READcolor(&color);
+                if (color.C < 2200 && color.B < 500 && color.B_norm < 0.24){count2 += 1;}
+            }
+
+            if (count2 == 5){
+
+                LATGbits.LATG1 = 0;
+                LATAbits.LATA4 = 0;
+                LATFbits.LATF7 = 0;
+
+                space(mL,mR);
+                _delay((unsigned long)((500)*(64000000/4000.0)));
+                stop(mL,mR);
+                _delay((unsigned long)((500)*(64000000/4000.0)));
+
+                return_home(mL,mR);
+
+                stop(mL,mR);
+                _delay((unsigned long)((500)*(64000000/4000.0)));
+
+                movement_return(mL,mR,3);
+                __asm(" sleep");
+
+            }
+    }
+
     else {forward(mL,mR);}
 }
 

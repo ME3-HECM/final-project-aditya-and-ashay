@@ -7,6 +7,7 @@
 * Function used to ease calibration of left turns
 ************************************************************/
 void left_turn_calibration(DC_motor *mL, DC_motor *mR){
+    
     while (!(!PORTFbits.RF3 && !PORTFbits.RF2)) {  //Styart calibration by pressing both buttons  
     left_45(mL,mR,4,left_timer); // do 180 degree turn (4 left_45 turns)
     __delay_ms(2000);
@@ -21,6 +22,7 @@ void left_turn_calibration(DC_motor *mL, DC_motor *mR){
 * Function used to ease calibration of right turns
 ************************************************************/
 void right_turn_calibration(DC_motor *mL, DC_motor *mR){
+    
     while (!(!PORTFbits.RF3 && !PORTFbits.RF2)) {    
         right_45(mL,mR,4,left_timer); // do 180 degree turn (4 left_45 turns)
         __delay_ms(2000);

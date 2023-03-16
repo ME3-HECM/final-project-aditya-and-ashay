@@ -172,7 +172,7 @@ void stop(DC_motor *mL, DC_motor *mR)
     mR->brakemode = 1; //mode defined for braking to occur
     BRAKELIGHT = 1;
     
-    for (int i = 70; i >= 0; i=i-10) {
+    for (char i = 70; i >= 0; i=i-10) {
         mL -> power = i;
         mR -> power = i;  // Power loss is gradual
         setMotorPWM(mL);

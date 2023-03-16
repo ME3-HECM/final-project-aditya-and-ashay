@@ -15,15 +15,25 @@
 ************************************************************/
 void complete_initialisation(void){
     
-    initDCmotorsPWM(99);
+    initDCmotorsPWM(99); 
+    
     buggyLEDs_init();
-    ports_init();
+    
+    ports_init(); 
+    
     motor_init(&motorL,&motorR);
+    
     I2C_2_Master_Init();
+    
     color_click_init();
+    
     Timer0_init();
+    
     interrupts_init();
+    
     initUSART4();
+    
     ADC_init();
     
+    //Done to simplify code in main.c
 }

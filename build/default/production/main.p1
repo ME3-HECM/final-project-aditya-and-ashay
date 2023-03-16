@@ -2096,24 +2096,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 [e ( _timer_reset ..  ]
-"28
-[; ;main.c: 28:         while (1) {
+"29
+[; ;main.c: 29:     while (1) {
 [e :U 2025 ]
 {
-"29
-[; ;main.c: 29:         buggy_color_response(&motorL,&motorR,&color);
+"31
+[; ;main.c: 31:         buggy_color_response(&motorL,&motorR,&color);
 [e ( _buggy_color_response (3 , , &U _motorL &U _motorR &U _color ]
-"30
-[; ;main.c: 30:         }
+"33
+[; ;main.c: 33:         }
 }
 [e :U 2024 ]
 [e $U 2025  ]
 [e :U 2026 ]
-"31
-[; ;main.c: 31:     }
+"34
+[; ;main.c: 34:     }
 }
 [e :U 2023 ]
-"32
-[; ;main.c: 32: }
+"35
+[; ;main.c: 35: }
 [e :UE 2019 ]
 }

@@ -25,8 +25,7 @@ void __interrupt(low_priority) LowISR()
     if (PIR0bits.TMR0IF) { //Check interrupt source
         timer_val += 1; //adds 1 to timer val (each 1 is worth 131 ms)
         PIR0bits.TMR0IF = 0; // Clear interrupt flag
-    }
-  
+    } 
 }
 
 

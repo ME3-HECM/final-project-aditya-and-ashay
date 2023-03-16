@@ -111,7 +111,7 @@ unsigned int color_read_Clear(void)
 *****************************************/
 void READcolor(colors *c) {
     
-    color.R = color_read_Red();
+    color.R = color_read_Red(); //reads the RED value from the sensor and assigns it to R variable in the struct
     color.B = color_read_Blue();
     color.G = color_read_Green();
     color.C = color_read_Clear();
@@ -207,36 +207,50 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
             __delay_ms(500);
             
             movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
-            Sleep();   
+            Sleep();  // once at start position stop the code from running 
         
         }
         timer_reset(); // reset the timer so it represents only the time taken for the car to move forward to next card
     }
     
-//    else if(color.C < 2200 && color.B < 500 && color.B_norm < 0.24) { // wall (LOST)
-//                    
-//            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
-//            card_count ++; 
-//            
-//            LATGbits.LATG1 = 0; //red LED OFF
-//            LATAbits.LATA4 = 0; //green LED OFF
-//            LATFbits.LATF7 = 0; //blue LED OFF (Allows us to see if white card has been triggered)
-//                
-//            space(mL,mR); //Create space between wall and buggy
-//            __delay_ms(500);
-//            stop(mL,mR);
-//            __delay_ms(500);
-//            
-//            return_home(mL,mR); // iterate through arrays to bring buggy back to start
-//            
-//            stop(mL,mR); 
-//            __delay_ms(500);
-//            
-//            movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
-//            Sleep();
-//    
-//            }           
-        
+    else if(color.C < 2200 && color.B < 500 && color.B_norm < 0.24) { // Wall Colour (LOST)
+                    
+            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
+            card_count ++; 
+            char count2 = 0;
+            
+            for (char j = 0; j <= 5; j++){   // buggy move back and forth 5 times and checks if it is still hitting the wall 
+                reverse(mL,mR);
+                __delay_ms(200);
+                stop(mL,mR);
+                __delay_ms(200);
+                forward(mL,mR);
+                __delay_ms(200);
+                READcolor(&color);
+                if (color.C < 2200 && color.B < 500 && color.B_norm < 0.24){count2 += 1;} // adds 1 to the counter every time it detects the wall
+            }
+            
+            if (count2 == 5){  //when 5 wall readings are confirmed, buggy is confirmed 'lost' and will return home
+
+                LATGbits.LATG1 = 0; //red LED OFF
+                LATAbits.LATA4 = 0; //green LED OFF
+                LATFbits.LATF7 = 0; //blue LED OFF (Allows us to see if white card has been triggered)
+
+                space(mL,mR); //Create space between wall and buggy
+                __delay_ms(500);
+                stop(mL,mR);
+                __delay_ms(500);
+
+                return_home(mL,mR); // iterate through arrays to bring buggy back to start
+
+                stop(mL,mR); 
+                __delay_ms(500);
+
+                movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
+                Sleep(); // once at start position stop the code from running 
+    
+            }           
+    }
 
     else {forward(mL,mR);} //If clear channel is below 2500, car will continue to move forward
 }
@@ -256,7 +270,7 @@ void return_home(DC_motor *mL, DC_motor *mR){
         stop(mL,mR); //stabilise
         __delay_ms(500);
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1]-2); //move forward for the time dictated in the timer array
+        delay_ms_func(timer_memory[timer_index-1]-2); //move forward for the time dictated in the timer array (-2 represents a 262 ms shorter time; found by calibration to work more effectively)
         timer_index--; //reduce timer index so previous position in array is accessed next time loop is performed
         stop(mL,mR);
         __delay_ms(200);

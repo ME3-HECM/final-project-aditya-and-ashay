@@ -24642,8 +24642,11 @@ void main(void){
 
 
     if (!PORTFbits.RF3){_delay((unsigned long)((500)*(64000000/4000.0)));timer_reset();
-        while (1) {
+
+    while (1) {
+
         buggy_color_response(&motorL,&motorR,&color);
+
         }
     }
 }
