@@ -11,7 +11,7 @@
 
 ## Challenge brief
 
-Our task was to develop an autonomous robot that can navigate a "mine" using a series of instructions coded in coloured cards and return to its starting position.  Our robot buggy (named Alisha) was able to perform the following: 
+Our task was to develop an autonomous robot that can navigate a "mine" using a series of instructions coded in coloured cards and return to its starting position.  Our robot buggy was able to perform the following: 
 
 1. Navigate towards a coloured card 
 2. Read the card colour
@@ -42,9 +42,7 @@ Mine courses varied in difficulty, with the simplest requiring 4 basic moves to 
 
 The link(s) provided below show how the buggy performed in an 'easy' maze and a 'hard' maze. In addition, it also shows how the buggy responded to a dead end.
 
-1. Link for the easy maze:
-2. Link for the hard maze:
-3. Link for dead end reaction:
+1. Link for multiple mazes:
 
 ## Hardware setup
 
@@ -66,8 +64,7 @@ We then imported these values in an excel sheet and for each colour we found nor
 
 ![image](https://user-images.githubusercontent.com/89412018/225482171-02faef63-39ad-4c15-9d02-0145cc8c0d68.png)
 
-###
-Turning calibration
+### Turning calibration
 
 Turning calibration was performed before every maze as the floor varied in roughness and surface level. Since the buggy did not have rotational encoders, it was imperative for the time to turn for each colour to be accurate. Our code for turning, which will be discussed in a later section, involves 45 degree turnes which are repeated to achieve 90, 135 and 180 degree turns. 
 
@@ -338,6 +335,50 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 
 The ambient lighting has really low Clear values and thus as soon as the value exceeds 2500, a color is in the vicinity. The code then reads the color, stores the forward movement time and moves the buggy a bit more forward. This is to allow the buggy to self align with the wall. It then reads the color again to double confirm and carries out mathematical operations to see which color it is. It then accordingly stores the opposite insturction value as the arrays are read backwards and all movements are opposite while returing.
 
+We also calibrated the colours of the wall to implement a lost function. When a wall is hit, the buggy moves back and forth and reads the colour detelcted. If the wall colour is detected 5 times, it confirms that the buggy is lost and the return home function is implemented.
+
+```c
+else if(color.C < 2200 && color.B < 500 && color.B_norm < 0.24) { // Wall Colour (LOST)
+                    
+            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
+            card_count ++; 
+            char count2 = 0;
+            
+            for (char j = 0; j <= 5; j++){   // buggy move back and forth 5 times and checks if it is still hitting the wall 
+                reverse(mL,mR);
+                __delay_ms(200);
+                stop(mL,mR);
+                __delay_ms(200);
+                forward(mL,mR);
+                __delay_ms(200);
+                READcolor(&color);
+                if (color.C < 2200 && color.B < 500 && color.B_norm < 0.24){count2 += 1;} // adds 1 to the counter every time it detects the wall
+            }
+            
+            if (count2 == 5){  //when 5 wall readings are confirmed, buggy is confirmed 'lost' and will return home
+
+                LATGbits.LATG1 = 0; //red LED OFF
+                LATAbits.LATA4 = 0; //green LED OFF
+                LATFbits.LATF7 = 0; //blue LED OFF (Allows us to see if white card has been triggered)
+
+                space(mL,mR); //Create space between wall and buggy
+                __delay_ms(500);
+                stop(mL,mR);
+                __delay_ms(500);
+
+                return_home(mL,mR); // iterate through arrays to bring buggy back to start
+
+                stop(mL,mR); 
+                __delay_ms(500);
+
+                movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
+                Sleep(); // once at start position stop the code from running 
+    
+            }           
+```
+
+Similarly, the code for white flag is:
+
 ```c
  if (color.R_norm < 0.5 && color.C > 16000  ){ //White card - Return home
            
@@ -393,4 +434,4 @@ void return_home(DC_motor *mL, DC_motor *mR){
 }
 ```
 
-This function implements array reading and buggy alignment. It reads the color array from the last value - last in first out. It then has a small function where the buggy purposely moves backwards for 0.5s in order to align it with the wall and allow efficient movement along the maze. This was proven to be more effective than other methods and we decided to stick with it. It then executes the forward movement with delays read from the timer array - last in first out but with a slightly reduced time (approximated 250ms) to account for the space function. It is also preceeded with a small reverse function incase the buggy hits a wall on the way.
+This function implements array reading and buggy alignment. It reads the color array from the last value - last in first out (LIFO). It then has a small function where the buggy purposely moves backwards for 0.5s in order to align it with the wall and allow efficient movement along the maze. This was proven to be more effective than other methods and we decided to stick with it. It then executes the forward movement with delays read from the timer array - last in first out but with a slightly reduced time (approximated 250ms) to account for the space function. It is also preceeded with a small reverse function incase the buggy hits a wall on the way.
