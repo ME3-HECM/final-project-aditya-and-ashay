@@ -42,7 +42,7 @@ Mine courses varied in difficulty, with the simplest requiring 4 basic moves to 
 
 The link(s) provided below show how the buggy performed in an 'easy' maze and a 'hard' maze. In addition, it also shows how the buggy responded to a dead end.
 
-1. Link for multiple mazes:
+1. Link for multiple mazes:https://imperiallondon-my.sharepoint.com/:f:/r/personal/at2720_ic_ac_uk/Documents/Year%203/ECM/FINAL%20PROJECT/ECM%20maze%20videos?csf=1&web=1&e=QDTAFj
 
 ## Hardware setup
 
@@ -85,7 +85,7 @@ void left_turn_calibration(DC_motor *mL, DC_motor *mR){
 
 Here, the user lets the buggy turn 180 degrees in an anti-clockwise direction by clicking any of the butttons RF2 or RF3 on the buggy. It then performes the turn and the time it takes to rotate 45 x 4 can be adjusted by holding either the RF2 or RF3 button. The RF2 button increased the timer by 5ms and the RF3 button decreased the timer by 5ms incase the buggy overshoot the 180 degrees. A tally of increasing or decreasing button clicks are noted and the values are adjusted accordingly before the final test.
 
-Link for turning calibration: 
+Link for turning calibration: https://imperiallondon-my.sharepoint.com/:f:/r/personal/at2720_ic_ac_uk/Documents/Year%203/ECM/FINAL%20PROJECT/ECM%20calibration%20videos?csf=1&web=1&e=3lXeSg
 
 ## Code structure
 
