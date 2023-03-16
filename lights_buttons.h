@@ -14,8 +14,14 @@
 #define LEDD7 LATDbits.LATD7
 #define LEDH3 LATHbits.LATH3
 
-
+/************************************************************
+* Function used to initialise all the pins and buttons needed
+************************************************************/
 void ports_init(void);
+
+/************************************************************
+* Function used to initialise all the pins for the lights on the buggy
+************************************************************/
 void buggyLEDs_init(void);
 
 #endif	

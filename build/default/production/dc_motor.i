@@ -24399,40 +24399,109 @@ typedef struct DC_motor {
 
 struct DC_motor motorL, motorR;
 
+
+
+
+
 void initDCmotorsPWM(unsigned int PWMperiod);
+
+
+
+
 void setMotorPWM(DC_motor *m);
+
+
+
+
 void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
+
+
+
 
 void forward(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void reverse(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void stop(DC_motor *mL, DC_motor *mR);
 
+
+
+
+
+
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+
+
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+
+
+
+
 void space(DC_motor *mL, DC_motor *mR);
 
+
+
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
+
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count);
+
+
+
+
+
+
 void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 2 "dc_motor.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 3 "dc_motor.c" 2
 
 # 1 "./calibration.h" 1
-
-
-
-
-
-
-
+# 11 "./calibration.h"
 void left_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void right_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void custom_delay(int temp);
+
+
+
+
+
 void battery_health(void);
 # 4 "dc_motor.c" 2
 
@@ -24529,6 +24598,9 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+
+
+
 void motor_init(DC_motor *mL, DC_motor *mR)
 {
     motorL.power=0;
@@ -24550,6 +24622,8 @@ void motor_init(DC_motor *mL, DC_motor *mR)
 
 
 
+
+
 void forward(DC_motor *mL, DC_motor *mR)
 {
     stop(mL,mR);
@@ -24567,6 +24641,9 @@ void forward(DC_motor *mL, DC_motor *mR)
     }
     LATDbits.LATD3 = 0;
 }
+
+
+
 
 void reverse(DC_motor *mL, DC_motor *mR)
 {
@@ -24587,13 +24664,15 @@ void reverse(DC_motor *mL, DC_motor *mR)
 }
 
 
+
+
 void stop(DC_motor *mL, DC_motor *mR)
 {
     mL->brakemode = 1;
     mR->brakemode = 1;
     LATDbits.LATD4 = 1;
 
-    for (int i = 70; i >= 0; i=i-10) {
+    for (char i = 70; i >= 0; i=i-10) {
         mL -> power = i;
         mR -> power = i;
         setMotorPWM(mL);
@@ -24607,6 +24686,10 @@ void stop(DC_motor *mL, DC_motor *mR)
     setMotorPWM(mR);
     LATDbits.LATD4 = 0;
 }
+
+
+
+
 
 
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
@@ -24632,8 +24715,13 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
 }
 
 
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
 {
+    stop(mL,mR);
     mL-> direction = 1;
     mR-> direction = 0;
     LATHbits.LATH0 = 1;
@@ -24650,8 +24738,11 @@ void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
     stop(mL,mR);
     _delay((unsigned long)((150)*(64000000/4000.0)));
     LATHbits.LATH0 = 0;
+    }
 }
-}
+
+
+
 
 void space(DC_motor *mL, DC_motor *mR)
 {
@@ -24675,16 +24766,8 @@ void space(DC_motor *mL, DC_motor *mR)
 
 }
 
-void reverse_pink(DC_motor *mL, DC_motor *mR) {
 
-    right_45(mL,mR,2,right_timer);
-    stop(mL,mR);
-    _delay((unsigned long)((200)*(64000000/4000.0)));
 
-     reverse(mL,mR);
-    _delay((unsigned long)((900)*(64000000/4000.0)));
-    stop(mL,mR);
-}
 
 void reverse_yellow(DC_motor *mL, DC_motor *mR) {
 
@@ -24698,22 +24781,46 @@ void reverse_yellow(DC_motor *mL, DC_motor *mR) {
 }
 
 
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR) {
+
+    right_45(mL,mR,2,right_timer);
+    stop(mL,mR);
+    _delay((unsigned long)((200)*(64000000/4000.0)));
+
+    reverse(mL,mR);
+    _delay((unsigned long)((900)*(64000000/4000.0)));
+    stop(mL,mR);
+}
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count)
 {
     space(mL,mR);
     _delay((unsigned long)((500)*(64000000/4000.0)));
     stop(mL,mR);
     _delay((unsigned long)((500)*(64000000/4000.0)));
+
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
 
 
 }
+
+
+
+
+
 
 void movement_return(DC_motor *mL, DC_motor *mR, int count)
 {

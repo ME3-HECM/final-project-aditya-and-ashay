@@ -24232,34 +24232,26 @@ unsigned char __t3rd16on(void);
 # 1 "serial.c" 2
 
 # 1 "./serial.h" 1
-# 13 "./serial.h"
-volatile char EUSART4RXbuf[20];
-volatile char RxBufWriteCnt=0;
-volatile char RxBufReadCnt=0;
-
-volatile char EUSART4TXbuf[60];
-volatile char TxBufWriteCnt=0;
-volatile char TxBufReadCnt=0;
-
-
-
+# 27 "./serial.h"
 void initUSART4(void);
+
+
+
+
 char getCharSerial4(void);
+
+
+
+
 void sendCharSerial4(char charToSend);
+
+
+
+
 void sendStringSerial4(char *string);
-
-
-char getCharFromRxBuf(void);
-void putCharToRxBuf(char byte);
-char isDataInRxBuf (void);
-
-
-char getCharFromTxBuf(void);
-void putCharToTxBuf(char byte);
-char isDataInTxBuf (void);
-void TxBufferedString(char *string);
-void sendTxBuf(void);
 # 2 "serial.c" 2
+
+
 
 
 
@@ -24283,16 +24275,21 @@ void initUSART4(void) {
 }
 
 
+
+
 char getCharSerial4(void) {
     while (!PIR4bits.RC4IF);
     return RC4REG;
 }
 
 
+
+
 void sendCharSerial4(char charToSend) {
     while (!PIR4bits.TX4IF);
     TX4REG = charToSend;
 }
+
 
 
 

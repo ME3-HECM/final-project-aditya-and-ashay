@@ -24233,10 +24233,17 @@ unsigned char __t3rd16on(void);
 # 2 "lights_buttons.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 3 "lights_buttons.c" 2
+
+
+
 
 
 void ports_init(void){
@@ -24261,6 +24268,9 @@ void ports_init(void){
     TRISHbits.TRISH3 = 0;
     LATHbits.LATH3 = 0;
 }
+
+
+
 
 void buggyLEDs_init(void) {
     LATHbits.LATH1 = 0;

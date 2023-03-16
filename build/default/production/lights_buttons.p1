@@ -2130,95 +2130,95 @@ Version 4.0 HI-TECH Software Intermediate Code
 "40927
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 40927: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"5 lights_buttons.c
-[; ;lights_buttons.c: 5: void ports_init(void){
+"8 lights_buttons.c
+[; ;lights_buttons.c: 8: void ports_init(void){
 [v _ports_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _ports_init ]
 [f ]
-"7
-[; ;lights_buttons.c: 7:     TRISGbits.TRISG1 = 0;
+"10
+[; ;lights_buttons.c: 10:     TRISGbits.TRISG1 = 0;
 [e = . . _TRISGbits 0 1 -> -> 0 `i `uc ]
-"8
-[; ;lights_buttons.c: 8:     TRISAbits.TRISA4 = 0;
-[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
-"9
-[; ;lights_buttons.c: 9:     TRISFbits.TRISF7 = 0;
-[e = . . _TRISFbits 0 7 -> -> 0 `i `uc ]
 "11
-[; ;lights_buttons.c: 11:     LATGbits.LATG1 = 1;
-[e = . . _LATGbits 0 1 -> -> 1 `i `uc ]
+[; ;lights_buttons.c: 11:     TRISAbits.TRISA4 = 0;
+[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
 "12
-[; ;lights_buttons.c: 12:     LATAbits.LATA4 = 1;
-[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
-"13
-[; ;lights_buttons.c: 13:     LATFbits.LATF7 = 1;
-[e = . . _LATFbits 0 7 -> -> 1 `i `uc ]
+[; ;lights_buttons.c: 12:     TRISFbits.TRISF7 = 0;
+[e = . . _TRISFbits 0 7 -> -> 0 `i `uc ]
+"14
+[; ;lights_buttons.c: 14:     LATGbits.LATG1 = 1;
+[e = . . _LATGbits 0 1 -> -> 1 `i `uc ]
 "15
-[; ;lights_buttons.c: 15:     TRISFbits.TRISF2=1;
-[e = . . _TRISFbits 0 2 -> -> 1 `i `uc ]
+[; ;lights_buttons.c: 15:     LATAbits.LATA4 = 1;
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 "16
-[; ;lights_buttons.c: 16:     ANSELFbits.ANSELF2=0;
-[e = . . _ANSELFbits 0 2 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 16:     LATFbits.LATF7 = 1;
+[e = . . _LATFbits 0 7 -> -> 1 `i `uc ]
 "18
-[; ;lights_buttons.c: 18:     TRISFbits.TRISF3= 1;
-[e = . . _TRISFbits 0 3 -> -> 1 `i `uc ]
+[; ;lights_buttons.c: 18:     TRISFbits.TRISF2=1;
+[e = . . _TRISFbits 0 2 -> -> 1 `i `uc ]
 "19
-[; ;lights_buttons.c: 19:     ANSELFbits.ANSELF3 = 0;
-[e = . . _ANSELFbits 0 3 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 19:     ANSELFbits.ANSELF2=0;
+[e = . . _ANSELFbits 0 2 -> -> 0 `i `uc ]
 "21
-[; ;lights_buttons.c: 21:     TRISDbits.TRISD7 = 0;
-[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 21:     TRISFbits.TRISF3= 1;
+[e = . . _TRISFbits 0 3 -> -> 1 `i `uc ]
 "22
-[; ;lights_buttons.c: 22:     LATDbits.LATD7 = 0;
-[e = . . _LATDbits 0 7 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 22:     ANSELFbits.ANSELF3 = 0;
+[e = . . _ANSELFbits 0 3 -> -> 0 `i `uc ]
 "24
-[; ;lights_buttons.c: 24:     TRISHbits.TRISH3 = 0;
-[e = . . _TRISHbits 0 3 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 24:     TRISDbits.TRISD7 = 0;
+[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
 "25
-[; ;lights_buttons.c: 25:     LATHbits.LATH3 = 0;
+[; ;lights_buttons.c: 25:     LATDbits.LATD7 = 0;
+[e = . . _LATDbits 0 7 -> -> 0 `i `uc ]
+"27
+[; ;lights_buttons.c: 27:     TRISHbits.TRISH3 = 0;
+[e = . . _TRISHbits 0 3 -> -> 0 `i `uc ]
+"28
+[; ;lights_buttons.c: 28:     LATHbits.LATH3 = 0;
 [e = . . _LATHbits 0 3 -> -> 0 `i `uc ]
-"26
-[; ;lights_buttons.c: 26: }
+"29
+[; ;lights_buttons.c: 29: }
 [e :UE 2015 ]
 }
-"28
-[; ;lights_buttons.c: 28: void buggyLEDs_init(void) {
+"34
+[; ;lights_buttons.c: 34: void buggyLEDs_init(void) {
 [v _buggyLEDs_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _buggyLEDs_init ]
 [f ]
-"29
-[; ;lights_buttons.c: 29:     LATHbits.LATH1 = 0;
-[e = . . _LATHbits 0 1 -> -> 0 `i `uc ]
-"30
-[; ;lights_buttons.c: 30:     LATDbits.LATD3 = 0;
-[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
-"31
-[; ;lights_buttons.c: 31:     LATDbits.LATD4 = 0;
-[e = . . _LATDbits 0 4 -> -> 0 `i `uc ]
-"32
-[; ;lights_buttons.c: 32:     LATFbits.LATF0 = 0;
-[e = . . _LATFbits 0 0 -> -> 0 `i `uc ]
-"33
-[; ;lights_buttons.c: 33:     LATHbits.LATH0 = 0;
-[e = . . _LATHbits 0 0 -> -> 0 `i `uc ]
 "35
-[; ;lights_buttons.c: 35:     TRISHbits.TRISH1 = 0;
-[e = . . _TRISHbits 0 1 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 35:     LATHbits.LATH1 = 0;
+[e = . . _LATHbits 0 1 -> -> 0 `i `uc ]
 "36
-[; ;lights_buttons.c: 36:     TRISDbits.TRISD3 = 0;
-[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 36:     LATDbits.LATD3 = 0;
+[e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
 "37
-[; ;lights_buttons.c: 37:     TRISDbits.TRISD4 = 0;
-[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 37:     LATDbits.LATD4 = 0;
+[e = . . _LATDbits 0 4 -> -> 0 `i `uc ]
 "38
-[; ;lights_buttons.c: 38:     TRISFbits.TRISF0 = 0;
-[e = . . _TRISFbits 0 0 -> -> 0 `i `uc ]
+[; ;lights_buttons.c: 38:     LATFbits.LATF0 = 0;
+[e = . . _LATFbits 0 0 -> -> 0 `i `uc ]
 "39
-[; ;lights_buttons.c: 39:     TRISHbits.TRISH0 = 0;
+[; ;lights_buttons.c: 39:     LATHbits.LATH0 = 0;
+[e = . . _LATHbits 0 0 -> -> 0 `i `uc ]
+"41
+[; ;lights_buttons.c: 41:     TRISHbits.TRISH1 = 0;
+[e = . . _TRISHbits 0 1 -> -> 0 `i `uc ]
+"42
+[; ;lights_buttons.c: 42:     TRISDbits.TRISD3 = 0;
+[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
+"43
+[; ;lights_buttons.c: 43:     TRISDbits.TRISD4 = 0;
+[e = . . _TRISDbits 0 4 -> -> 0 `i `uc ]
+"44
+[; ;lights_buttons.c: 44:     TRISFbits.TRISF0 = 0;
+[e = . . _TRISFbits 0 0 -> -> 0 `i `uc ]
+"45
+[; ;lights_buttons.c: 45:     TRISHbits.TRISH0 = 0;
 [e = . . _TRISHbits 0 0 -> -> 0 `i `uc ]
-"40
-[; ;lights_buttons.c: 40: }
+"46
+[; ;lights_buttons.c: 46: }
 [e :UE 2016 ]
 }

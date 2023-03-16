@@ -24399,20 +24399,78 @@ typedef struct DC_motor {
 
 struct DC_motor motorL, motorR;
 
+
+
+
+
 void initDCmotorsPWM(unsigned int PWMperiod);
+
+
+
+
 void setMotorPWM(DC_motor *m);
+
+
+
+
 void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
+
+
+
 
 void forward(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void reverse(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void stop(DC_motor *mL, DC_motor *mR);
 
+
+
+
+
+
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+
+
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+
+
+
+
 void space(DC_motor *mL, DC_motor *mR);
 
+
+
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
+
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count);
+
+
+
+
+
+
 void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 2 "initialisation.c" 2
 
@@ -24437,7 +24495,6 @@ typedef struct colors {
 
 struct colors color;
 
-int color_lowerbound = 0;
 int color_upperbound = 2500;
 
 unsigned char card_count = 0;
@@ -24455,83 +24512,87 @@ void color_click_init(void);
 
 
 
-
-
 void color_writetoaddr(char address, char value);
 
 
 
 
-
 unsigned int color_read_Red(void);
+
+
+
+
 unsigned int color_read_Blue(void);
+
+
+
+
 unsigned int color_read_Green(void);
+
+
+
+
 unsigned int color_read_Clear(void);
 
 
 
+
+
 void READcolor(colors *c);
+
+
+
+
+
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
-void colourcards_normaliseRGBC(colors *c);
+
+
+
 
 void return_home(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
 void delay_ms_func(unsigned int time);
 # 3 "initialisation.c" 2
 
 # 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-
-void interrupts_init(void);
-
-
-
-
-
-char T_flag = 0;
+# 10 "./interrupts.h"
 int timer_val = 0;
 
-void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
+
+
+
+void interrupts_init(void);
+
+
+
+
+void __attribute__((picinterrupt(("low_priority")))) LowISR();
 # 4 "initialisation.c" 2
 
 # 1 "./serial.h" 1
-# 13 "./serial.h"
-volatile char EUSART4RXbuf[20];
-volatile char RxBufWriteCnt=0;
-volatile char RxBufReadCnt=0;
-
-volatile char EUSART4TXbuf[60];
-volatile char TxBufWriteCnt=0;
-volatile char TxBufReadCnt=0;
-
-
-
+# 27 "./serial.h"
 void initUSART4(void);
+
+
+
+
 char getCharSerial4(void);
+
+
+
+
 void sendCharSerial4(char charToSend);
+
+
+
+
 void sendStringSerial4(char *string);
-
-
-char getCharFromRxBuf(void);
-void putCharToRxBuf(char byte);
-char isDataInRxBuf (void);
-
-
-char getCharFromTxBuf(void);
-void putCharToTxBuf(char byte);
-char isDataInTxBuf (void);
-void TxBufferedString(char *string);
-void sendTxBuf(void);
 # 5 "initialisation.c" 2
 
 # 1 "./i2c.h" 1
@@ -24570,34 +24631,44 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 # 6 "initialisation.c" 2
 
 # 1 "./timers.h" 1
-
-
-
-
-
-
-
+# 11 "./timers.h"
 void Timer0_init(void);
+
+
+
+
+
 void timer_reset(void);
 # 7 "initialisation.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 8 "initialisation.c" 2
 
 # 1 "./calibration.h" 1
-
-
-
-
-
-
-
+# 11 "./calibration.h"
 void left_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void right_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void custom_delay(int temp);
+
+
+
+
+
 void battery_health(void);
 # 9 "initialisation.c" 2
 
@@ -24607,16 +24678,16 @@ void complete_initialisation(void);
 # 10 "initialisation.c" 2
 
 # 1 "./ADC.h" 1
-
-
-
-
-
-
-
+# 12 "./ADC.h"
 void ADC_init(void);
+
+
+
+
 unsigned int ADC_getval(void);
 # 11 "initialisation.c" 2
+
+
 
 
 
@@ -24632,6 +24703,5 @@ void complete_initialisation(void){
     interrupts_init();
     initUSART4();
     ADC_init();
-
 
 }

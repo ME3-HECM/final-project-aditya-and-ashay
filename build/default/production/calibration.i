@@ -24399,28 +24399,92 @@ typedef struct DC_motor {
 
 struct DC_motor motorL, motorR;
 
+
+
+
+
 void initDCmotorsPWM(unsigned int PWMperiod);
+
+
+
+
 void setMotorPWM(DC_motor *m);
+
+
+
+
 void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
+
+
+
 
 void forward(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void reverse(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void stop(DC_motor *mL, DC_motor *mR);
 
+
+
+
+
+
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+
+
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+
+
+
+
 void space(DC_motor *mL, DC_motor *mR);
 
+
+
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
+
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count);
+
+
+
+
+
+
 void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 2 "calibration.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 3 "calibration.c" 2
+
+
 
 
 
@@ -24436,6 +24500,9 @@ void left_turn_calibration(DC_motor *mL, DC_motor *mR){
     }
 }
 
+
+
+
 void right_turn_calibration(DC_motor *mL, DC_motor *mR){
     while (!(!PORTFbits.RF3 && !PORTFbits.RF2)) {
         right_45(mL,mR,4,left_timer);
@@ -24447,10 +24514,17 @@ void right_turn_calibration(DC_motor *mL, DC_motor *mR){
         }
 }
 
+
+
+
 void custom_delay(int temp){
 int i;
 for (i = 0; i < temp; i++){_delay((unsigned long)((1)*(64000000/4000.0)));}
 }
+
+
+
+
 
 void battery_health(void) {
     unsigned char battery_level;

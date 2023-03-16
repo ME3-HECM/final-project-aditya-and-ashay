@@ -2047,71 +2047,71 @@ Version 4.0 HI-TECH Software Intermediate Code
 "40927
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 40927: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"9 ADC.c
-[; ;ADC.c: 9: void ADC_init(void)
+"8 ADC.c
+[; ;ADC.c: 8: void ADC_init(void)
 [v _ADC_init `(v ~T0 @X0 1 ef ]
-"10
-[; ;ADC.c: 10: {
+"9
+[; ;ADC.c: 9: {
 {
 [e :U _ADC_init ]
 [f ]
-"11
-[; ;ADC.c: 11:     TRISFbits.TRISF6=1;
+"10
+[; ;ADC.c: 10:     TRISFbits.TRISF6=1;
 [e = . . _TRISFbits 0 6 -> -> 1 `i `uc ]
-"12
-[; ;ADC.c: 12:     ANSELFbits.ANSELF6=1;
+"11
+[; ;ADC.c: 11:     ANSELFbits.ANSELF6=1;
 [e = . . _ANSELFbits 0 6 -> -> 1 `i `uc ]
-"15
-[; ;ADC.c: 15:     ADREFbits.ADNREF = 0;
+"13
+[; ;ADC.c: 13:     ADREFbits.ADNREF = 0;
 [e = . . _ADREFbits 0 2 -> -> 0 `i `uc ]
-"16
-[; ;ADC.c: 16:     ADREFbits.ADPREF = 0b00;
+"14
+[; ;ADC.c: 14:     ADREFbits.ADPREF = 0b00;
 [e = . . _ADREFbits 0 0 -> -> 0 `i `uc ]
-"17
-[; ;ADC.c: 17:     ADPCH=0b101110;
+"15
+[; ;ADC.c: 15:     ADPCH=0b101110;
 [e = _ADPCH -> -> 46 `i `uc ]
-"18
-[; ;ADC.c: 18:     ADCON0bits.ADFM = 0;
+"16
+[; ;ADC.c: 16:     ADCON0bits.ADFM = 0;
 [e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
-"19
-[; ;ADC.c: 19:     ADCON0bits.ADCS = 1;
+"17
+[; ;ADC.c: 17:     ADCON0bits.ADCS = 1;
 [e = . . _ADCON0bits 0 4 -> -> 1 `i `uc ]
-"20
-[; ;ADC.c: 20:     ADCON0bits.ADON = 1;
+"18
+[; ;ADC.c: 18:     ADCON0bits.ADON = 1;
 [e = . . _ADCON0bits 0 7 -> -> 1 `i `uc ]
-"21
-[; ;ADC.c: 21: }
+"19
+[; ;ADC.c: 19: }
 [e :UE 2015 ]
 }
-"23
-[; ;ADC.c: 23: unsigned int ADC_getval(void)
-[v _ADC_getval `(ui ~T0 @X0 1 ef ]
 "24
-[; ;ADC.c: 24: {
+[; ;ADC.c: 24: unsigned int ADC_getval(void)
+[v _ADC_getval `(ui ~T0 @X0 1 ef ]
+"25
+[; ;ADC.c: 25: {
 {
 [e :U _ADC_getval ]
 [f ]
-"25
-[; ;ADC.c: 25:     unsigned int tmpval;
+"26
+[; ;ADC.c: 26:     unsigned int tmpval;
 [v _tmpval `ui ~T0 @X0 1 a ]
-"27
-[; ;ADC.c: 27:     ADCON0bits.GO = 1;
+"28
+[; ;ADC.c: 28:     ADCON0bits.GO = 1;
 [e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
-"29
-[; ;ADC.c: 29:     while (ADCON0bits.GO);
+"30
+[; ;ADC.c: 30:     while (ADCON0bits.GO);
 [e $U 2017  ]
 [e :U 2018 ]
 [e :U 2017 ]
 [e $ != -> . . _ADCON0bits 1 0 `i -> 0 `i 2018  ]
 [e :U 2019 ]
-"31
-[; ;ADC.c: 31:     tmpval = ADRESH;
+"32
+[; ;ADC.c: 32:     tmpval = ADRESH;
 [e = _tmpval -> _ADRESH `ui ]
-"33
-[; ;ADC.c: 33:     return tmpval;
+"34
+[; ;ADC.c: 34:     return tmpval;
 [e ) _tmpval ]
 [e $UE 2016  ]
-"34
-[; ;ADC.c: 34: }
+"35
+[; ;ADC.c: 35: }
 [e :UE 2016 ]
 }

@@ -24232,17 +24232,14 @@ unsigned char __t3rd16on(void);
 # 1 "ADC.c" 2
 
 # 1 "./ADC.h" 1
-
-
-
-
-
-
-
+# 12 "./ADC.h"
 void ADC_init(void);
+
+
+
+
 unsigned int ADC_getval(void);
 # 2 "ADC.c" 2
-
 
 
 
@@ -24254,7 +24251,6 @@ void ADC_init(void)
     TRISFbits.TRISF6=1;
     ANSELFbits.ANSELF6=1;
 
-
     ADREFbits.ADNREF = 0;
     ADREFbits.ADPREF = 0b00;
     ADPCH=0b101110;
@@ -24262,6 +24258,9 @@ void ADC_init(void)
     ADCON0bits.ADCS = 1;
     ADCON0bits.ADON = 1;
 }
+
+
+
 
 unsigned int ADC_getval(void)
 {

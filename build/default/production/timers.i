@@ -24232,40 +24232,30 @@ unsigned char __t3rd16on(void);
 # 1 "timers.c" 2
 
 # 1 "./timers.h" 1
-
-
-
-
-
-
-
+# 11 "./timers.h"
 void Timer0_init(void);
+
+
+
+
+
 void timer_reset(void);
 # 2 "timers.c" 2
 
 # 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-
-void interrupts_init(void);
-
-
-
-
-
-char T_flag = 0;
+# 10 "./interrupts.h"
 int timer_val = 0;
 
-void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
+
+
+
+void interrupts_init(void);
+
+
+
+
+void __attribute__((picinterrupt(("low_priority")))) LowISR();
 # 3 "timers.c" 2
 
 
@@ -24284,6 +24274,10 @@ void Timer0_init(void)
     TMR0L=0b00100011;
     T0CON0bits.T0EN=1;
 }
+
+
+
+
 
 void timer_reset(void) {
     timer_val = 0;

@@ -30,11 +30,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\builtins.h
 [v __delay `JF192 ~T0 @X0 0 e ]
 [p i __delay ]
-"9 ./timers.h
-[; ;./timers.h: 9: void timer_reset(void);
+"17 ./timers.h
+[; ;./timers.h: 17: void timer_reset(void);
 [v _timer_reset `(v ~T0 @X0 0 ef ]
-"55 ./color.h
-[; ;./color.h: 55: void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
+"70 ./color.h
+[; ;./color.h: 70: void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 [v _buggy_color_response `(v ~T0 @X0 0 ef3`*S2017`*S2017`*S2018 ]
 "1 main.c
 [p x FEXTOSC  =  HS      ]
@@ -2038,43 +2038,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./color.h: 19: struct colors color;
 [v _color `S2018 ~T0 @X0 1 e ]
 "21
-[; ;./color.h: 21: int color_lowerbound = 0;
-[v _color_lowerbound `i ~T0 @X0 1 e ]
-[i _color_lowerbound
--> 0 `i
-]
-"22
-[; ;./color.h: 22: int color_upperbound = 2500;
+[; ;./color.h: 21: int color_upperbound = 2500;
 [v _color_upperbound `i ~T0 @X0 1 e ]
 [i _color_upperbound
 -> 2500 `i
 ]
-"24
-[; ;./color.h: 24: unsigned char card_count = 0;
+"23
+[; ;./color.h: 23: unsigned char card_count = 0;
 [v _card_count `uc ~T0 @X0 1 e ]
 [i _card_count
 -> -> 0 `i `uc
 ]
-"25
-[; ;./color.h: 25: char card_memory[40];
+"24
+[; ;./color.h: 24: char card_memory[40];
 [v _card_memory `uc ~T0 @X0 -> 40 `i e ]
-"27
-[; ;./color.h: 27: unsigned char timer_index = 0;
+"26
+[; ;./color.h: 26: unsigned char timer_index = 0;
 [v _timer_index `uc ~T0 @X0 1 e ]
 [i _timer_index
 -> -> 0 `i `uc
 ]
-"28
-[; ;./color.h: 28: char timer_memory[40];
+"27
+[; ;./color.h: 27: char timer_memory[40];
 [v _timer_memory `uc ~T0 @X0 -> 40 `i e ]
-"15 ./interrupts.h
-[; ;./interrupts.h: 15: char T_flag = 0;
-[v _T_flag `uc ~T0 @X0 1 e ]
-[i _T_flag
--> -> 0 `i `uc
-]
-"16
-[; ;./interrupts.h: 16: int timer_val = 0;
+"10 ./interrupts.h
+[; ;./interrupts.h: 10: int timer_val = 0;
 [v _timer_val `i ~T0 @X0 1 e ]
 [i _timer_val
 -> 0 `i
@@ -2096,30 +2084,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 2020 ]
 [e $ && != -> . . _PORTFbits 0 2 `i -> 0 `i != -> . . _PORTFbits 0 3 `i -> 0 `i 2021  ]
 [e :U 2022 ]
-"24
-[; ;main.c: 24:     if (!PORTFbits.RF3){_delay((unsigned long)((500)*(64000000/4000.0)));timer_reset();
+"27
+[; ;main.c: 27:     if (!PORTFbits.RF3){_delay((unsigned long)((500)*(64000000/4000.0)));timer_reset();
 [e $ ! ! != -> . . _PORTFbits 0 3 `i -> 0 `i 2023  ]
 {
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 [e ( _timer_reset ..  ]
-"25
-[; ;main.c: 25:         while (1) {
+"28
+[; ;main.c: 28:         while (1) {
 [e :U 2025 ]
 {
-"26
-[; ;main.c: 26:         buggy_color_response(&motorL,&motorR,&color);
+"29
+[; ;main.c: 29:         buggy_color_response(&motorL,&motorR,&color);
 [e ( _buggy_color_response (3 , , &U _motorL &U _motorR &U _color ]
-"27
-[; ;main.c: 27:         }
+"30
+[; ;main.c: 30:         }
 }
 [e :U 2024 ]
 [e $U 2025  ]
 [e :U 2026 ]
-"28
-[; ;main.c: 28:     }
+"31
+[; ;main.c: 31:     }
 }
 [e :U 2023 ]
-"29
-[; ;main.c: 29: }
+"32
+[; ;main.c: 32: }
 [e :UE 2019 ]
 }

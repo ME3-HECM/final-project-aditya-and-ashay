@@ -6,19 +6,18 @@
 #define _XTAL_FREQ 64000000
 
 
-void interrupts_init(void);
-
-
-//Value for the upper bound for the interrupt to be triggered
-//Will find these through calibration
-
-char T_flag = 0;
+//Global varibale to count forward time movements of buggy
 int timer_val = 0;
 
+/************************************
+ * Function to turn on interrupts and set if priority is used
+ * Note you also need to enable peripheral interrupts in the INTCON register to use CM1IE.
+************************************/
 void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __interrupt(high_priority) HighISR();
+/************************************
+ * Low priorty interrupt flags everytime the timer overflows (131 ms)
+************************************/
+void __interrupt(low_priority) LowISR();
 
 #endif

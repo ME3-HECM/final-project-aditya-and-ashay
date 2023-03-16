@@ -24232,58 +24232,39 @@ unsigned char __t3rd16on(void);
 # 1 "interrupts.c" 2
 
 # 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-
-void interrupts_init(void);
-
-
-
-
-
-char T_flag = 0;
+# 10 "./interrupts.h"
 int timer_val = 0;
 
-void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
+
+
+
+void interrupts_init(void);
+
+
+
+
+void __attribute__((picinterrupt(("low_priority")))) LowISR();
 # 2 "interrupts.c" 2
 
 # 1 "./serial.h" 1
-# 13 "./serial.h"
-volatile char EUSART4RXbuf[20];
-volatile char RxBufWriteCnt=0;
-volatile char RxBufReadCnt=0;
-
-volatile char EUSART4TXbuf[60];
-volatile char TxBufWriteCnt=0;
-volatile char TxBufReadCnt=0;
-
-
-
+# 27 "./serial.h"
 void initUSART4(void);
+
+
+
+
 char getCharSerial4(void);
+
+
+
+
 void sendCharSerial4(char charToSend);
+
+
+
+
 void sendStringSerial4(char *string);
-
-
-char getCharFromRxBuf(void);
-void putCharToRxBuf(char byte);
-char isDataInRxBuf (void);
-
-
-char getCharFromTxBuf(void);
-void putCharToTxBuf(char byte);
-char isDataInTxBuf (void);
-void TxBufferedString(char *string);
-void sendTxBuf(void);
 # 3 "interrupts.c" 2
 
 
@@ -24293,17 +24274,18 @@ void sendTxBuf(void);
 
 void interrupts_init(void)
 {
-# 20 "interrupts.c"
     PIE0bits.TMR0IE = 1;
     PIR0bits.TMR0IF = 0;
     IPR0bits.TMR0IP = 0;
-
 
     INTCONbits.IPEN = 1;
     INTCONbits.PEIE = 1;
     INTCONbits.GIE = 1;
 }
-# 54 "interrupts.c"
+
+
+
+
 void __attribute__((picinterrupt(("low_priority")))) LowISR()
 {
     if (PIR0bits.TMR0IF) {

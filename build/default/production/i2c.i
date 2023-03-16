@@ -24267,6 +24267,9 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 # 2 "i2c.c" 2
 
 
+
+
+
 void I2C_2_Master_Init(void)
 {
 
@@ -24285,10 +24288,16 @@ void I2C_2_Master_Init(void)
   RD6PPS=0x1B;
 }
 
+
+
+
 void I2C_2_Master_Idle(void)
 {
   while ((SSP2STAT & 0x04) || (SSP2CON2 & 0x1F));
 }
+
+
+
 
 void I2C_2_Master_Start(void)
 {
@@ -24296,11 +24305,17 @@ void I2C_2_Master_Start(void)
   SSP2CON2bits.SEN = 1;
 }
 
+
+
+
 void I2C_2_Master_RepStart(void)
 {
   I2C_2_Master_Idle();
   SSP2CON2bits.RSEN = 1;
 }
+
+
+
 
 void I2C_2_Master_Stop()
 {
@@ -24308,11 +24323,17 @@ void I2C_2_Master_Stop()
   SSP2CON2bits.PEN = 1;
 }
 
+
+
+
 void I2C_2_Master_Write(unsigned char data_byte)
 {
   I2C_2_Master_Idle();
   SSP2BUF = data_byte;
 }
+
+
+
 
 unsigned char I2C_2_Master_Read(unsigned char ack)
 {

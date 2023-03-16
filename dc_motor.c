@@ -3,9 +3,9 @@
 #include "lights_buttons.h"
 #include "calibration.h"
 
-
-
-// function initialise T2 and CCP for DC motor control
+/************************************************************
+* Function used to initialise T2 and CCP for DC motor control
+************************************************************/
 void initDCmotorsPWM(unsigned int PWMperiod){
     //initialise your TRIS and LAT registers for PWM  
     TRISEbits.TRISE2 = 0;
@@ -70,9 +70,9 @@ void initDCmotorsPWM(unsigned int PWMperiod){
     
 }
 
-
-//TRY TO TURN IN SMALL INCREMENTS AND HAVE A CALIBRATION FUNCTION!!!!!!!!!!
-// function to set CCP PWM output from the values in the motor structure
+/**********************************************************************
+* Function to set CCP PWM output from the values in the motor structure
+**********************************************************************/
 void setMotorPWM(DC_motor *m)
 {
     unsigned char posDuty, negDuty; //duty cycle values for different sides of the motor
@@ -95,6 +95,9 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+/*********************************************
+* Function to intialise motor specifications 
+*********************************************/
 void motor_init(DC_motor *mL, DC_motor *mR)
 {
     motorL.power=0; 						//zero power to start
@@ -115,113 +118,132 @@ void motor_init(DC_motor *mL, DC_motor *mR)
 }
 
 
-//function to make the robot go straight
+/************************************
+* Function used to move buggy forward
+************************************/
 void forward(DC_motor *mL, DC_motor *mR)
 {
-    stop(mL,mR);
+    stop(mL,mR); // Make sure motor is idle
     mL-> direction = 1;
     mR-> direction = 1; // Forward direction
-    MAINLIGHT = 1;
+    MAINLIGHT = 1; //Turn main beam lights on
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <= 50) || (mR->power <= 55)){
-        if (mL->power <= 50){mL->power += 1;}
-        if (mR->power <= 55){mR->power += 1;}
+        if (mL->power <= 50){mL->power += 1;} 
+        if (mR->power <= 55){mR->power += 1;} //Gradual power increase
         setMotorPWM(mL);
         setMotorPWM(mR);
         __delay_us(5);   
     }
-    MAINLIGHT = 0;
+    MAINLIGHT = 0; //Turn main beam lights off after move is performed
 }
 
+/*****************************************************
+* Function used to move buggy in the reverse direction
+*****************************************************/
 void reverse(DC_motor *mL, DC_motor *mR)
 {
-    stop(mL,mR);
+    stop(mL,mR); // Make sure motor is idle
     mL-> direction = 0;
-    mR-> direction = 0; // Forward direction
-    HEADLAMPS = 1;
+    mR-> direction = 0; // Reverse direction
+    HEADLAMPS = 1; //Turn reverse lights on
     setMotorPWM(mR);
     setMotorPWM(mL);
     while ((mL->power <= 50) || (mR->power <= 55)){
-        if (mL->power <= 50){mL->power += 1;}
+        if (mL->power <= 50){mL->power += 1;} //Gradual power increase
         if (mR->power <= 55){mR->power += 1;}
         setMotorPWM(mL);
         setMotorPWM(mR);
         __delay_us(5);   
     }
-    HEADLAMPS = 0;
+    HEADLAMPS = 0; //Turn reverse lights off after move is performed
 }
 
-//function to stop the robot gradually 
+/*****************************************
+* Function used to stop buggy gradually
+*****************************************/
 void stop(DC_motor *mL, DC_motor *mR)
 {
-    mL->brakemode = 1;
-    mR->brakemode = 1;
-    BRAKELIGHT = 1;
+    mL->brakemode = 1; 
+    mR->brakemode = 1; //mode defined for braking to occur
+    BRAKELIGHT = 1; 
     
-    for (int i = 70; i >= 0; i=i-10) {
-        mL -> power = i;
-        mR -> power = i;  
+    for (char i = 70; i >= 0; i=i-10) {
+        mL -> power = i; 
+        mR -> power = i;  // Power loss is gradual
         setMotorPWM(mL);
         setMotorPWM(mR); 
         __delay_us(20);
     }
     
-    mL->power = 0;
-    mR->power = 0;
+    mL->power = 0; 
+    mR->power = 0; //0 power causes motors to come to a stop
     setMotorPWM(mL);
     setMotorPWM(mR);
     BRAKELIGHT = 0;
 }
 
-//function to make the robot turn left 
+/*****************************************
+* Function used to make buggy turn left 45 degrees
+* count input defines how many 45 degree turns the function will perform 
+* left_45(mL,mR,2,left_timer) - This will do two 45 degree turns therefore make a 90 degree turn
+*****************************************/
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
 {
-    stop(mL,mR);       // Make sure motor is idle
-    mL-> direction = 0;
-    mR-> direction = 1; // moves right side 
+    stop(mL,mR); // Make sure motor is idle
+    mL-> direction = 0; //moves left side backward
+    mR-> direction = 1; // moves right side forward 
     LEFTINDICATOR = 1;
     int i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
-        if (mR->power <= 50){mR->power += 10;}
+        if (mR->power <= 50){mR->power += 10;} //Gradual power increase
         setMotorPWM(mL);
         setMotorPWM(mR);
         __delay_ms(10);
     }
-    custom_delay(left_timer);
-    stop(mL,mR); 
+    custom_delay(left_timer); //delay time set by calibration, delay set to perform an accurate 45 degree turn
+    stop(mL,mR); // stop buggy after move is performed
     __delay_ms(150); // Wait for Car to stabilise
     LEFTINDICATOR = 0;
     }
 }
 
-//function to make the robot turn right 
+/*****************************************
+* Function used to make buggy turn right 45 degrees
+* count input defines how many 45 degree turns the function will perform  
+* right_45(mL, mR, 2, right_timer) - This will do two 45 degree turns therefore make a 90 degree turn
+*****************************************/
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
 {
-    mL-> direction = 1;
-    mR-> direction = 0; // moves right side
+    stop(mL,mR); // Make sure motor is idle
+    mL-> direction = 1; //moves left side forward
+    mR-> direction = 0; // moves right side backward
     RIGHTINDICATOR = 1;
     int i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
-        if (mR->power <= 50){mR->power += 10;}
+        if (mR->power <= 50){mR->power += 10;} //Gradual power increase
         setMotorPWM(mL);
         setMotorPWM(mR);
         __delay_ms(10);   
     }
-    custom_delay(right_timer);
-    stop(mL,mR); 
+    custom_delay(right_timer); //delay time set by calibration, delay set to perform an accurate 45 degree turn
+    stop(mL,mR); // stop buggy after move is performed
     __delay_ms(150); // Wait for Car to stabilise
     RIGHTINDICATOR = 0;
-}
+    }
 }
 
+/*****************************************
+* Function used to create a space between the buggy and the wall after a colour is read
+*****************************************/
 void space(DC_motor *mL, DC_motor *mR)
 {
-    stop(mL,mR);
+    stop(mL,mR); // Make sure motor is idle
     HEADLAMPS = 1;
     mL-> direction = 0;
     mR-> direction = 0; // Reverse direction
@@ -229,67 +251,83 @@ void space(DC_motor *mL, DC_motor *mR)
     setMotorPWM(mL);
     while ((mL->power <30) && (mR->power <30)){
         mL->power += 10;
-        mR->power += 10;
+        mR->power += 10; //Gradual power increase
         setMotorPWM(mL);
         setMotorPWM(mR);
         __delay_us(20);   
     }
-    __delay_ms(350);
-    stop(mL,mR);
+    __delay_ms(350); //Buggy will reverse for this length of time
+    stop(mL,mR); // stop buggy after move is performed
     __delay_ms(200); // Wait for Car to stabilise
     HEADLAMPS = 0;
     
 }
 
-void reverse_pink(DC_motor *mL, DC_motor *mR) {
-   
-    right_45(mL,mR,2,right_timer);
-    stop(mL,mR);
-    __delay_ms(200);
-    
-     reverse(mL,mR);
-    __delay_ms(900);
-    stop(mL,mR);
-}
-
+/*****************************************
+* Function used to define movements for yellow card while returning home
+*****************************************/
 void reverse_yellow(DC_motor *mL, DC_motor *mR) {
     
-    left_45(mL,mR,2,left_timer);
+    left_45(mL,mR,2,left_timer); // 90 degree left turn
     stop(mL,mR);
     __delay_ms(200);
     
      reverse(mL,mR);
-    __delay_ms(900);
-    stop(mL,mR);
+    __delay_ms(900); //square_timer set by calibration; defines time to reverse 1 square
+    stop(mL,mR); // stop buggy after move is performed
 }
 
+/*****************************************
+* Function used to define movements for pink card while returning home
+*****************************************/
+void reverse_pink(DC_motor *mL, DC_motor *mR) {
+   
+    right_45(mL,mR,2,right_timer); // 90 degree right turn
+    stop(mL,mR);
+    __delay_ms(200);
+    
+    reverse(mL,mR);
+    __delay_ms(900); //square_timer set by calibration; defines time to reverse 1 square 
+    stop(mL,mR); // stop buggy after move is performed
+}
 
+/*****************************************
+* Function used to define movements when each card is read
+* count input is used to define which card was identified and hence what move should be made
+* Eg. movement(mL,mR,1) is used when red card is flagged and performs the required movements  
+*****************************************/
 void movement(DC_motor *mL, DC_motor *mR, int count)
 {
-    space(mL,mR);
+    space(mL,mR); //Reverses away from wall
     __delay_ms(500);
-    stop(mL,mR);
+    stop(mL,mR); //stabilises buggy
     __delay_ms(500);
-    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); __delay_ms(900);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); __delay_ms(900);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-    if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
+    
+    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);} // RED
+    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);} // GREEN
+    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);} //BLUE
+    if (count == 4){reverse(mL,mR); __delay_ms(900);;stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);} //YELLOW
+    if (count == 5){reverse(mL,mR); __delay_ms(900);;stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);} //PINK
+    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);} //ORANGE
+    if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);} //LIGHT BLUE
        
     
 }
 
+/*****************************************
+* Function used to define movements during RETURN HOME
+* movements will be opposite to what was initially performed
+ * Eg. movement_return(mL,mR,1) is used to perform the opposite of a green card   
+*****************************************/
 void movement_return(DC_motor *mL, DC_motor *mR, int count)
 {
        
-    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-    if (count == 7){left_45(mL,mR,3,right_timer); stop(mL,mR);}
+    if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);} //GREEN (RETURN HOME)
+    if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}//RED (RETURN HOME)
+    if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}//BLUE - same as before
+    if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}//LIGHT BLUE (RETURN HOME)
+    if (count == 7){left_45(mL,mR,3,right_timer); stop(mL,mR);}//ORANGE (RETURN HOME)
         
-    if (count == 9){reverse_yellow(mL,mR);}
-    if (count == 10) {reverse_pink(mL,mR);}
+    if (count == 9){reverse_yellow(mL,mR);} //YELLOW (RETURN HOME)
+    if (count == 10) {reverse_pink(mL,mR);} //PINK (RETURN HOME)
 }

@@ -10,7 +10,9 @@
 #include "initialisation.h"
 #include "ADC.h"
 
-
+/************************************************************
+* Function used to initiliase all the functions that must be initialised before buggy can enter the maze
+************************************************************/
 void complete_initialisation(void){
     
     initDCmotorsPWM(99);
@@ -24,5 +26,4 @@ void complete_initialisation(void){
     initUSART4();
     ADC_init();
     
-    //colorclick_interrupts_init();
 }

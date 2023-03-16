@@ -7,6 +7,9 @@
 #include "interrupts.h"
 #include "lights_buttons.h"
 
+/*****************************************
+* Function used to initialise colour click
+*****************************************/
 void color_click_init(void)
 {   
     //setup colour sensor via i2c interface
@@ -19,7 +22,9 @@ void color_click_init(void)
     //set integration time
 	color_writetoaddr(0x01, 0xD5);
 }
-
+/*****************************************
+* Function used to write to the colour click
+*****************************************/
 void color_writetoaddr(char address, char value){
     I2C_2_Master_Start();         //Start condition
     I2C_2_Master_Write(0x52 | 0x00);     //7 bit device address + Write mode
@@ -28,6 +33,9 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Stop();          //Stop condition
 }
 
+/*****************************************
+* Function used to read the red light and return a 16 bit colour intensity reading
+*****************************************/
 unsigned int color_read_Red(void)
 {
 	unsigned int tmp;
@@ -43,6 +51,9 @@ unsigned int color_read_Red(void)
 	return tmp;
 }
 
+/*****************************************
+* Function used to read the blue light and return a 16 bit colour intensity reading
+*****************************************/
 unsigned int color_read_Blue(void)
 {
 	unsigned int tmp;
@@ -58,6 +69,9 @@ unsigned int color_read_Blue(void)
 	return tmp;
 }
 
+/*****************************************
+* Function used to read the green light and return a 16 bit colour intensity reading
+*****************************************/
 unsigned int color_read_Green(void)
 {
 	unsigned int tmp;
@@ -73,6 +87,9 @@ unsigned int color_read_Green(void)
 	return tmp;
 }
 
+/*****************************************
+* Function used to read the clear light and return a 16 bit colour intensity reading
+*****************************************/
 unsigned int color_read_Clear(void)
 {
 	unsigned int tmp;
@@ -88,6 +105,10 @@ unsigned int color_read_Clear(void)
 	return tmp;
 }
 
+/*****************************************
+* Function used to perform colour reads and assign them to struct variables
+* normalised values are also added to the colour struct 
+*****************************************/
 void READcolor(colors *c) {
     
     color.R = color_read_Red();
@@ -95,68 +116,72 @@ void READcolor(colors *c) {
     color.G = color_read_Green();
     color.C = color_read_Clear();
     
-    color.R_norm = (float)color.R / (float)color.C;
+    color.R_norm = (float)color.R / (float)color.C; 
     color.B_norm = (float)color.B / (float)color.C;
-    color.G_norm = (float)color.G / (float)color.C;
+    color.G_norm = (float)color.G / (float)color.C; //normalised values found by: (colour intensity / clear channel intensity)
 }
 
+/*****************************************
+* Function used to read colours and create the desired response of the buggy
+* Function also assigns colour read and timer values to an array to  be used in the return home function
+*****************************************/
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
     
-    READcolor(&color);
+    READcolor(&color); //Read colour intensities initially
     
-    if (color.C > color_upperbound){ 
-        timer_memory[timer_index] = timer_val;
-        timer_index ++;
-        forward(mL,mR);
+    if (color.C > color_upperbound){ //if clear channel value is above certain value it means a card has been reached
+        timer_memory[timer_index] = timer_val; // First append the timer value to timer array to be used while return home
+        timer_index ++; //increment timer index so the next position in the array can be accessed next time a card is flagged
+        forward(mL,mR); //move forward to ensure buggy is hitting the card and read is accurate
         __delay_ms(50);
         stop(mL,mR); __delay_ms(500);
-        READcolor(&color); __delay_ms(500);
+        READcolor(&color); __delay_ms(500); // Read colours again
         
         if (color.R_norm > 0.77 && color.B_norm < 0.18 && color.G_norm < 0.14){
-            card_memory[card_count] = 2;
-            card_count ++;
-            movement(mL,mR,1); //RED COLOUR CARD - Turn Right
+            card_memory[card_count] = 2; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
+            movement(mL,mR,1); //Red card - Turn Right
          
         }
     
         if (color.B_norm < 0.25 && color.G_norm > 0.40) { 
-            card_memory[card_count] = 1;
-            card_count ++;
+            card_memory[card_count] = 1; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,2);   //Green card - Turn Left
         
         }
     
         if (color.R_norm < 0.38 && color.B_norm > 0.32 && color.G_norm > 0.34){
-            card_memory[card_count] = 3;
-            card_count ++;
+            card_memory[card_count] = 3; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,3);    //Blue card - Reverse 180
         
         }
     
         if (color.R_norm > 0.52 && color.G_norm > 0.32){
-            card_memory[card_count] = 9;
-            card_count ++;
+            card_memory[card_count] = 9; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,4);    //Yellow Card - Reverse 1 Square, Right turn
             
         }
     
         if (color.R_norm > 0.50 && color.B_norm > 0.24 && color.G_norm < 0.33){
-            card_memory[card_count] = 10;
-            card_count ++;
+            card_memory[card_count] = 10; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,5);    //Pink card
             
         }  
     
         if (color.R_norm > 0.60 && color.B_norm < 0.22 && color.G_norm > 0.23){
-            card_memory[card_count] = 7;
-            card_count ++;
+            card_memory[card_count] = 7; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,6);    //Orange
             
         }
     
         if (color.R_norm < 0.40 && color.B_norm > 0.30 && color.G_norm > 0.4){
-            card_memory[card_count] = 6;
-            card_count ++;
+            card_memory[card_count] = 6; // append the opposite movement number to the memory array for return home function
+            card_count ++; //increment card count so the next position in the array can be accessed next time a card is flagged
             movement(mL,mR,7);    //Light Blue
             
         }
@@ -164,75 +189,78 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         if (color.R_norm < 0.5 && color.C > 16000  ){ //White card - Return home
            
                 
-            card_memory[card_count] = 3;
-            card_count ++;
+            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
+            card_count ++; 
             
             LATGbits.LATG1 = 0; //red LED OFF
             LATAbits.LATA4 = 0; //green LED OFF
-            LATFbits.LATF7 = 0; //blue LED OFF
+            LATFbits.LATF7 = 0; //blue LED OFF (Allows us to see if white card has been triggered)
                 
-            space(mL,mR);
+            space(mL,mR); //Create space between wall and buggy
             __delay_ms(500);
             stop(mL,mR);
             __delay_ms(500);
             
-            return_home(mL,mR);
+            return_home(mL,mR); // iterate through arrays to bring buggy back to start
             
-            stop(mL,mR);
+            stop(mL,mR); 
             __delay_ms(500);
             
-            movement_return(mL,mR,3);
+            movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
             Sleep();   
         
         }
-        timer_reset();
+        timer_reset(); // reset the timer so it represents only the time taken for the car to move forward to next card
     }
     
 //    else if() { // wall (LOST)
 //                    
-//                 
-//                card_memory[card_count] = 3;
-//                card_count ++;
-//
-//                LATGbits.LATG1 = 0; //red LED OFF
-//                LATAbits.LATA4 = 0; //green LED OFF
-//                LATFbits.LATF7 = 0; //blue LED OFF
-//    
-//                space(mL,mR);
-//                __delay_ms(500);
-//                stop(mL,mR);
-//                __delay_ms(500);
-//
-//                return_home(mL,mR);
-//
-//                stop(mL,mR);
-//                __delay_ms(500);
-//
-//                movement_return(mL,mR,3);
-//                Sleep(); 
+//            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
+//            card_count ++; 
+//            
+//            LATGbits.LATG1 = 0; //red LED OFF
+//            LATAbits.LATA4 = 0; //green LED OFF
+//            LATFbits.LATF7 = 0; //blue LED OFF (Allows us to see if white card has been triggered)
+//                
+//            space(mL,mR); //Create space between wall and buggy
+//            __delay_ms(500);
+//            stop(mL,mR);
+//            __delay_ms(500);
+//            
+//            return_home(mL,mR); // iterate through arrays to bring buggy back to start
+//            
+//            stop(mL,mR); 
+//            __delay_ms(500);
+//            
+//            movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
+//            Sleep();
+    
 //            }           
         
 
     else {forward(mL,mR);} //If clear channel is below 2500, car will continue to move forward
 }
     
-
+/*****************************************
+* Function used to bring buggy back to start position
+* Iterates through timer array and card array from back to front 
+*****************************************/
 void return_home(DC_motor *mL, DC_motor *mR){
-    while(timer_index > 0 && card_count > 0 ) {
+    while(timer_index > 0 && card_count > 0 ) { //Keep going till everything in array has been performed
         
-        movement_return(mL,mR,card_memory[card_count-1]);
-        card_count--;
+        movement_return(mL,mR,card_memory[card_count-1]); //start with performing the opposite movement for the card that was read 
+        card_count--; //reduce card count so previous position in array is accessed next time loop is performed
         __delay_ms(250);
-        reverse(mL,mR);
+        reverse(mL,mR); // reverse into the wall to align buggy perpendicular to wall
         __delay_ms(500);
-        stop(mL,mR);
+        stop(mL,mR); //stabilise
         __delay_ms(500);
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1]); //-2 corresponds to 262ms and accounts for the space created between white card and wall
-        timer_index--; 
+        delay_ms_func(timer_memory[timer_index-1]); //move forward for the time dictated in the timer array
+        timer_index--; //reduce timer index so previous position in array is accessed next time loop is performed
         stop(mL,mR);
         __delay_ms(200);
-         reverse(mL,mR);
+         reverse(mL,mR); // reverse just in case buggy is up against a wall and needs to make space
         __delay_ms(100);
         stop(mL,mR);        
         __delay_ms(250);
@@ -240,6 +268,10 @@ void return_home(DC_motor *mL, DC_motor *mR){
     }
 }
 
+/*****************************************
+* Function used to create a custom delay for the timer
+* Our timer overflows every 131 ms therfore this function takes a timer overflow input and creates the desired delay time
+*****************************************/
 void delay_ms_func(unsigned int time) {
     unsigned int i;
     for (i=0; i < time; i++) {__delay_ms(131);} //131 ms for each timer overflow

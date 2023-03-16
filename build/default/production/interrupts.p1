@@ -2027,47 +2027,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "40927
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 40927: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"15 ./interrupts.h
-[; ;./interrupts.h: 15: char T_flag = 0;
-[v _T_flag `uc ~T0 @X0 1 e ]
-[i _T_flag
--> -> 0 `i `uc
-]
-"16
-[; ;./interrupts.h: 16: int timer_val = 0;
+"10 ./interrupts.h
+[; ;./interrupts.h: 10: int timer_val = 0;
 [v _timer_val `i ~T0 @X0 1 e ]
 [i _timer_val
 -> 0 `i
-]
-"13 ./serial.h
-[; ;./serial.h: 13: volatile char EUSART4RXbuf[20];
-[v _EUSART4RXbuf `Vuc ~T0 @X0 -> 20 `i e ]
-"14
-[; ;./serial.h: 14: volatile char RxBufWriteCnt=0;
-[v _RxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufWriteCnt
--> -> 0 `i `uc
-]
-"15
-[; ;./serial.h: 15: volatile char RxBufReadCnt=0;
-[v _RxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _RxBufReadCnt
--> -> 0 `i `uc
-]
-"17
-[; ;./serial.h: 17: volatile char EUSART4TXbuf[60];
-[v _EUSART4TXbuf `Vuc ~T0 @X0 -> 60 `i e ]
-"18
-[; ;./serial.h: 18: volatile char TxBufWriteCnt=0;
-[v _TxBufWriteCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufWriteCnt
--> -> 0 `i `uc
-]
-"19
-[; ;./serial.h: 19: volatile char TxBufReadCnt=0;
-[v _TxBufReadCnt `Vuc ~T0 @X0 1 e ]
-[i _TxBufReadCnt
--> -> 0 `i `uc
 ]
 "9 interrupts.c
 [; ;interrupts.c: 9: void interrupts_init(void)
@@ -2077,52 +2041,52 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _interrupts_init ]
 [f ]
-"20
-[; ;interrupts.c: 20:     PIE0bits.TMR0IE = 1;
+"11
+[; ;interrupts.c: 11:     PIE0bits.TMR0IE = 1;
 [e = . . _PIE0bits 0 5 -> -> 1 `i `uc ]
-"21
-[; ;interrupts.c: 21:     PIR0bits.TMR0IF = 0;
+"12
+[; ;interrupts.c: 12:     PIR0bits.TMR0IF = 0;
 [e = . . _PIR0bits 0 5 -> -> 0 `i `uc ]
-"22
-[; ;interrupts.c: 22:     IPR0bits.TMR0IP = 0;
+"13
+[; ;interrupts.c: 13:     IPR0bits.TMR0IP = 0;
 [e = . . _IPR0bits 0 5 -> -> 0 `i `uc ]
-"25
-[; ;interrupts.c: 25:     INTCONbits.IPEN = 1;
+"15
+[; ;interrupts.c: 15:     INTCONbits.IPEN = 1;
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"26
-[; ;interrupts.c: 26:     INTCONbits.PEIE = 1;
+"16
+[; ;interrupts.c: 16:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 1 -> -> 1 `i `uc ]
-"27
-[; ;interrupts.c: 27:     INTCONbits.GIE = 1;
+"17
+[; ;interrupts.c: 17:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 1 2 -> -> 1 `i `uc ]
-"28
-[; ;interrupts.c: 28: }
+"18
+[; ;interrupts.c: 18: }
 [e :UE 2015 ]
 }
 [v $root$_LowISR `(v ~T0 @X0 0 e ]
-"54
-[; ;interrupts.c: 54: void __attribute__((picinterrupt(("low_priority")))) LowISR()
+"23
+[; ;interrupts.c: 23: void __attribute__((picinterrupt(("low_priority")))) LowISR()
 [v _LowISR `(v ~T2 @X0 1 ef ]
-"55
-[; ;interrupts.c: 55: {
+"24
+[; ;interrupts.c: 24: {
 {
 [e :U _LowISR ]
 [f ]
-"56
-[; ;interrupts.c: 56:     if (PIR0bits.TMR0IF) {
+"25
+[; ;interrupts.c: 25:     if (PIR0bits.TMR0IF) {
 [e $ ! != -> . . _PIR0bits 0 5 `i -> 0 `i 2017  ]
 {
-"57
-[; ;interrupts.c: 57:         timer_val += 1;
+"26
+[; ;interrupts.c: 26:         timer_val += 1;
 [e =+ _timer_val -> 1 `i ]
-"58
-[; ;interrupts.c: 58:         PIR0bits.TMR0IF = 0;
+"27
+[; ;interrupts.c: 27:         PIR0bits.TMR0IF = 0;
 [e = . . _PIR0bits 0 5 -> -> 0 `i `uc ]
-"59
-[; ;interrupts.c: 59:     }
+"28
+[; ;interrupts.c: 28:     }
 }
 [e :U 2017 ]
-"61
-[; ;interrupts.c: 61: }
+"30
+[; ;interrupts.c: 30: }
 [e :UE 2016 ]
 }

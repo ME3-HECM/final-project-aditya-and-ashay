@@ -24407,20 +24407,78 @@ typedef struct DC_motor {
 
 struct DC_motor motorL, motorR;
 
+
+
+
+
 void initDCmotorsPWM(unsigned int PWMperiod);
+
+
+
+
 void setMotorPWM(DC_motor *m);
+
+
+
+
 void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
+
+
+
 
 void forward(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void reverse(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void stop(DC_motor *mL, DC_motor *mR);
 
+
+
+
+
+
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+
+
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+
+
+
+
 void space(DC_motor *mL, DC_motor *mR);
 
+
+
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
+
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count);
+
+
+
+
+
+
 void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 9 "main.c" 2
 
@@ -24445,7 +24503,6 @@ typedef struct colors {
 
 struct colors color;
 
-int color_lowerbound = 0;
 int color_upperbound = 2500;
 
 unsigned char card_count = 0;
@@ -24463,84 +24520,108 @@ void color_click_init(void);
 
 
 
-
-
 void color_writetoaddr(char address, char value);
 
 
 
 
-
 unsigned int color_read_Red(void);
+
+
+
+
 unsigned int color_read_Blue(void);
+
+
+
+
 unsigned int color_read_Green(void);
+
+
+
+
 unsigned int color_read_Clear(void);
 
 
 
+
+
 void READcolor(colors *c);
+
+
+
+
+
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
-void colourcards_normaliseRGBC(colors *c);
+
+
+
 
 void return_home(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
 void delay_ms_func(unsigned int time);
 # 10 "main.c" 2
 
 # 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-
-void interrupts_init(void);
-
-
-
-
-
-char T_flag = 0;
+# 10 "./interrupts.h"
 int timer_val = 0;
 
-void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
+
+
+
+void interrupts_init(void);
+
+
+
+
+void __attribute__((picinterrupt(("low_priority")))) LowISR();
 # 11 "main.c" 2
 
 # 1 "./timers.h" 1
-
-
-
-
-
-
-
+# 11 "./timers.h"
 void Timer0_init(void);
+
+
+
+
+
 void timer_reset(void);
 # 12 "main.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 13 "main.c" 2
 
 # 1 "./calibration.h" 1
-
-
-
-
-
-
-
+# 11 "./calibration.h"
 void left_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void right_turn_calibration(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void custom_delay(int temp);
+
+
+
+
+
 void battery_health(void);
 # 14 "main.c" 2
 
@@ -24557,6 +24638,9 @@ void main(void){
     complete_initialisation();
 
     while (PORTFbits.RF2 && PORTFbits.RF3);
+
+
+
     if (!PORTFbits.RF3){_delay((unsigned long)((500)*(64000000/4000.0)));timer_reset();
         while (1) {
         buggy_color_response(&motorL,&motorR,&color);

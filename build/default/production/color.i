@@ -24405,20 +24405,78 @@ typedef struct DC_motor {
 
 struct DC_motor motorL, motorR;
 
+
+
+
+
 void initDCmotorsPWM(unsigned int PWMperiod);
+
+
+
+
 void setMotorPWM(DC_motor *m);
+
+
+
+
 void motor_init(DC_motor *mL,DC_motor *mR);
-void buggyLEDs_init(void);
+
+
+
 
 void forward(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void reverse(DC_motor *mL, DC_motor *mR);
+
+
+
+
 void stop(DC_motor *mL, DC_motor *mR);
 
+
+
+
+
+
 void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+
+
+
+
+
+
 void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+
+
+
+
 void space(DC_motor *mL, DC_motor *mR);
 
+
+
+
+void reverse_yellow(DC_motor *mL, DC_motor *mR);
+
+
+
+
+void reverse_pink(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
+
 void movement(DC_motor *mL, DC_motor *mR, int count);
+
+
+
+
+
+
 void movement_return(DC_motor *mL, DC_motor *mR, int count);
 # 5 "./color.h" 2
 
@@ -24437,7 +24495,6 @@ typedef struct colors {
 
 struct colors color;
 
-int color_lowerbound = 0;
 int color_upperbound = 2500;
 
 unsigned char card_count = 0;
@@ -24455,27 +24512,50 @@ void color_click_init(void);
 
 
 
-
-
 void color_writetoaddr(char address, char value);
 
 
 
 
-
 unsigned int color_read_Red(void);
+
+
+
+
 unsigned int color_read_Blue(void);
+
+
+
+
 unsigned int color_read_Green(void);
+
+
+
+
 unsigned int color_read_Clear(void);
 
 
 
+
+
 void READcolor(colors *c);
+
+
+
+
+
 void buggy_color_response(DC_motor *mL,DC_motor *mR, colors *c);
 
-void colourcards_normaliseRGBC(colors *c);
+
+
+
 
 void return_home(DC_motor *mL, DC_motor *mR);
+
+
+
+
+
 void delay_ms_func(unsigned int time);
 # 3 "color.c" 2
 
@@ -24516,47 +24596,44 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 
 # 1 "./timers.h" 1
-
-
-
-
-
-
-
+# 11 "./timers.h"
 void Timer0_init(void);
+
+
+
+
+
 void timer_reset(void);
 # 6 "color.c" 2
 
 # 1 "./interrupts.h" 1
-
-
-
-
-
-
-
-
-void interrupts_init(void);
-
-
-
-
-
-char T_flag = 0;
+# 10 "./interrupts.h"
 int timer_val = 0;
 
-void interrupts_init(void);
-void colorclick_interrupts_init(void);
-void interrupts_clear(void);
 
-void __attribute__((picinterrupt(("high_priority")))) HighISR();
+
+
+
+void interrupts_init(void);
+
+
+
+
+void __attribute__((picinterrupt(("low_priority")))) LowISR();
 # 7 "color.c" 2
 
 # 1 "./lights_buttons.h" 1
-# 18 "./lights_buttons.h"
+# 20 "./lights_buttons.h"
 void ports_init(void);
+
+
+
+
 void buggyLEDs_init(void);
 # 8 "color.c" 2
+
+
+
 
 
 void color_click_init(void)
@@ -24572,6 +24649,8 @@ void color_click_init(void)
  color_writetoaddr(0x01, 0xD5);
 }
 
+
+
 void color_writetoaddr(char address, char value){
     I2C_2_Master_Start();
     I2C_2_Master_Write(0x52 | 0x00);
@@ -24579,6 +24658,9 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Write(value);
     I2C_2_Master_Stop();
 }
+
+
+
 
 unsigned int color_read_Red(void)
 {
@@ -24595,6 +24677,9 @@ unsigned int color_read_Red(void)
  return tmp;
 }
 
+
+
+
 unsigned int color_read_Blue(void)
 {
  unsigned int tmp;
@@ -24609,6 +24694,9 @@ unsigned int color_read_Blue(void)
  I2C_2_Master_Stop();
  return tmp;
 }
+
+
+
 
 unsigned int color_read_Green(void)
 {
@@ -24625,6 +24713,9 @@ unsigned int color_read_Green(void)
  return tmp;
 }
 
+
+
+
 unsigned int color_read_Clear(void)
 {
  unsigned int tmp;
@@ -24640,6 +24731,10 @@ unsigned int color_read_Clear(void)
  return tmp;
 }
 
+
+
+
+
 void READcolor(colors *c) {
 
     color.R = color_read_Red();
@@ -24651,6 +24746,10 @@ void READcolor(colors *c) {
     color.B_norm = (float)color.B / (float)color.C;
     color.G_norm = (float)color.G / (float)color.C;
 }
+
+
+
+
 
 void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 
@@ -24739,9 +24838,12 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         }
         timer_reset();
     }
-# 216 "color.c"
+# 241 "color.c"
     else {forward(mL,mR);}
 }
+
+
+
 
 
 void return_home(DC_motor *mL, DC_motor *mR){
@@ -24766,6 +24868,10 @@ void return_home(DC_motor *mL, DC_motor *mR){
 
     }
 }
+
+
+
+
 
 void delay_ms_func(unsigned int time) {
     unsigned int i;

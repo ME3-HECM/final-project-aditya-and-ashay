@@ -20,21 +20,25 @@ void main(void){
     
     complete_initialisation(); //Full initialisation of buggy function
    
-    while (PORTFbits.RF2 && PORTFbits.RF3);
-    if (!PORTFbits.RF3){__delay_ms(500);timer_reset();   
+    while (PORTFbits.RF2 && PORTFbits.RF3); //Empty while loop (Wait for button press)
+    
+    /*****************Start the maze when RF3 is pressed*************/
+    
+    if (!PORTFbits.RF3){__delay_ms(500);timer_reset();   //If button RF3 is pressed wait for half secodn before starting buggy
         while (1) {
-        buggy_color_response(&motorL,&motorR,&color);
+        buggy_color_response(&motorL,&motorR,&color); //Execute maze exploring function
         }
     }            
 } 
 
-//        battery_health();
+//        battery_health(); // checks battery health
+
 //        while (1) { //infinite while loop - repeat forever
 //        
 //        while (PORTFbits.RF2 && PORTFbits.RF3); //empty while loop (wait for button press)
 //        
-//        left_turn_calibration(&motorL,&motorR);
+//        left_turn_calibration(&motorL,&motorR); //calibrate left 180 degree turns
 //        
-//        __delay_ms(2000); 
+//        __delay_ms(2000); // give time to adjust delays within the calibration code
 //        }
 //}
