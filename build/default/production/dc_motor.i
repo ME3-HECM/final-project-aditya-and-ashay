@@ -24386,7 +24386,7 @@ char *tempnam(const char *, const char *);
 
 int left_timer = 98;
 int right_timer = 96;
-
+int square_timer = 900;
 
 typedef struct DC_motor {
     char power;
@@ -24435,14 +24435,14 @@ void stop(DC_motor *mL, DC_motor *mR);
 
 
 
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer);
 
 
 
 
 
 
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer);
 
 
 
@@ -24464,14 +24464,14 @@ void reverse_pink(DC_motor *mL, DC_motor *mR);
 
 
 
-void movement(DC_motor *mL, DC_motor *mR, int count);
+void movement(DC_motor *mL, DC_motor *mR, char count);
 
 
 
 
 
 
-void movement_return(DC_motor *mL, DC_motor *mR, int count);
+void movement_return(DC_motor *mL, DC_motor *mR, char count);
 # 2 "dc_motor.c" 2
 
 # 1 "./lights_buttons.h" 1
@@ -24695,13 +24695,13 @@ void stop(DC_motor *mL, DC_motor *mR)
 
 
 
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
+void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer)
 {
     stop(mL,mR);
     mL-> direction = 0;
     mR-> direction = 1;
     LATFbits.LATF0 = 1;
-    int i;
+    char i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
@@ -24722,13 +24722,13 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
 
 
 
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
+void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer)
 {
     stop(mL,mR);
     mL-> direction = 1;
     mR-> direction = 0;
     LATHbits.LATH0 = 1;
-    int i;
+    char i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
@@ -24779,7 +24779,7 @@ void reverse_yellow(DC_motor *mL, DC_motor *mR) {
     _delay((unsigned long)((200)*(64000000/4000.0)));
 
      reverse(mL,mR);
-    _delay((unsigned long)((900)*(64000000/4000.0)));
+    custom_delay(square_timer);
     stop(mL,mR);
 }
 
@@ -24793,7 +24793,7 @@ void reverse_pink(DC_motor *mL, DC_motor *mR) {
     _delay((unsigned long)((200)*(64000000/4000.0)));
 
     reverse(mL,mR);
-    _delay((unsigned long)((900)*(64000000/4000.0)));
+    custom_delay(square_timer);
     stop(mL,mR);
 }
 
@@ -24802,7 +24802,7 @@ void reverse_pink(DC_motor *mL, DC_motor *mR) {
 
 
 
-void movement(DC_motor *mL, DC_motor *mR, int count)
+void movement(DC_motor *mL, DC_motor *mR, char count)
 {
     space(mL,mR);
     _delay((unsigned long)((500)*(64000000/4000.0)));
@@ -24812,8 +24812,8 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-    if (count == 4){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
-    if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
+    if (count == 4){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
+    if (count == 5){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
 
@@ -24824,7 +24824,7 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
 
 
 
-void movement_return(DC_motor *mL, DC_motor *mR, int count)
+void movement_return(DC_motor *mL, DC_motor *mR, char count)
 {
 
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}

@@ -39,8 +39,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./dc_motor.h: 52: void stop(DC_motor *mL, DC_motor *mR);
 [v _stop `(v ~T0 @X0 0 ef2`*S2017`*S2017 ]
 "88
-[; ;./dc_motor.h: 88: void movement(DC_motor *mL, DC_motor *mR, int count);
-[v _movement `(v ~T0 @X0 0 ef3`*S2017`*S2017`i ]
+[; ;./dc_motor.h: 88: void movement(DC_motor *mL, DC_motor *mR, char count);
+[v _movement `(v ~T0 @X0 0 ef3`*S2017`*S2017`uc ]
 "29146 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 29146:     struct {
 [s S1358 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -93,8 +93,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./color.h: 76: void return_home(DC_motor *mL, DC_motor *mR);
 [v _return_home `(v ~T0 @X0 0 ef2`*S2017`*S2017 ]
 "95 ./dc_motor.h
-[; ;./dc_motor.h: 95: void movement_return(DC_motor *mL, DC_motor *mR, int count);
-[v _movement_return `(v ~T0 @X0 0 ef3`*S2017`*S2017`i ]
+[; ;./dc_motor.h: 95: void movement_return(DC_motor *mL, DC_motor *mR, char count);
+[v _movement_return `(v ~T0 @X0 0 ef3`*S2017`*S2017`uc ]
 "17 ./timers.h
 [; ;./timers.h: 17: void timer_reset(void);
 [v _timer_reset `(v ~T0 @X0 0 ef ]
@@ -2090,6 +2090,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _right_timer
 -> 96 `i
 ]
+"10
+[; ;./dc_motor.h: 10: int square_timer = 900;
+[v _square_timer `i ~T0 @X0 1 e ]
+[i _square_timer
+-> 900 `i
+]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
 [v _motorL `S2017 ~T0 @X0 1 e ]
@@ -2433,7 +2439,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "143
 [; ;color.c: 143:             movement(mL,mR,1);
-[e ( _movement (3 , , _mL _mR -> 1 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 1 `i `uc ]
 "145
 [; ;color.c: 145:         }
 }
@@ -2450,7 +2456,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "150
 [; ;color.c: 150:             movement(mL,mR,2);
-[e ( _movement (3 , , _mL _mR -> 2 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 2 `i `uc ]
 "152
 [; ;color.c: 152:         }
 }
@@ -2467,7 +2473,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "157
 [; ;color.c: 157:             movement(mL,mR,3);
-[e ( _movement (3 , , _mL _mR -> 3 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 3 `i `uc ]
 "159
 [; ;color.c: 159:         }
 }
@@ -2484,7 +2490,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "164
 [; ;color.c: 164:             movement(mL,mR,4);
-[e ( _movement (3 , , _mL _mR -> 4 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 4 `i `uc ]
 "166
 [; ;color.c: 166:         }
 }
@@ -2501,7 +2507,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "171
 [; ;color.c: 171:             movement(mL,mR,5);
-[e ( _movement (3 , , _mL _mR -> 5 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 5 `i `uc ]
 "173
 [; ;color.c: 173:         }
 }
@@ -2518,7 +2524,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "178
 [; ;color.c: 178:             movement(mL,mR,6);
-[e ( _movement (3 , , _mL _mR -> 6 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 6 `i `uc ]
 "180
 [; ;color.c: 180:         }
 }
@@ -2535,7 +2541,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _card_count -> -> 1 `i `uc ]
 "185
 [; ;color.c: 185:             movement(mL,mR,7);
-[e ( _movement (3 , , _mL _mR -> 7 `i ]
+[e ( _movement (3 , , _mL _mR -> -> 7 `i `uc ]
 "187
 [; ;color.c: 187:         }
 }
@@ -2582,7 +2588,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "209
 [; ;color.c: 209:             movement_return(mL,mR,3);
-[e ( _movement_return (3 , , _mL _mR -> 3 `i ]
+[e ( _movement_return (3 , , _mL _mR -> -> 3 `i `uc ]
 "210
 [; ;color.c: 210:             __asm(" sleep");
 [; <"  sleep ;# ">
@@ -2623,7 +2629,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "251
 [; ;color.c: 251:         movement_return(mL,mR,card_memory[card_count-1]);
-[e ( _movement_return (3 , , _mL _mR -> *U + &U _card_memory * -> -> - -> _card_count `i -> 1 `i `ui `ux -> -> # *U &U _card_memory `ui `ux `i ]
+[e ( _movement_return (3 , , _mL _mR *U + &U _card_memory * -> -> - -> _card_count `i -> 1 `i `ui `ux -> -> # *U &U _card_memory `ui `ux ]
 "252
 [; ;color.c: 252:         card_count--;
 [e -- _card_count -> -> 1 `i `uc ]

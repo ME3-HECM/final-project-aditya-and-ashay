@@ -192,13 +192,13 @@ void stop(DC_motor *mL, DC_motor *mR)
 * count input defines how many 45 degree turns the function will perform 
 * left_45(mL,mR,2,left_timer) - This will do two 45 degree turns therefore make a 90 degree turn
 *****************************************/
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
+void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer)
 {
     stop(mL,mR); // Make sure motor is idle
     mL-> direction = 0; //moves left side backward
     mR-> direction = 1; // moves right side forward 
     LEFTINDICATOR = 1;
-    int i;
+    char i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
@@ -219,13 +219,13 @@ void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
 * count input defines how many 45 degree turns the function will perform  
 * right_45(mL, mR, 2, right_timer) - This will do two 45 degree turns therefore make a 90 degree turn
 *****************************************/
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
+void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer)
 {
     stop(mL,mR); // Make sure motor is idle
     mL-> direction = 1; //moves left side forward
     mR-> direction = 0; // moves right side backward
     RIGHTINDICATOR = 1;
-    int i;
+    char i;
     for (i = 0;i<count;i++){
     while ((mL->power <= 50) || (mR->power <= 50)){
         if (mL->power <= 50){mL->power += 10;}
@@ -276,7 +276,7 @@ void reverse_yellow(DC_motor *mL, DC_motor *mR) {
     __delay_ms(200);
     
      reverse(mL,mR);
-    __delay_ms(900); //square_timer set by calibration; defines time to reverse 1 square
+    custom_delay(square_timer); //square_timer set by calibration; defines time to reverse 1 square
     stop(mL,mR); // stop buggy after move is performed
 }
 
@@ -290,7 +290,7 @@ void reverse_pink(DC_motor *mL, DC_motor *mR) {
     __delay_ms(200);
     
     reverse(mL,mR);
-    __delay_ms(900); //square_timer set by calibration; defines time to reverse 1 square 
+    custom_delay(square_timer); //square_timer set by calibration; defines time to reverse 1 square 
     stop(mL,mR); // stop buggy after move is performed
 }
 
@@ -299,7 +299,7 @@ void reverse_pink(DC_motor *mL, DC_motor *mR) {
 * count input is used to define which card was identified and hence what move should be made
 * Eg. movement(mL,mR,1) is used when red card is flagged and performs the required movements  
 *****************************************/
-void movement(DC_motor *mL, DC_motor *mR, int count)
+void movement(DC_motor *mL, DC_motor *mR, char count)
 {
     space(mL,mR); //Reverses away from wall
     __delay_ms(500);
@@ -309,8 +309,8 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);} // RED
     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);} // GREEN
     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);} //BLUE
-    if (count == 4){reverse(mL,mR); __delay_ms(900);;stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);} //YELLOW
-    if (count == 5){reverse(mL,mR); __delay_ms(900);;stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);} //PINK
+    if (count == 4){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);__delay_ms(500);right_45(mL,mR,2,right_timer); stop(mL,mR);} //YELLOW
+    if (count == 5){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);__delay_ms(500);left_45(mL,mR,2,left_timer); stop(mL,mR);} //PINK
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);} //ORANGE
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);} //LIGHT BLUE
        
@@ -321,7 +321,7 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
 * movements will be opposite to what was initially performed
  * Eg. movement_return(mL,mR,1) is used to perform the opposite of a green card   
 *****************************************/
-void movement_return(DC_motor *mL, DC_motor *mR, int count)
+void movement_return(DC_motor *mL, DC_motor *mR, char count)
 {
        
     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);} //GREEN (RETURN HOME)

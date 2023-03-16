@@ -24386,7 +24386,7 @@ char *tempnam(const char *, const char *);
 
 int left_timer = 98;
 int right_timer = 96;
-
+int square_timer = 900;
 
 typedef struct DC_motor {
     char power;
@@ -24435,14 +24435,14 @@ void stop(DC_motor *mL, DC_motor *mR);
 
 
 
-void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
+void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer);
 
 
 
 
 
 
-void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
+void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer);
 
 
 
@@ -24464,14 +24464,14 @@ void reverse_pink(DC_motor *mL, DC_motor *mR);
 
 
 
-void movement(DC_motor *mL, DC_motor *mR, int count);
+void movement(DC_motor *mL, DC_motor *mR, char count);
 
 
 
 
 
 
-void movement_return(DC_motor *mL, DC_motor *mR, int count);
+void movement_return(DC_motor *mL, DC_motor *mR, char count);
 # 2 "calibration.c" 2
 
 # 1 "./lights_buttons.h" 1

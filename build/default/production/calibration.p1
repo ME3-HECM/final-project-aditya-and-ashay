@@ -4,8 +4,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [s S2017 `uc 1 `uc 1 `uc 1 `ui 1 `*uc 1 `*uc 1 ]
 [n S2017 DC_motor power direction brakemode PWMperiod posDutyHighByte negDutyHighByte ]
 "59
-[; ;./dc_motor.h: 59: void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer);
-[v _left_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`i`i ]
+[; ;./dc_motor.h: 59: void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer);
+[v _left_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`uc`i ]
 [v F192 `(v ~T0 @X0 1 tf1`ul ]
 "12 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\builtins.h
 [v __delay `JF192 ~T0 @X0 0 e ]
@@ -72,8 +72,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 29264: extern volatile LATHbits_t LATHbits __attribute__((address(0xF80)));
 [v _LATHbits `VS1360 ~T0 @X0 0 e@3968 ]
 "66 ./dc_motor.h
-[; ;./dc_motor.h: 66: void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer);
-[v _right_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`i`i ]
+[; ;./dc_motor.h: 66: void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer);
+[v _right_45 `(v ~T0 @X0 0 ef4`*S2017`*S2017`uc`i ]
 "54 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-K_DFP/1.7.134/xc8\pic\include\proc\pic18f67k40.h: 54: __asm("PPSLOCK equ 0DEFh");
 [; <" PPSLOCK equ 0DEFh ;# ">
@@ -2060,6 +2060,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _right_timer
 -> 96 `i
 ]
+"10
+[; ;./dc_motor.h: 10: int square_timer = 900;
+[v _square_timer `i ~T0 @X0 1 e ]
+[i _square_timer
+-> 900 `i
+]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
 [v _motorL `S2017 ~T0 @X0 1 e ]
@@ -2079,7 +2085,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "11
 [; ;calibration.c: 11:     left_45(mL,mR,4,left_timer);
-[e ( _left_45 (4 , , , _mL _mR -> 4 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 4 `i `uc _left_timer ]
 "12
 [; ;calibration.c: 12:     _delay((unsigned long)((2000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
@@ -2135,7 +2141,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "25
 [; ;calibration.c: 25:         right_45(mL,mR,4,left_timer);
-[e ( _right_45 (4 , , , _mL _mR -> 4 `i _left_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 4 `i `uc _left_timer ]
 "26
 [; ;calibration.c: 26:         _delay((unsigned long)((2000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]

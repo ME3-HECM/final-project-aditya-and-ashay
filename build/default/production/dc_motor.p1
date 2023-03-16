@@ -2345,6 +2345,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _right_timer
 -> 96 `i
 ]
+"10
+[; ;./dc_motor.h: 10: int square_timer = 900;
+[v _square_timer `i ~T0 @X0 1 e ]
+[i _square_timer
+-> 900 `i
+]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
 [v _motorL `S2017 ~T0 @X0 1 e ]
@@ -2824,17 +2830,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2037 ]
 }
 "195
-[; ;dc_motor.c: 195: void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
-[v _left_45 `(v ~T0 @X0 1 ef4`*S2017`*S2017`i`i ]
+[; ;dc_motor.c: 195: void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer)
+[v _left_45 `(v ~T0 @X0 1 ef4`*S2017`*S2017`uc`i ]
 "196
 [; ;dc_motor.c: 196: {
 {
 [e :U _left_45 ]
 "195
-[; ;dc_motor.c: 195: void left_45(DC_motor *mL, DC_motor *mR, int count, int left_timer)
+[; ;dc_motor.c: 195: void left_45(DC_motor *mL, DC_motor *mR, char count, int left_timer)
 [v _mL `*S2017 ~T0 @X0 1 r1 ]
 [v _mR `*S2017 ~T0 @X0 1 r2 ]
-[v _count `i ~T0 @X0 1 r3 ]
+[v _count `uc ~T0 @X0 1 r3 ]
 [v _left_timer `i ~T0 @X0 1 r4 ]
 "196
 [; ;dc_motor.c: 196: {
@@ -2852,12 +2858,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 200:     LATFbits.LATF0 = 1;
 [e = . . _LATFbits 0 0 -> -> 1 `i `uc ]
 "201
-[; ;dc_motor.c: 201:     int i;
-[v _i `i ~T0 @X0 1 a ]
+[; ;dc_motor.c: 201:     char i;
+[v _i `uc ~T0 @X0 1 a ]
 "202
 [; ;dc_motor.c: 202:     for (i = 0;i<count;i++){
 {
-[e = _i -> 0 `i ]
+[e = _i -> -> 0 `i `uc ]
 [e $U 2045  ]
 [e :U 2042 ]
 {
@@ -2912,9 +2918,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "214
 [; ;dc_motor.c: 214:     }
 }
-[e ++ _i -> 1 `i ]
+[e ++ _i -> -> 1 `i `uc ]
 [e :U 2045 ]
-[e $ < _i _count 2042  ]
+[e $ < -> _i `i -> _count `i 2042  ]
 [e :U 2043 ]
 }
 "215
@@ -2922,17 +2928,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2041 ]
 }
 "222
-[; ;dc_motor.c: 222: void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
-[v _right_45 `(v ~T0 @X0 1 ef4`*S2017`*S2017`i`i ]
+[; ;dc_motor.c: 222: void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer)
+[v _right_45 `(v ~T0 @X0 1 ef4`*S2017`*S2017`uc`i ]
 "223
 [; ;dc_motor.c: 223: {
 {
 [e :U _right_45 ]
 "222
-[; ;dc_motor.c: 222: void right_45(DC_motor *mL, DC_motor *mR, int count, int right_timer)
+[; ;dc_motor.c: 222: void right_45(DC_motor *mL, DC_motor *mR, char count, int right_timer)
 [v _mL `*S2017 ~T0 @X0 1 r1 ]
 [v _mR `*S2017 ~T0 @X0 1 r2 ]
-[v _count `i ~T0 @X0 1 r3 ]
+[v _count `uc ~T0 @X0 1 r3 ]
 [v _right_timer `i ~T0 @X0 1 r4 ]
 "223
 [; ;dc_motor.c: 223: {
@@ -2950,12 +2956,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 227:     LATHbits.LATH0 = 1;
 [e = . . _LATHbits 0 0 -> -> 1 `i `uc ]
 "228
-[; ;dc_motor.c: 228:     int i;
-[v _i `i ~T0 @X0 1 a ]
+[; ;dc_motor.c: 228:     char i;
+[v _i `uc ~T0 @X0 1 a ]
 "229
 [; ;dc_motor.c: 229:     for (i = 0;i<count;i++){
 {
-[e = _i -> 0 `i ]
+[e = _i -> -> 0 `i `uc ]
 [e $U 2055  ]
 [e :U 2052 ]
 {
@@ -3010,9 +3016,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "241
 [; ;dc_motor.c: 241:     }
 }
-[e ++ _i -> 1 `i ]
+[e ++ _i -> -> 1 `i `uc ]
 [e :U 2055 ]
-[e $ < _i _count 2052  ]
+[e $ < -> _i `i -> _count `i 2052  ]
 [e :U 2053 ]
 }
 "242
@@ -3105,7 +3111,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "274
 [; ;dc_motor.c: 274:     left_45(mL,mR,2,left_timer);
-[e ( _left_45 (4 , , , _mL _mR -> 2 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 2 `i `uc _left_timer ]
 "275
 [; ;dc_motor.c: 275:     stop(mL,mR);
 [e ( _stop (2 , _mL _mR ]
@@ -3116,8 +3122,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 278:      reverse(mL,mR);
 [e ( _reverse (2 , _mL _mR ]
 "279
-[; ;dc_motor.c: 279:     _delay((unsigned long)((900)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 900 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;dc_motor.c: 279:     custom_delay(square_timer);
+[e ( _custom_delay (1 _square_timer ]
 "280
 [; ;dc_motor.c: 280:     stop(mL,mR);
 [e ( _stop (2 , _mL _mR ]
@@ -3135,7 +3141,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "288
 [; ;dc_motor.c: 288:     right_45(mL,mR,2,right_timer);
-[e ( _right_45 (4 , , , _mL _mR -> 2 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 2 `i `uc _right_timer ]
 "289
 [; ;dc_motor.c: 289:     stop(mL,mR);
 [e ( _stop (2 , _mL _mR ]
@@ -3146,8 +3152,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 292:     reverse(mL,mR);
 [e ( _reverse (2 , _mL _mR ]
 "293
-[; ;dc_motor.c: 293:     _delay((unsigned long)((900)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 900 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;dc_motor.c: 293:     custom_delay(square_timer);
+[e ( _custom_delay (1 _square_timer ]
 "294
 [; ;dc_motor.c: 294:     stop(mL,mR);
 [e ( _stop (2 , _mL _mR ]
@@ -3156,17 +3162,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2066 ]
 }
 "302
-[; ;dc_motor.c: 302: void movement(DC_motor *mL, DC_motor *mR, int count)
-[v _movement `(v ~T0 @X0 1 ef3`*S2017`*S2017`i ]
+[; ;dc_motor.c: 302: void movement(DC_motor *mL, DC_motor *mR, char count)
+[v _movement `(v ~T0 @X0 1 ef3`*S2017`*S2017`uc ]
 "303
 [; ;dc_motor.c: 303: {
 {
 [e :U _movement ]
 "302
-[; ;dc_motor.c: 302: void movement(DC_motor *mL, DC_motor *mR, int count)
+[; ;dc_motor.c: 302: void movement(DC_motor *mL, DC_motor *mR, char count)
 [v _mL `*S2017 ~T0 @X0 1 r1 ]
 [v _mR `*S2017 ~T0 @X0 1 r2 ]
-[v _count `i ~T0 @X0 1 r3 ]
+[v _count `uc ~T0 @X0 1 r3 ]
 "303
 [; ;dc_motor.c: 303: {
 [f ]
@@ -3184,65 +3190,65 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "309
 [; ;dc_motor.c: 309:     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 1 `i 2068  ]
+[e $ ! == -> _count `i -> 1 `i 2068  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 2 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 2 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2068 ]
 "310
 [; ;dc_motor.c: 310:     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-[e $ ! == _count -> 2 `i 2069  ]
+[e $ ! == -> _count `i -> 2 `i 2069  ]
 {
-[e ( _left_45 (4 , , , _mL _mR -> 2 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 2 `i `uc _left_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2069 ]
 "311
 [; ;dc_motor.c: 311:     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 3 `i 2070  ]
+[e $ ! == -> _count `i -> 3 `i 2070  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 4 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 4 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2070 ]
 "312
-[; ;dc_motor.c: 312:     if (count == 4){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 4 `i 2071  ]
+[; ;dc_motor.c: 312:     if (count == 4){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));right_45(mL,mR,2,right_timer); stop(mL,mR);}
+[e $ ! == -> _count `i -> 4 `i 2071  ]
 {
 [e ( _reverse (2 , _mL _mR ]
-[e ( __delay (1 -> * -> -> 900 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e ( _custom_delay (1 _square_timer ]
 [e ( _stop (2 , _mL _mR ]
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[e ( _right_45 (4 , , , _mL _mR -> 2 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 2 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2071 ]
 "313
-[; ;dc_motor.c: 313:     if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
-[e $ ! == _count -> 5 `i 2072  ]
+[; ;dc_motor.c: 313:     if (count == 5){reverse(mL,mR); custom_delay(square_timer);stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
+[e $ ! == -> _count `i -> 5 `i 2072  ]
 {
 [e ( _reverse (2 , _mL _mR ]
-[e ( __delay (1 -> * -> -> 900 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e ( _custom_delay (1 _square_timer ]
 [e ( _stop (2 , _mL _mR ]
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[e ( _left_45 (4 , , , _mL _mR -> 2 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 2 `i `uc _left_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2072 ]
 "314
 [; ;dc_motor.c: 314:     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 6 `i 2073  ]
+[e $ ! == -> _count `i -> 6 `i 2073  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 3 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 3 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2073 ]
 "315
 [; ;dc_motor.c: 315:     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
-[e $ ! == _count -> 7 `i 2074  ]
+[e $ ! == -> _count `i -> 7 `i 2074  ]
 {
-[e ( _left_45 (4 , , , _mL _mR -> 3 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 3 `i `uc _left_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2074 ]
@@ -3251,70 +3257,70 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2067 ]
 }
 "324
-[; ;dc_motor.c: 324: void movement_return(DC_motor *mL, DC_motor *mR, int count)
-[v _movement_return `(v ~T0 @X0 1 ef3`*S2017`*S2017`i ]
+[; ;dc_motor.c: 324: void movement_return(DC_motor *mL, DC_motor *mR, char count)
+[v _movement_return `(v ~T0 @X0 1 ef3`*S2017`*S2017`uc ]
 "325
 [; ;dc_motor.c: 325: {
 {
 [e :U _movement_return ]
 "324
-[; ;dc_motor.c: 324: void movement_return(DC_motor *mL, DC_motor *mR, int count)
+[; ;dc_motor.c: 324: void movement_return(DC_motor *mL, DC_motor *mR, char count)
 [v _mL `*S2017 ~T0 @X0 1 r1 ]
 [v _mR `*S2017 ~T0 @X0 1 r2 ]
-[v _count `i ~T0 @X0 1 r3 ]
+[v _count `uc ~T0 @X0 1 r3 ]
 "325
 [; ;dc_motor.c: 325: {
 [f ]
 "327
 [; ;dc_motor.c: 327:     if (count == 1){right_45(mL,mR,2,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 1 `i 2076  ]
+[e $ ! == -> _count `i -> 1 `i 2076  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 2 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 2 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2076 ]
 "328
 [; ;dc_motor.c: 328:     if (count == 2){left_45(mL,mR,2,left_timer); stop(mL,mR);}
-[e $ ! == _count -> 2 `i 2077  ]
+[e $ ! == -> _count `i -> 2 `i 2077  ]
 {
-[e ( _left_45 (4 , , , _mL _mR -> 2 `i _left_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 2 `i `uc _left_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2077 ]
 "329
 [; ;dc_motor.c: 329:     if (count == 3){right_45(mL,mR,4,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 3 `i 2078  ]
+[e $ ! == -> _count `i -> 3 `i 2078  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 4 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 4 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2078 ]
 "330
 [; ;dc_motor.c: 330:     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 6 `i 2079  ]
+[e $ ! == -> _count `i -> 6 `i 2079  ]
 {
-[e ( _right_45 (4 , , , _mL _mR -> 3 `i _right_timer ]
+[e ( _right_45 (4 , , , _mL _mR -> -> 3 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2079 ]
 "331
 [; ;dc_motor.c: 331:     if (count == 7){left_45(mL,mR,3,right_timer); stop(mL,mR);}
-[e $ ! == _count -> 7 `i 2080  ]
+[e $ ! == -> _count `i -> 7 `i 2080  ]
 {
-[e ( _left_45 (4 , , , _mL _mR -> 3 `i _right_timer ]
+[e ( _left_45 (4 , , , _mL _mR -> -> 3 `i `uc _right_timer ]
 [e ( _stop (2 , _mL _mR ]
 }
 [e :U 2080 ]
 "333
 [; ;dc_motor.c: 333:     if (count == 9){reverse_yellow(mL,mR);}
-[e $ ! == _count -> 9 `i 2081  ]
+[e $ ! == -> _count `i -> 9 `i 2081  ]
 {
 [e ( _reverse_yellow (2 , _mL _mR ]
 }
 [e :U 2081 ]
 "334
 [; ;dc_motor.c: 334:     if (count == 10) {reverse_pink(mL,mR);}
-[e $ ! == _count -> 10 `i 2082  ]
+[e $ ! == -> _count `i -> 10 `i 2082  ]
 {
 [e ( _reverse_pink (2 , _mL _mR ]
 }

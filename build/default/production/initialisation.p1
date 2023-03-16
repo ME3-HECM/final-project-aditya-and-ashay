@@ -2023,6 +2023,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _right_timer
 -> 96 `i
 ]
+"10
+[; ;./dc_motor.h: 10: int square_timer = 900;
+[v _square_timer `i ~T0 @X0 1 e ]
+[i _square_timer
+-> 900 `i
+]
 "21
 [; ;./dc_motor.h: 21: struct DC_motor motorL, motorR;
 [v _motorL `S2017 ~T0 @X0 1 e ]
