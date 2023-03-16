@@ -213,7 +213,7 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
         timer_reset(); // reset the timer so it represents only the time taken for the car to move forward to next card
     }
     
-//    else if() { // wall (LOST)
+//    else if(color.C < 2200 && color.B < 500 && color.B_norm < 0.24) { // wall (LOST)
 //                    
 //            card_memory[card_count] = 3; //append 3 to array so the first move performed when return_home() is called is a 180 turn
 //            card_count ++; 
@@ -234,7 +234,7 @@ void buggy_color_response(DC_motor *mL, DC_motor *mR, colors *c) {
 //            
 //            movement_return(mL,mR,3); //Lastly turn 180 so buggy is in exact start position
 //            Sleep();
-    
+//    
 //            }           
         
 
@@ -256,7 +256,7 @@ void return_home(DC_motor *mL, DC_motor *mR){
         stop(mL,mR); //stabilise
         __delay_ms(500);
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1]); //move forward for the time dictated in the timer array
+        delay_ms_func(timer_memory[timer_index-1]-2); //move forward for the time dictated in the timer array
         timer_index--; //reduce timer index so previous position in array is accessed next time loop is performed
         stop(mL,mR);
         __delay_ms(200);

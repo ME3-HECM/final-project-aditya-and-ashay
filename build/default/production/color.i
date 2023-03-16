@@ -24857,7 +24857,7 @@ void return_home(DC_motor *mL, DC_motor *mR){
         stop(mL,mR);
         _delay((unsigned long)((500)*(64000000/4000.0)));
         forward(mL,mR);
-        delay_ms_func(timer_memory[timer_index-1]);
+        delay_ms_func(timer_memory[timer_index-1]-2);
         timer_index--;
         stop(mL,mR);
         _delay((unsigned long)((200)*(64000000/4000.0)));

@@ -2652,8 +2652,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;color.c: 258:         forward(mL,mR);
 [e ( _forward (2 , _mL _mR ]
 "259
-[; ;color.c: 259:         delay_ms_func(timer_memory[timer_index-1]);
-[e ( _delay_ms_func (1 -> *U + &U _timer_memory * -> -> - -> _timer_index `i -> 1 `i `ui `ux -> -> # *U &U _timer_memory `ui `ux `ui ]
+[; ;color.c: 259:         delay_ms_func(timer_memory[timer_index-1]-2);
+[e ( _delay_ms_func (1 -> - -> *U + &U _timer_memory * -> -> - -> _timer_index `i -> 1 `i `ui `ux -> -> # *U &U _timer_memory `ui `ux `i -> 2 `i `ui ]
 "260
 [; ;color.c: 260:         timer_index--;
 [e -- _timer_index -> -> 1 `i `uc ]
