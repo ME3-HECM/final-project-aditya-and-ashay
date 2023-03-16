@@ -48,4 +48,3 @@ void sendStringSerial4(char *string){
         sendCharSerial4(*string++); // Send out the current byte pointed to and increment the pointer
     } 
 }
-

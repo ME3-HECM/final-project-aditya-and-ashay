@@ -59,31 +59,31 @@
 [v _return_home return_home `(v  1 e 1 0 ]
 "275
 [v _delay_ms_func delay_ms_func `(v  1 e 1 0 ]
-"9 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
+"11 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
 [v _initDCmotorsPWM initDCmotorsPWM `(v  1 e 1 0 ]
-"76
+"78
 [v _setMotorPWM setMotorPWM `(v  1 e 1 0 ]
-"101
+"104
 [v _motor_init motor_init `(v  1 e 1 0 ]
-"124
+"127
 [v _forward forward `(v  1 e 1 0 ]
-"145
+"148
 [v _reverse reverse `(v  1 e 1 0 ]
-"166
+"169
 [v _stop stop `(v  1 e 1 0 ]
-"192
+"195
 [v _left_45 left_45 `(v  1 e 1 0 ]
-"219
+"222
 [v _right_45 right_45 `(v  1 e 1 0 ]
-"244
+"247
 [v _space space `(v  1 e 1 0 ]
-"269
+"272
 [v _reverse_yellow reverse_yellow `(v  1 e 1 0 ]
-"283
+"286
 [v _reverse_pink reverse_pink `(v  1 e 1 0 ]
-"299
+"302
 [v _movement movement `(v  1 e 1 0 ]
-"322
+"324
 [v _movement_return movement_return `(v  1 e 1 0 ]
 "7 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\i2c.c
 [v _I2C_2_Master_Init I2C_2_Master_Init `(v  1 e 1 0 ]
@@ -910,13 +910,13 @@
 {
 "29
 } 0
-"101 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
+"104 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
 [v _motor_init motor_init `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
 [v motor_init@mL mL `*.39S236  1 p 2 2 ]
 [v motor_init@mR mR `*.39S236  1 p 2 4 ]
-"118
+"121
 } 0
 "9 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\interrupts.c
 [v _interrupts_init interrupts_init `(v  1 e 1 0 ]
@@ -928,11 +928,11 @@
 {
 "24
 } 0
-"9 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
+"11 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
 [v _initDCmotorsPWM initDCmotorsPWM `(v  1 e 1 0 ]
 {
 [v initDCmotorsPWM@PWMperiod PWMperiod `ui  1 p 2 2 ]
-"71
+"73
 } 0
 "13 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\color.c
 [v _color_click_init color_click_init `(v  1 e 1 0 ]
@@ -972,10 +972,10 @@
 [v _buggy_color_response buggy_color_response `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v buggy_color_response@mL mL `*.39S236  1 p 2 56 ]
-[v buggy_color_response@mR mR `*.39S236  1 p 2 58 ]
+[v buggy_color_response@mL mL `*.39S236  1 p 2 57 ]
+[v buggy_color_response@mR mR `*.39S236  1 p 2 59 ]
 [s S243 colors 20 `ui 1 R 2 0 `ui 1 B 2 2 `ui 1 G 2 4 `ui 1 C 2 6 `f 1 R_norm 4 8 `f 1 B_norm 4 12 `f 1 G_norm 4 16 ]
-[v buggy_color_response@c c `*.39S243  1 p 2 60 ]
+[v buggy_color_response@c c `*.39S243  1 p 2 61 ]
 "242
 } 0
 "25 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\timers.c
@@ -987,42 +987,42 @@
 [v _return_home return_home `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v return_home@mL mL `*.39S236  1 p 2 50 ]
-[v return_home@mR mR `*.39S236  1 p 2 52 ]
+[v return_home@mL mL `*.39S236  1 p 2 51 ]
+[v return_home@mR mR `*.39S236  1 p 2 53 ]
 "269
 } 0
-"322 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
+"324 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
 [v _movement_return movement_return `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v movement_return@mL mL `*.39S236  1 p 2 44 ]
-[v movement_return@mR mR `*.39S236  1 p 2 46 ]
-[v movement_return@count count `i  1 p 2 48 ]
-"333
+[v movement_return@mL mL `*.39S236  1 p 2 45 ]
+[v movement_return@mR mR `*.39S236  1 p 2 47 ]
+[v movement_return@count count `i  1 p 2 49 ]
+"335
 } 0
-"269
+"272
 [v _reverse_yellow reverse_yellow `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v reverse_yellow@mL mL `*.39S236  1 p 2 38 ]
-[v reverse_yellow@mR mR `*.39S236  1 p 2 40 ]
-"278
+[v reverse_yellow@mL mL `*.39S236  1 p 2 39 ]
+[v reverse_yellow@mR mR `*.39S236  1 p 2 41 ]
+"281
 } 0
-"283
+"286
 [v _reverse_pink reverse_pink `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v reverse_pink@mL mL `*.39S236  1 p 2 38 ]
-[v reverse_pink@mR mR `*.39S236  1 p 2 40 ]
-"292
+[v reverse_pink@mL mL `*.39S236  1 p 2 39 ]
+[v reverse_pink@mR mR `*.39S236  1 p 2 41 ]
+"295
 } 0
-"124
+"127
 [v _forward forward `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v forward@mL mL `*.39S236  1 p 2 26 ]
-[v forward@mR mR `*.39S236  1 p 2 28 ]
-"140
+[v forward@mL mL `*.39S236  1 p 2 27 ]
+[v forward@mR mR `*.39S236  1 p 2 29 ]
+"143
 } 0
 "275 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\color.c
 [v _delay_ms_func delay_ms_func `(v  1 e 1 0 ]
@@ -1033,78 +1033,78 @@
 [v delay_ms_func@time time `ui  1 p 2 2 ]
 "278
 } 0
-"299 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
+"302 C:\Users\ashay\OneDrive - Imperial College London\Documents\GitHub\final-project-aditya-and-ashay.X\dc_motor.c
 [v _movement movement `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v movement@mL mL `*.39S236  1 p 2 38 ]
-[v movement@mR mR `*.39S236  1 p 2 40 ]
-[v movement@count count `i  1 p 2 42 ]
-"315
+[v movement@mL mL `*.39S236  1 p 2 39 ]
+[v movement@mR mR `*.39S236  1 p 2 41 ]
+[v movement@count count `i  1 p 2 43 ]
+"317
 } 0
-"244
+"247
 [v _space space `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v space@mL mL `*.39S236  1 p 2 26 ]
-[v space@mR mR `*.39S236  1 p 2 28 ]
-"264
+[v space@mL mL `*.39S236  1 p 2 27 ]
+[v space@mR mR `*.39S236  1 p 2 29 ]
+"267
 } 0
-"219
+"222
 [v _right_45 right_45 `(v  1 e 1 0 ]
 {
-"225
-[v right_45@i i `i  1 a 2 36 ]
+"228
+[v right_45@i i `i  1 a 2 37 ]
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-"219
-[v right_45@mL mL `*.39S236  1 p 2 26 ]
-[v right_45@mR mR `*.39S236  1 p 2 28 ]
-[v right_45@count count `i  1 p 2 30 ]
-[v right_45@right_timer right_timer `i  1 p 2 32 ]
-"239
+"222
+[v right_45@mL mL `*.39S236  1 p 2 27 ]
+[v right_45@mR mR `*.39S236  1 p 2 29 ]
+[v right_45@count count `i  1 p 2 31 ]
+[v right_45@right_timer right_timer `i  1 p 2 33 ]
+"242
 } 0
-"145
+"148
 [v _reverse reverse `(v  1 e 1 0 ]
 {
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-[v reverse@mL mL `*.39S236  1 p 2 26 ]
-[v reverse@mR mR `*.39S236  1 p 2 28 ]
-"161
+[v reverse@mL mL `*.39S236  1 p 2 27 ]
+[v reverse@mR mR `*.39S236  1 p 2 29 ]
+"164
 } 0
-"192
+"195
 [v _left_45 left_45 `(v  1 e 1 0 ]
 {
-"198
-[v left_45@i i `i  1 a 2 36 ]
+"201
+[v left_45@i i `i  1 a 2 37 ]
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-"192
-[v left_45@mL mL `*.39S236  1 p 2 26 ]
-[v left_45@mR mR `*.39S236  1 p 2 28 ]
-[v left_45@count count `i  1 p 2 30 ]
-[v left_45@left_timer left_timer `i  1 p 2 32 ]
-"212
+"195
+[v left_45@mL mL `*.39S236  1 p 2 27 ]
+[v left_45@mR mR `*.39S236  1 p 2 29 ]
+[v left_45@count count `i  1 p 2 31 ]
+[v left_45@left_timer left_timer `i  1 p 2 33 ]
+"215
 } 0
-"166
+"169
 [v _stop stop `(v  1 e 1 0 ]
 {
-"172
-[v stop@i i `uc  1 a 1 25 ]
+"175
+[v stop@i i `i  1 a 2 25 ]
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-"166
+"169
 [v stop@mL mL `*.39S236  1 p 2 21 ]
 [v stop@mR mR `*.39S236  1 p 2 23 ]
-"185
+"188
 } 0
-"76
+"78
 [v _setMotorPWM setMotorPWM `(v  1 e 1 0 ]
 {
-"78
+"80
 [v setMotorPWM@negDuty negDuty `uc  1 a 1 20 ]
 [v setMotorPWM@posDuty posDuty `uc  1 a 1 19 ]
 [s S236 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
-"76
+"78
 [v setMotorPWM@m m `*.39S236  1 p 2 15 ]
-"96
+"98
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]

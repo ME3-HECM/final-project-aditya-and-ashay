@@ -3,6 +3,8 @@
 #include "lights_buttons.h"
 #include "calibration.h"
 
+
+
 /************************************************************
 * Function used to initialise T2 and CCP for DC motor control
 ************************************************************/
@@ -95,8 +97,9 @@ void setMotorPWM(DC_motor *m)
     }
 }
 
+
 /*********************************************
-* Function to intialise motor specifications 
+* Function to initialise motor specifications 
 *********************************************/
 void motor_init(DC_motor *mL, DC_motor *mR)
 {
@@ -165,19 +168,19 @@ void reverse(DC_motor *mL, DC_motor *mR)
 *****************************************/
 void stop(DC_motor *mL, DC_motor *mR)
 {
-    mL->brakemode = 1; 
+    mL->brakemode = 1;
     mR->brakemode = 1; //mode defined for braking to occur
-    BRAKELIGHT = 1; 
+    BRAKELIGHT = 1;
     
-    for (char i = 70; i >= 0; i=i-10) {
-        mL -> power = i; 
+    for (int i = 70; i >= 0; i=i-10) {
+        mL -> power = i;
         mR -> power = i;  // Power loss is gradual
         setMotorPWM(mL);
         setMotorPWM(mR); 
         __delay_us(20);
     }
     
-    mL->power = 0; 
+    mL->power = 0;
     mR->power = 0; //0 power causes motors to come to a stop
     setMotorPWM(mL);
     setMotorPWM(mR);
@@ -311,7 +314,6 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);} //ORANGE
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);} //LIGHT BLUE
        
-    
 }
 
 /*****************************************

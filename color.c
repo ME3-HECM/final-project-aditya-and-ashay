@@ -276,4 +276,3 @@ void delay_ms_func(unsigned int time) {
     unsigned int i;
     for (i=0; i < time; i++) {__delay_ms(131);} //131 ms for each timer overflow
 }
-

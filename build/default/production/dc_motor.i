@@ -24509,6 +24509,8 @@ void battery_health(void);
 
 
 
+
+
 void initDCmotorsPWM(unsigned int PWMperiod){
 
     TRISEbits.TRISE2 = 0;
@@ -24601,6 +24603,7 @@ void setMotorPWM(DC_motor *m)
 
 
 
+
 void motor_init(DC_motor *mL, DC_motor *mR)
 {
     motorL.power=0;
@@ -24672,7 +24675,7 @@ void stop(DC_motor *mL, DC_motor *mR)
     mR->brakemode = 1;
     LATDbits.LATD4 = 1;
 
-    for (char i = 70; i >= 0; i=i-10) {
+    for (int i = 70; i >= 0; i=i-10) {
         mL -> power = i;
         mR -> power = i;
         setMotorPWM(mL);
@@ -24813,7 +24816,6 @@ void movement(DC_motor *mL, DC_motor *mR, int count)
     if (count == 5){reverse(mL,mR); _delay((unsigned long)((900)*(64000000/4000.0)));;stop(mL,mR);_delay((unsigned long)((500)*(64000000/4000.0)));left_45(mL,mR,2,left_timer); stop(mL,mR);}
     if (count == 6){right_45(mL,mR,3,right_timer); stop(mL,mR);}
     if (count == 7){left_45(mL,mR,3,left_timer); stop(mL,mR);}
-
 
 }
 

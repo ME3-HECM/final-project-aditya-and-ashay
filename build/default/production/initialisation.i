@@ -24673,7 +24673,7 @@ void battery_health(void);
 # 9 "initialisation.c" 2
 
 # 1 "./initialisation.h" 1
-# 10 "./initialisation.h"
+# 13 "./initialisation.h"
 void complete_initialisation(void);
 # 10 "initialisation.c" 2
 

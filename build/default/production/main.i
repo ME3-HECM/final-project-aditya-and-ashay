@@ -24626,7 +24626,7 @@ void battery_health(void);
 # 14 "main.c" 2
 
 # 1 "./initialisation.h" 1
-# 10 "./initialisation.h"
+# 13 "./initialisation.h"
 void complete_initialisation(void);
 # 15 "main.c" 2
 

@@ -52,4 +52,3 @@ void battery_health(void) {
         }
     } 
 }
-
